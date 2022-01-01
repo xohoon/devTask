@@ -25,4 +25,5 @@ public class HomeController {
     public String config() {
         return "config";
     }
+
 }
