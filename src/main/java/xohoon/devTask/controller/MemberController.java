@@ -17,11 +17,6 @@ public class MemberController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping(value = "/mypage")
-    public String myPage() throws Exception {
-        return "user/mypage";
-    }
-
     @GetMapping("/users")
     public String createUser() {
         return "member/register";
