@@ -1,10 +1,8 @@
 package xohoon.devTask.domain.dto;
 
-import lombok.Getter;
+import lombok.Data;
 
-import javax.persistence.Column;
-
-@Getter
+@Data
 public class MemberDto {
     private Long id;
     private String username;
