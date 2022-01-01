@@ -1,8 +1,10 @@
 package xohoon.devTask.security.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +18,9 @@ import xohoon.devTask.security.provider.FormAuthenticationProvider;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private AuthenticationDetailsSource authenticationDetailsSource;
 
     @Override // db 연동 커스텀한 구현체로 인증처리
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -40,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login_proc")
+                .authenticationDetailsSource(authenticationDetailsSource) // 추가인증
                 .defaultSuccessUrl("/")
                 .permitAll()
         ;

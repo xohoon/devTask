@@ -3,12 +3,14 @@ package xohoon.devTask.security.provider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
+import xohoon.devTask.security.common.FormWebAuthenticationDetails;
 import xohoon.devTask.security.service.MemberContext;
 
 public class FormAuthenticationProvider implements AuthenticationProvider {
@@ -28,6 +30,12 @@ public class FormAuthenticationProvider implements AuthenticationProvider {
 
         if (!passwordEncoder.matches(password, memberContext.getMember().getPassword())) {
             throw new BadCredentialsException("BadCredentialsException");
+        }
+        // secret key 추가 인증
+        FormWebAuthenticationDetails formWebAuthenticationDetails = (FormWebAuthenticationDetails) authentication.getDetails();
+        String secretKey = formWebAuthenticationDetails.getSecretKey();
+        if (secretKey == null || !"secret".equals(secretKey)) {
+            throw new InsufficientAuthenticationException("InsufficientAuthenticationException");
         }
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(memberContext.getMember(), null, memberContext.getAuthorities());
 
