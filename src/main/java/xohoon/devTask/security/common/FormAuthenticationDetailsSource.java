@@ -11,6 +11,6 @@ public class FormAuthenticationDetailsSource implements AuthenticationDetailsSou
 
     @Override
     public WebAuthenticationDetails buildDetails(HttpServletRequest context) {
-        return new FormWebAuthenticationDetails(context);
+        return new FormWebAuthenticationDetails(context); // 파라미터 데이터로 변환해 return
     }
 }
