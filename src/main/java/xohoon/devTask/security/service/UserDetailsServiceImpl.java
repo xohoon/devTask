@@ -29,9 +29,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("UsernameNotFoundException");
         }
 
-        List<GrantedAuthority> roles = new ArrayList<>();
+        List<GrantedAuthority> roles = new ArrayList<>(); // 사용자의 권한 정보 생성
         roles.add(new SimpleGrantedAuthority(member.getRole()));
-        MemberContext memberContext = new MemberContext(member, roles);
+        MemberContext memberContext = new MemberContext(member, roles); // UserDetails 반환타입으로 변환
 
         return memberContext;
     }
