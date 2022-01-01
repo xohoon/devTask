@@ -1,6 +1,7 @@
 package xohoon.devTask.security.handler;
 
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
@@ -12,5 +13,19 @@ import java.io.IOException;
 
 @Component
 public class FormAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
-    
+    @Override
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+
+        String errorMessage = "Invalid Username or Password";
+        // 경우에 따른 exception message
+        if (exception instanceof BadCredentialsException) {
+            errorMessage = "Invalid Username or Password";
+        } else if (exception instanceof InsufficientAuthenticationException) {
+            errorMessage = "Invalid Secret Key";
+        }
+        // 인증 실패시 이동
+        setDefaultFailureUrl("/login?error=true&exception=" + errorMessage);
+        // 부모 클래스에 처리 위임
+        super.onAuthenticationFailure(request, response, exception);
+    }
 }
