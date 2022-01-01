@@ -8,7 +8,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import xohoon.devTask.service.impl.MemberContext;
+import org.springframework.transaction.annotation.Transactional;
+import xohoon.devTask.security.service.MemberContext;
 
 public class FormAuthenticationProvider implements AuthenticationProvider {
 
@@ -17,6 +18,7 @@ public class FormAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Transactional
     @Override // 인증 관련 검증 구현
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();

@@ -2,6 +2,9 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <div th:fragment="header">
+    <script th:src="@{/js/jquery-2.1.3.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css}" />
     <nav class="navbar navbar-dark sticky-top bg-dark ">
         <div class="container">
             <a class="text-light" href="#"><h4>Core Spring Security</h4></a>

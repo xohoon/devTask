@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import xohoon.devTask.domain.entity.Member;
 import xohoon.devTask.repository.MemberRepository;
-import xohoon.devTask.service.impl.MemberContext;
 
 import java.util.ArrayList;
 import java.util.List;

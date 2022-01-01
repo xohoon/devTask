@@ -1,4 +1,4 @@
-package xohoon.devTask.service.impl;
+package xohoon.devTask.security.service;
 
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
