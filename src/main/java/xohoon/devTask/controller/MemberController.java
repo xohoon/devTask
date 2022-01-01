@@ -59,4 +59,13 @@ public class MemberController {
         return "redirect:/login";
     }
 
+    @GetMapping("/denied")
+    public String accessDenied(@RequestParam(value = "exception", required = false) String exception, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Member member = (Member) authentication.getPrincipal();
+        model.addAttribute("username", member.getUsername());
+        model.addAttribute("exception", exception);
+
+        return "member/denied";
+    }
 }

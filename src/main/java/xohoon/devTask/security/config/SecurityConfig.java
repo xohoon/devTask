@@ -13,8 +13,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import xohoon.devTask.security.handler.FormAccessDeniedHandler;
 import xohoon.devTask.security.provider.FormAuthenticationProvider;
 
 @Configuration
@@ -57,6 +59,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler(authenticationFailureHandler)
                 .permitAll()
         ;
+        http
+                .exceptionHandling()
+                .accessDeniedHandler(accessDeniedHandler())
+        ;
     }
 
     @Bean
@@ -67,5 +73,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         return new FormAuthenticationProvider();
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        FormAccessDeniedHandler accessDeniedHandler = new FormAccessDeniedHandler();
+        accessDeniedHandler.setErrorPage("/denied");
+        return accessDeniedHandler;
     }
 }
