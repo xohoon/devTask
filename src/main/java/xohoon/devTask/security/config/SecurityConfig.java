@@ -24,11 +24,13 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import xohoon.devTask.security.factory.UrlResourcesMapFactoryBean;
+import xohoon.devTask.security.filter.PermitAllFilter;
 import xohoon.devTask.security.handler.CustomAccessDeniedHandler;
 import xohoon.devTask.security.metadata.UrlFilterInvocationSecurityMetadataSource;
 import xohoon.devTask.security.provider.CustomAuthenticationProvider;
 import xohoon.devTask.service.SecurityResourcesService;
 
+import javax.annotation.security.PermitAll;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -45,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthenticationFailureHandler authenticationFailureHandler;
     @Autowired
     private SecurityResourcesService securityResourcesService;
+    private String[] permitAllResources = {"/", "/login", "/user/login/**"};
 
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -103,13 +106,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public FilterSecurityInterceptor customFilterSecurityInterceptor() throws Exception{
-        FilterSecurityInterceptor filterSecurityInterceptor = new FilterSecurityInterceptor();
-        filterSecurityInterceptor.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource());
-        filterSecurityInterceptor.setAccessDecisionManager(affirmativeBased());
-        filterSecurityInterceptor.setAuthenticationManager(authenticationManagerBean());
-
-        return filterSecurityInterceptor;
+    public PermitAllFilter customFilterSecurityInterceptor() throws Exception{
+        PermitAllFilter permitAllFilter = new PermitAllFilter(permitAllResources);
+        permitAllFilter.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource());
+        permitAllFilter.setAccessDecisionManager(affirmativeBased());
+        permitAllFilter.setAuthenticationManager(authenticationManagerBean());
+        return permitAllFilter;
     }
 
     private AccessDecisionManager affirmativeBased() {
