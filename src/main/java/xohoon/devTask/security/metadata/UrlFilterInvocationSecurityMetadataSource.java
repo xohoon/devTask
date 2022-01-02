@@ -13,7 +13,7 @@ import java.util.*;
 public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
     private LinkedHashMap<RequestMatcher, List<ConfigAttribute>> requestMap = new LinkedHashMap<>();
-    private SecurityResourcesService securityResourcesService; // db 에서 매핑된 저옵 가져오기 위해
+    private SecurityResourcesService securityResourcesService; // db 에서 매핑된 정보 가져오기 위해
 
     public UrlFilterInvocationSecurityMetadataSource(LinkedHashMap<RequestMatcher, List<ConfigAttribute>> resourcesMap, SecurityResourcesService securityResourcesService) {
         this.requestMap = resourcesMap;
@@ -48,7 +48,7 @@ public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocati
         return null;
     }
 
-    @Override //
+    @Override
     public boolean supports(Class<?> clazz) {
         return FilterInvocation.class.isAssignableFrom(clazz);
     }
@@ -57,7 +57,7 @@ public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocati
         LinkedHashMap<RequestMatcher, List<ConfigAttribute>> reloadedMap = securityResourcesService.getResourceList();// 최신 매핑 데이터
         Iterator<Map.Entry<RequestMatcher, List<ConfigAttribute>>> iterator = reloadedMap.entrySet().iterator();
 
-        reloadedMap.clear();
+        requestMap.clear();
 
         while (iterator.hasNext()) { // 키와 권한을 가져와 넣어준다
             Map.Entry<RequestMatcher, List<ConfigAttribute>> entry = iterator.next();
