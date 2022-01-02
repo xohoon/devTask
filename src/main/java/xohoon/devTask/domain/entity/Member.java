@@ -8,6 +8,7 @@ import java.util.Set;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Member {

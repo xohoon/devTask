@@ -23,12 +23,15 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import xohoon.devTask.security.factory.UrlResourcesMapFactoryBean;
 import xohoon.devTask.security.handler.CustomAccessDeniedHandler;
 import xohoon.devTask.security.metadata.UrlFilterInvocationSecurityMetadataSource;
 import xohoon.devTask.security.provider.CustomAuthenticationProvider;
+import xohoon.devTask.service.SecurityResourcesService;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.ResourceBundle;
 
 @Configuration
 @EnableWebSecurity
@@ -40,6 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthenticationSuccessHandler authenticationSuccessHandler;
     @Autowired
     private AuthenticationFailureHandler authenticationFailureHandler;
+    @Autowired
+    private SecurityResourcesService securityResourcesService;
 
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -120,7 +125,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public FilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource() {
-        return new UrlFilterInvocationSecurityMetadataSource();
+    public FilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource() throws Exception{
+        return new UrlFilterInvocationSecurityMetadataSource(urlResourcesMapFactoryBean().getObject());
+    }
+
+    private UrlResourcesMapFactoryBean urlResourcesMapFactoryBean() {
+        UrlResourcesMapFactoryBean urlResourcesMapFactoryBean = new UrlResourcesMapFactoryBean();
+        urlResourcesMapFactoryBean.setSecurityResourceService(securityResourcesService);
+        return urlResourcesMapFactoryBean;
     }
 }
