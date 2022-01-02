@@ -26,7 +26,6 @@ public class Member {
     private String email;
     @Column
     private int age;
-    private String role;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
     @JoinTable(name = "user_roles", joinColumns = { @JoinColumn(name = "member_id") }, inverseJoinColumns = {

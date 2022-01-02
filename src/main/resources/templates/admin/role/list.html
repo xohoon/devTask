@@ -24,14 +24,14 @@
             <tr class="link_btn hover" th:each="role : ${roles}">
 
                 <td style="text-align: left;">
-                    <a th:href="@{'/admin/roles/' + ${role.id}}"><span th:text="${role.roleName}">회원</span></a>
+                    <a th:href="@{'/hide/admin/role/' + ${role.id}}"><span th:text="${role.roleName}">회원</span></a>
                 </td>
                 <td style="text-align: left;" th:text="${role.roleDesc}"></td>
             </tr>
             </tbody>
         </table>
         <div style="text-align:right;">
-            <p><a class="btn btn-dark btn-lg" style="margin:10;" th:href="@{/admin/roles/register}">권한 등록</a></p>
+            <p><a class="btn btn-dark btn-lg" style="margin:10;" th:href="@{/hide/admin/role/register}">권한 등록</a></p>
         </div>
     </div>
 </div>

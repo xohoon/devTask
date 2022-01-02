@@ -14,7 +14,7 @@
         <a href="javascript:tabChange('3');" class="cc-tab-item">리소스관리</a>
     </div>
     <div class="tbl_wrp">
-        <form class="form-horizontal" th:action="@{/admin/roles}" method="post" th:object="${role}">
+        <form class="form-horizontal" th:action="@{/hide/admin/role}" method="post" th:object="${role}">
             <input th:type="hidden" name="id" th:value="*{id}"/>
             <div class="form-group">
                 <label for="roleName" class="col-sm-2 control-label">권한명</label>
@@ -33,8 +33,8 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-1 col-sm-10">
-                    <button type="Submit" class="btn btn-dark btn-lg">등록</button>
-                    <a class="btn btn-dark btn-lg" style="margin:10;" href="/admin/roles">목록 </a>
+                    <button type="Submit" class="btn btn-dark btn-lg">저장</button>
+                    <a class="btn btn-dark btn-lg" style="margin:10;" href="/hide/admin/role">목록</a>
                 </div>
             </div>
         </form>

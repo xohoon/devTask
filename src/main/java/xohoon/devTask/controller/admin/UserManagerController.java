@@ -36,18 +36,18 @@ public class UserManagerController {
     @PostMapping(value="/admin/user")
     public String modifyUser(MemberDto memberDto) throws Exception {
 
-//        memberService.modifyUser(memberDto);
+        memberService.modifyUser(memberDto);
 
-        return "redirect:/hide/admin/users";
+        return "redirect:/hide/admin/user";
     }
 
     @GetMapping(value = "/admin/user/{id}")
     public String getUser(@PathVariable(value = "id") Long id, Model model) {
 
-//        MemberDto MemberDto = memberService.getUser(id);
+        MemberDto memberDto = memberService.getUser(id);
         List<Role> roleList = roleService.getRoles();
 
-//        model.addAttribute("member", memberDto);
+        model.addAttribute("member", memberDto);
         model.addAttribute("roleList", roleList);
 
         return "admin/user/detail";

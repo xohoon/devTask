@@ -12,6 +12,8 @@ import xohoon.devTask.repository.MemberRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -25,13 +27,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Member member = memberRepository.findByUsername(username);
 
         if (member == null) {
-            throw new UsernameNotFoundException("UsernameNotFoundException");
+            if (memberRepository.countByUsername(username) == 0) {
+                throw new UsernameNotFoundException("No user found with username: " + username);
+            }
         }
+        Set<String> userRoles = member.getUserRoles()
+                .stream()
+                .map(userRole -> userRole.getRoleName())
+                .collect(Collectors.toSet());
 
-        List<GrantedAuthority> roles = new ArrayList<>(); // 사용자의 권한 정보 생성
-        roles.add(new SimpleGrantedAuthority(member.getRole()));
-        MemberContext memberContext = new MemberContext(member, roles); // UserDetails 반환타입으로 변환
+        List<GrantedAuthority> collect = userRoles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 
-        return memberContext;
+        return new MemberContext(member, collect);
     }
 }
