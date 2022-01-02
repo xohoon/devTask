@@ -2,10 +2,9 @@ package xohoon.devTask.domain.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -14,7 +13,6 @@ import javax.persistence.Id;
 public class Member {
 
     @Id @GeneratedValue
-    @Column
     private Long id;
     @Column
     private String username;
@@ -25,4 +23,9 @@ public class Member {
     @Column
     private int age;
     private String role;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
+    @JoinTable(name = "user_roles", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
+            @JoinColumn(name = "role_id") })
+    private Set<Role> userRoles = new HashSet<>();
 }
