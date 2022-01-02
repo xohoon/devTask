@@ -19,44 +19,34 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Component
+//@Component
 public class SetData {
-
+/*
     private boolean alreadySetup = false;
 
     @Autowired
-    private MemberRepository userRepository;
-
+    private MemberRepository MemberRepository;
     @Autowired
     private RoleRepository roleRepository;
-
     @Autowired
     private ResourcesRepository resourcesRepository;
-
     @Autowired
     private RoleHierarchyRepository roleHierarchyRepository;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
-/*
-
     @Autowired
-    private AccessIpRepository accessIpRepository;
-*/
+    private MemberRepository memberRepository;
 
     private static AtomicInteger count = new AtomicInteger(0);
-/*
-    @Override
+
+//    @Override
     @Transactional
     public void onApplicationEvent(final ContextRefreshedEvent event) {
-
         if (alreadySetup) {
             return;
         }
-
         setupSecurityResources();
-
-        setupAccessIpData();
+//        setupAccessIpData();
 
         alreadySetup = true;
     }
@@ -67,8 +57,8 @@ public class SetData {
         Role adminRole = createRoleIfNotFound("ROLE_ADMIN", "관리자");
         roles.add(adminRole);
         createResourceIfNotFound("/admin/**", "", roles, "url");
-        createResourceIfNotFound("execution(public * io.security.corespringsecurity.aopsecurity.*Service.pointcut*(..))", "", roles, "pointcut");
-        createUserIfNotFound("admin", "admin@admin.com", "pass", roles);
+        createResourceIfNotFound("execution(public * io.security.corespringsecurity.aopsecurity.*Service.pointcut*(..))", "", roles, "url");
+        createUserIfNotFound("admin", "admin@admin.com", "1234", roles);
         Role managerRole = createRoleIfNotFound("ROLE_MANAGER", "매니저권한");
         Role userRole = createRoleIfNotFound("ROLE_USER", "사용자권한");
         createRoleHierarchyIfNotFound(managerRole, adminRole);
@@ -88,25 +78,23 @@ public class SetData {
         }
         return roleRepository.save(role);
     }
-    */
-/*
+
     @Transactional
     public Member createUserIfNotFound(final String userName, final String email, final String password, Set<Role> roleSet) {
 
-        Member account = userRepository.findByUsername(userName);
+        Member Member = MemberRepository.findByUsername(userName);
 
-        if (account == null) {
-            account = Member.builder()
+        if (Member == null) {
+            Member = Member.builder()
                     .username(userName)
                     .email(email)
                     .password(passwordEncoder.encode(password))
                     .userRoles(roleSet)
                     .build();
         }
-        return userRepository.save(account);
+        return MemberRepository.save(Member);
     }
-    */
-/*
+
     @Transactional
     public Resources createResourceIfNotFound(String resourceName, String httpMethod, Set<Role> roleSet, String resourceType) {
         Resources resources = resourcesRepository.findByResourceNameAndHttpMethod(resourceName, httpMethod);
@@ -122,8 +110,7 @@ public class SetData {
         }
         return resourcesRepository.save(resources);
     }
-    */
-/*
+
     @Transactional
     public void createRoleHierarchyIfNotFound(Role childRole, Role parentRole) {
 
@@ -146,7 +133,7 @@ public class SetData {
         childRoleHierarchy.setParentName(parentRoleHierarchy);
     }
     */
-/*
+    /*
     private void setupAccessIpData() {
 
         AccessIp byIpAddress = accessIpRepository.findByIpAddress("0:0:0:0:0:0:0:1");

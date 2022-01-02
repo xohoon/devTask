@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import org.springframework.web.bind.annotation.RequestMapping;
 import xohoon.devTask.domain.dto.ResourcesDto;
 import xohoon.devTask.domain.entity.Resources;
 import xohoon.devTask.domain.entity.Role;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
+@RequestMapping(value="/hide")
 public class ResourcesController {
 
     @Autowired
@@ -34,7 +36,7 @@ public class ResourcesController {
     @Autowired
     private UrlFilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource;
 */
-    @GetMapping(value="/admin/resources")
+    @GetMapping(value="/admin/resource")
     public String getResources(Model model) throws Exception {
 
 //        List<WebProperties.Resources> resources = resourcesService.getResources();
@@ -43,7 +45,7 @@ public class ResourcesController {
         return "admin/resource/list";
     }
 
-    @PostMapping(value="/admin/resources")
+    @PostMapping(value="/admin/resource")
     public String createResources(ResourcesDto resourcesDto) throws Exception {
 
         ModelMapper modelMapper = new ModelMapper();
@@ -56,10 +58,10 @@ public class ResourcesController {
         resourcesService.createResources(resources);
 //        urlSecurityMetadataSource.reload();
 
-        return "redirect:/admin/resources";
+        return "redirect:/hide/admin/resource";
     }
 
-    @GetMapping(value="/admin/resources/register")
+    @GetMapping(value="/admin/resource/register")
     public String viewRoles(Model model) throws Exception {
 
         List<Role> roleList = roleService.getRoles();
@@ -74,7 +76,7 @@ public class ResourcesController {
         return "admin/resource/detail";
     }
 
-    @GetMapping(value="/admin/resources/{id}")
+    @GetMapping(value="/admin/resource/{id}")
     public String getResources(@PathVariable String id, Model model) throws Exception {
 
         List<Role> roleList = roleService.getRoles();
@@ -88,13 +90,13 @@ public class ResourcesController {
         return "admin/resource/detail";
     }
 
-    @GetMapping(value="/admin/resources/delete/{id}")
+    @GetMapping(value="/admin/resource/delete/{id}")
     public String removeResources(@PathVariable String id, Model model) throws Exception {
 
         Resources resources = resourcesService.getResources(Long.valueOf(id));
         resourcesService.deleteResources(Long.valueOf(id));
 //        urlSecurityMetadataSource.reload();
 
-        return "redirect:/admin/resources";
+        return "redirect:/hide/admin/resource";
     }
 }

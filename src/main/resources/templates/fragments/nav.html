@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <div th:fragment="nav">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top navTop">
         <div class="container-fluid">
             <a class="navbar-brand" th:href="@{'/home'}"><h4>devTask</h4></a>
             <div class="collapse navbar-collapse" id="navbarText">
@@ -13,13 +13,17 @@
             </div>
             <div class="collapse navbar-collapse justify-content-end" id="navbarText1">
                 <ul class="navbar-nav mb-2 mb-lg-0">
-                    <li class="nav-item" sec:authorize="isAnonymous()"><a class="nav-link text-light" th:href="@{/login}">로그인</a></li>
-                    <li class="nav-item" sec:authorize="isAnonymous()"><a class="nav-link text-light" th:href="@{/users}">회원가입</a></li>
-                    <li class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link text-light" th:href="@{/mypage}">마이페이지</a></li>
-                    <li class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link text-light" th:href="@{/logout}">로그아웃</a></li>
+                    <li class="nav-item" sec:authorize="isAnonymous()"><a class="nav-link text-light"
+                                                                          th:href="@{/login}">로그인</a></li>
+                    <li class="nav-item" sec:authorize="isAnonymous()"><a class="nav-link text-light"
+                                                                          th:href="@{/users}">회원가입</a></li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link text-light"
+                                                                              th:href="@{/mypage}">마이페이지</a></li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link text-light"
+                                                                              th:href="@{/logout}">로그아웃</a></li>
                     <!--<li class="nav-item" sec:authorize="hasAuthority('ROLE_ADMIN')"><a class="nav-link text-light" th:href="@{/hide/admin}">관리자</a></li>-->
                     <li class="nav-item"><a class="nav-link text-light" th:href="@{/hide/admin}">관리자</a></li>
-                    <li class="nav-item" ><a class="nav-link text-light" href="/">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="/">HOME</a></li>
                 </ul>
             </div>
         </div>

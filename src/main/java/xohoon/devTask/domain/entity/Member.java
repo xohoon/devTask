@@ -8,12 +8,15 @@ import java.util.Set;
 
 @Entity
 @Data
+@ToString(exclude = {"userRoles"})
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EqualsAndHashCode(of = "id")
+@NoArgsConstructor
 @AllArgsConstructor
 public class Member {
 
     @Id @GeneratedValue
+    @Column(name="member_id")
     private Long id;
     @Column
     private String username;
@@ -26,7 +29,7 @@ public class Member {
     private String role;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
-    @JoinTable(name = "user_roles", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
+    @JoinTable(name = "user_roles", joinColumns = { @JoinColumn(name = "member_id") }, inverseJoinColumns = {
             @JoinColumn(name = "role_id") })
     private Set<Role> userRoles = new HashSet<>();
 }
