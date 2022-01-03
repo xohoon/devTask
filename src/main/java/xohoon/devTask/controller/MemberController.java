@@ -25,12 +25,12 @@ public class MemberController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/users")
+    @GetMapping("/users") // 회원가입 페이지로 이동
     public String createUser() {
         return "member/register";
     }
 
-    @PostMapping(value = "/users")
+    @PostMapping(value = "/users") // 회원가입
     public String createUser(MemberDto memberDto) throws Exception {
         System.out.println("memberDto = " + memberDto);
         ModelMapper modelMapper = new ModelMapper();
@@ -41,7 +41,7 @@ public class MemberController {
         return "redirect:/";
     }
 
-    @GetMapping(value = "/login")
+    @GetMapping(value = "/login") // 로그인 페이지 이동
     public String login(@RequestParam(value = "error", required = false) String error, Model model,
                         @RequestParam(value = "exception", required = false) String exception) {
         model.addAttribute("error", error);
@@ -50,7 +50,7 @@ public class MemberController {
         return "member/login";
     }
 
-    @GetMapping(value = "/logout")
+    @GetMapping(value = "/logout") // 로그아웃
     public String logout(HttpServletRequest request, HttpServletResponse response) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
@@ -59,7 +59,7 @@ public class MemberController {
         return "redirect:/login";
     }
 
-    @GetMapping("/denied")
+    @GetMapping("/denied") // 접근 거부 페이지
     public String accessDenied(@RequestParam(value = "exception", required = false) String exception, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Member member = (Member) authentication.getPrincipal();

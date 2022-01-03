@@ -13,9 +13,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Component
-public class SetData implements ApplicationListener<ContextRefreshedEvent> {
-
+//@Component
+public class SetData {
+//implements ApplicationListener<ContextRefreshedEvent>
     private boolean alreadySetup = false;
 
     @Autowired
@@ -33,7 +33,7 @@ public class SetData implements ApplicationListener<ContextRefreshedEvent> {
 
     private static AtomicInteger count = new AtomicInteger(0);
 
-    @Override
+//    @Override
     @Transactional
     public void onApplicationEvent(final ContextRefreshedEvent event) {
         if (alreadySetup) {

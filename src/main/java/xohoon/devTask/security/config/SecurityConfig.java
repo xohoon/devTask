@@ -127,7 +127,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private List<AccessDecisionVoter<?>> getAccessDecisionVoters() {
         // role hierarchy 추가
         List<AccessDecisionVoter<? extends Object>> accessDecisionVoters = new ArrayList<>();
-        accessDecisionVoters.add(new IpAddressVoter(securityResourcesService)); // IP voter 가장 먼저 심사
+//        accessDecisionVoters.add(new IpAddressVoter(securityResourcesService)); // IP voter 가장 먼저 심사
         accessDecisionVoters.add(roleVoter());
         return accessDecisionVoters;
     }

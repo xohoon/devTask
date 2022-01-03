@@ -10,7 +10,6 @@ public class HomeController {
     public String home() {
         return "home";
     }
-
     @GetMapping(value="mypage")
     public String mypage() {
         return "mypage";
@@ -18,5 +17,13 @@ public class HomeController {
     @GetMapping(value="manager")
     public String manage() {
         return "manager";
+    }
+    @GetMapping(value="co")
+    public String co() {
+        return "co";
+    }
+    @GetMapping(value="dev")
+    public String dev() {
+        return "dev";
     }
 }
