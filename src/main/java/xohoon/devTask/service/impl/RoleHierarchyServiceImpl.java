@@ -1,9 +1,9 @@
 package xohoon.devTask.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import xohoon.devTask.domain.entity.RoleHierarchy;
-import xohoon.devTask.repository.RoleHierarchyRepository;
-import xohoon.devTask.service.RoleHierarchyService;
+import xohoon.devTask.domain.entity.admin.RoleHierarchy;
+import xohoon.devTask.repository.admin.RoleHierarchyRepository;
+import xohoon.devTask.service.admin.RoleHierarchyService;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Iterator;

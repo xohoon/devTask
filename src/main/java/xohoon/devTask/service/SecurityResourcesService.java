@@ -6,11 +6,10 @@ import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Service;
-import xohoon.devTask.domain.entity.Resources;
-import xohoon.devTask.repository.AccessIpRepository;
-import xohoon.devTask.repository.ResourcesRepository;
+import xohoon.devTask.domain.entity.admin.Resources;
+import xohoon.devTask.repository.admin.AccessIpRepository;
+import xohoon.devTask.repository.admin.ResourcesRepository;
 
-import javax.persistence.Access;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;

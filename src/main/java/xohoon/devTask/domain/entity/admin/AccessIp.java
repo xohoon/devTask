@@ -1,4 +1,4 @@
-package xohoon.devTask.domain.entity;
+package xohoon.devTask.domain.entity.admin;
 
 import lombok.*;
 

@@ -1,8 +1,8 @@
-package xohoon.devTask.repository;
+package xohoon.devTask.repository.admin;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import xohoon.devTask.domain.entity.Resources;
+import xohoon.devTask.domain.entity.admin.Resources;
 
 import java.util.List;
 

@@ -1,6 +1,8 @@
-package xohoon.devTask.domain.entity;
+package xohoon.devTask.domain.entity.admin;
 
 import lombok.*;
+import xohoon.devTask.domain.entity.Member;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;

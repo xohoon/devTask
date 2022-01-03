@@ -1,6 +1,7 @@
 package xohoon.devTask.domain.entity;
 
 import lombok.*;
+import xohoon.devTask.domain.entity.admin.Role;
 
 import javax.persistence.*;
 import java.util.HashSet;

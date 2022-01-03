@@ -1,4 +1,4 @@
-package xohoon.devTask.domain.dto;
+package xohoon.devTask.domain.dto.admin;
 
 
 import lombok.AllArgsConstructor;

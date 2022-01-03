@@ -1,13 +1,19 @@
 package xohoon.devTask.security.listener;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import xohoon.devTask.domain.entity.*;
+import xohoon.devTask.domain.entity.admin.AccessIp;
+import xohoon.devTask.domain.entity.admin.Resources;
+import xohoon.devTask.domain.entity.admin.Role;
+import xohoon.devTask.domain.entity.admin.RoleHierarchy;
 import xohoon.devTask.repository.*;
+import xohoon.devTask.repository.admin.AccessIpRepository;
+import xohoon.devTask.repository.admin.ResourcesRepository;
+import xohoon.devTask.repository.admin.RoleHierarchyRepository;
+import xohoon.devTask.repository.admin.RoleRepository;
 
 import java.util.HashSet;
 import java.util.Set;

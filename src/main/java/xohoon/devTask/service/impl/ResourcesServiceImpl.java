@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xohoon.devTask.domain.entity.Resources;
-import xohoon.devTask.repository.ResourcesRepository;
-import xohoon.devTask.service.ResourcesService;
+import xohoon.devTask.domain.entity.admin.Resources;
+import xohoon.devTask.repository.admin.ResourcesRepository;
+import xohoon.devTask.service.admin.ResourcesService;
 
 import java.util.List;
 

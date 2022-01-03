@@ -2,8 +2,8 @@ package xohoon.devTask.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import xohoon.devTask.repository.AccessIpRepository;
-import xohoon.devTask.repository.ResourcesRepository;
+import xohoon.devTask.repository.admin.AccessIpRepository;
+import xohoon.devTask.repository.admin.ResourcesRepository;
 import xohoon.devTask.service.SecurityResourcesService;
 
 @Configuration

@@ -5,7 +5,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.stereotype.Component;
-import xohoon.devTask.service.RoleHierarchyService;
+import xohoon.devTask.service.admin.RoleHierarchyService;
 
 @Component
 public class SecurityInitializer implements ApplicationRunner {

@@ -6,22 +6,35 @@
             <a class="navbar-brand" th:href="@{'/'}"><h4>devTask</h4></a>
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link text-light" th:href="@{/#}">공고</a></li>
-                    <li class="nav-item"><a class="nav-link text-light" th:href="@{/#}">토이</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" th:href="@{/task/list}">공고</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" th:href="@{/toy/list}">토이</a></li>
                     <li class="nav-item"><a class="nav-link text-light" th:href="@{/#}">게시판</a></li>
                 </ul>
             </div>
             <div class="collapse navbar-collapse justify-content-end" id="navbarText1">
                 <ul class="navbar-nav mb-2 mb-lg-0">
-                    <li class="nav-item" sec:authorize="isAnonymous()"><a class="nav-link text-light"
-                                                                          th:href="@{/login}">로그인</a></li>
-                    <li class="nav-item" sec:authorize="isAnonymous()"><a class="nav-link text-light"
-                                                                          th:href="@{/users}">회원가입</a></li>
-                    <li class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link text-light"
-                                                                              th:href="@{/mypage}">마이페이지</a></li>
-                    <li class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link text-light"
-                                                                              th:href="@{/logout}">로그아웃</a></li>
-                    <li class="nav-item" sec:authorize="hasAuthority('ROLE_ADMIN')"><a class="nav-link text-light" th:href="@{/hide/admin}">관리자</a></li>
+                    <!-- Anonymous-->
+                    <li class="nav-item" sec:authorize="isAnonymous()">
+                        <a class="nav-link text-light" th:href="@{/login}">로그인</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAnonymous()">
+                        <a class="nav-link text-light" th:href="@{/users}">회원가입</a>
+                    </li>
+                    <!-- only company-->
+                    <li class="nav-item" sec:authorize="hasAuthority('ROLE_CO')">
+                        <a class="nav-link text-light" th:href="@{/task/co/main}">기업전용페이지</a>
+                    </li>
+                    <!-- only user-->
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link text-light" th:href="@{/mypage}">마이페이지</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link text-light"th:href="@{/logout}">로그아웃</a>
+                    </li>
+                    <!-- only admin-->
+                    <li class="nav-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                        <a class="nav-link text-light" th:href="@{/hide/admin}">관리자</a>
+                    </li>
                 </ul>
             </div>
         </div>

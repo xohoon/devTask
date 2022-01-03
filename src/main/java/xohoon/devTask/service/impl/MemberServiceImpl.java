@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xohoon.devTask.domain.dto.MemberDto;
 import xohoon.devTask.domain.entity.Member;
-import xohoon.devTask.domain.entity.Role;
+import xohoon.devTask.domain.entity.admin.Role;
 import xohoon.devTask.repository.MemberRepository;
-import xohoon.devTask.repository.RoleRepository;
+import xohoon.devTask.repository.admin.RoleRepository;
 import xohoon.devTask.service.MemberService;
 
 import java.util.HashSet;

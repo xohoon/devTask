@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import xohoon.devTask.domain.dto.RoleDto;
-import xohoon.devTask.domain.entity.Role;
-import xohoon.devTask.service.RoleService;
+import xohoon.devTask.domain.dto.admin.RoleDto;
+import xohoon.devTask.domain.entity.admin.Role;
+import xohoon.devTask.service.admin.RoleService;
 
 import java.util.List;
 

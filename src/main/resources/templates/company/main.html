@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<head th:replace="fragments/header::header">
+    <title>debTask</title>
+</head>
+<body>
+<div th:replace="fragments/nav::nav"></div>
+<div class="container">
+    기업전용 페이지
+    <a class="btn btn-dark btn-lg" th:href="@{/task/co/register}">회사정보 입력하기 </a>
+</div>
+</body>
+</html>

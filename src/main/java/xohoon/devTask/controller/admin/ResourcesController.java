@@ -2,7 +2,6 @@ package xohoon.devTask.controller.admin;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,13 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import xohoon.devTask.domain.dto.ResourcesDto;
-import xohoon.devTask.domain.entity.Resources;
-import xohoon.devTask.domain.entity.Role;
-import xohoon.devTask.repository.RoleRepository;
+import xohoon.devTask.domain.dto.admin.ResourcesDto;
+import xohoon.devTask.domain.entity.admin.Resources;
+import xohoon.devTask.domain.entity.admin.Role;
+import xohoon.devTask.repository.admin.RoleRepository;
 import xohoon.devTask.security.metadata.UrlFilterInvocationSecurityMetadataSource;
-import xohoon.devTask.service.ResourcesService;
-import xohoon.devTask.service.RoleService;
+import xohoon.devTask.service.admin.ResourcesService;
+import xohoon.devTask.service.admin.RoleService;
 
 import java.util.HashSet;
 import java.util.List;

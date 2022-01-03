@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthenticationFailureHandler authenticationFailureHandler;
     @Autowired
     private SecurityResourcesService securityResourcesService;
-    private String[] permitAllResources = {"/", "/login", "/user/login/**"};
+    private String[] permitAllResources = {"/", "/users", "/member/login/**", "/login*", "/error", "admin/*"};
 
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -73,7 +73,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/users", "/member/login/**", "/login*", "/error", "admin/*").permitAll()
                 .anyRequest().authenticated()
             .and()
                 .formLogin()

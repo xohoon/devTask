@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import xohoon.devTask.domain.dto.MemberDto;
 import xohoon.devTask.domain.entity.Member;
-import xohoon.devTask.domain.entity.Role;
+import xohoon.devTask.domain.entity.admin.Role;
 import xohoon.devTask.service.MemberService;
-import xohoon.devTask.service.RoleService;
+import xohoon.devTask.service.admin.RoleService;
 
 import java.util.List;
 

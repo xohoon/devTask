@@ -1,10 +1,10 @@
-package xohoon.devTask.domain.dto;
+package xohoon.devTask.domain.dto.admin;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import xohoon.devTask.domain.entity.Role;
+import xohoon.devTask.domain.entity.admin.Role;
 
 import java.util.Set;
 

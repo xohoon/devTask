@@ -1,6 +1,6 @@
-package xohoon.devTask.service;
+package xohoon.devTask.service.admin;
 
-import xohoon.devTask.domain.entity.Resources;
+import xohoon.devTask.domain.entity.admin.Resources;
 
 import java.util.List;
 
