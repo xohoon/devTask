@@ -31,6 +31,7 @@ import xohoon.devTask.security.filter.PermitAllFilter;
 import xohoon.devTask.security.handler.CustomAccessDeniedHandler;
 import xohoon.devTask.security.metadata.UrlFilterInvocationSecurityMetadataSource;
 import xohoon.devTask.security.provider.CustomAuthenticationProvider;
+import xohoon.devTask.security.voter.IpAddressVoter;
 import xohoon.devTask.service.SecurityResourcesService;
 
 import javax.annotation.security.PermitAll;
@@ -126,6 +127,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private List<AccessDecisionVoter<?>> getAccessDecisionVoters() {
         // role hierarchy 추가
         List<AccessDecisionVoter<? extends Object>> accessDecisionVoters = new ArrayList<>();
+        accessDecisionVoters.add(new IpAddressVoter(securityResourcesService)); // IP voter 가장 먼저 심사
         accessDecisionVoters.add(roleVoter());
         return accessDecisionVoters;
     }

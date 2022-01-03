@@ -7,20 +7,25 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Service;
 import xohoon.devTask.domain.entity.Resources;
+import xohoon.devTask.repository.AccessIpRepository;
 import xohoon.devTask.repository.ResourcesRepository;
 
+import javax.persistence.Access;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 public class SecurityResourcesService {
 
     private ResourcesRepository resourcesRepository;
+    private AccessIpRepository accessIpRepository;
 
-    public SecurityResourcesService(ResourcesRepository resourcesRepository) {
+    public SecurityResourcesService(ResourcesRepository resourcesRepository, AccessIpRepository accessIpRepository) {
         this.resourcesRepository = resourcesRepository;
+        this.accessIpRepository = accessIpRepository;
     }
 
     public LinkedHashMap<RequestMatcher, List<ConfigAttribute>> getResourceList() {
@@ -37,5 +42,10 @@ public class SecurityResourcesService {
         });
         log.debug("cache test");
         return result;
+    }
+
+    public List<String> getAccessIpList() {
+        List<String> accessIpList = accessIpRepository.findAll().stream().map(accessIp -> accessIp.getIpAddress()).collect(Collectors.toList());
+        return accessIpList;
     }
 }

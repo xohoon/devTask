@@ -6,26 +6,20 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import xohoon.devTask.domain.entity.Member;
-import xohoon.devTask.domain.entity.Resources;
-import xohoon.devTask.domain.entity.Role;
-import xohoon.devTask.domain.entity.RoleHierarchy;
-import xohoon.devTask.repository.MemberRepository;
-import xohoon.devTask.repository.ResourcesRepository;
-import xohoon.devTask.repository.RoleHierarchyRepository;
-import xohoon.devTask.repository.RoleRepository;
+import xohoon.devTask.domain.entity.*;
+import xohoon.devTask.repository.*;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-//@Component
-public class SetData {
-/*
+@Component
+public class SetData implements ApplicationListener<ContextRefreshedEvent> {
+
     private boolean alreadySetup = false;
 
     @Autowired
-    private MemberRepository MemberRepository;
+    private MemberRepository memberRepository;
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
@@ -35,23 +29,23 @@ public class SetData {
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
-    private MemberRepository memberRepository;
+    private AccessIpRepository accessIpRepository;
 
     private static AtomicInteger count = new AtomicInteger(0);
 
-//    @Override
+    @Override
     @Transactional
     public void onApplicationEvent(final ContextRefreshedEvent event) {
         if (alreadySetup) {
             return;
         }
         setupSecurityResources();
-//        setupAccessIpData();
+        setupAccessIpData();
 
         alreadySetup = true;
     }
-    */
-/*
+
+
     private void setupSecurityResources() {
         Set<Role> roles = new HashSet<>();
         Role adminRole = createRoleIfNotFound("ROLE_ADMIN", "관리자");
@@ -82,17 +76,17 @@ public class SetData {
     @Transactional
     public Member createUserIfNotFound(final String userName, final String email, final String password, Set<Role> roleSet) {
 
-        Member Member = MemberRepository.findByUsername(userName);
+        Member member = memberRepository.findByUsername(userName);
 
-        if (Member == null) {
-            Member = Member.builder()
+        if (member == null) {
+            member = Member.builder()
                     .username(userName)
                     .email(email)
                     .password(passwordEncoder.encode(password))
                     .userRoles(roleSet)
                     .build();
         }
-        return MemberRepository.save(Member);
+        return memberRepository.save(member);
     }
 
     @Transactional
@@ -132,10 +126,9 @@ public class SetData {
         RoleHierarchy childRoleHierarchy = roleHierarchyRepository.save(roleHierarchy);
         childRoleHierarchy.setParentName(parentRoleHierarchy);
     }
-    */
-    /*
-    private void setupAccessIpData() {
 
+
+    private void setupAccessIpData() {
         AccessIp byIpAddress = accessIpRepository.findByIpAddress("0:0:0:0:0:0:0:1");
         if (byIpAddress == null) {
             AccessIp accessIp = AccessIp.builder()
@@ -144,5 +137,5 @@ public class SetData {
             accessIpRepository.save(accessIp);
         }
     }
-    */
+
 }
