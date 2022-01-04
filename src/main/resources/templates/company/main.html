@@ -6,9 +6,11 @@
 <body>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
-    기업전용 페이지
-    <a class="btn btn-dark btn-lg" th:href="@{/co/detail}">회사정보 확인</a>
-    <a class="btn btn-dark btn-lg" th:href="@{/co/register}">회사정보 입력하기</a>
+    기업전용 페이지<br /><br /><br /><br />
+    <a th:if="${company == null}" class="btn btn-dark btn-lg" th:href="@{/co/register}">회사정보 입력하기</a>
+    <a th:if="${company != null}" th:href="@{'/co/detail/'+${company.id}}">
+        <span th:text="${company.company}">기업</span>
+    </a>
 </div>
 </body>
 </html>

@@ -23,10 +23,8 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private MemberRepository memberRepository;
-
     @Autowired
     private RoleRepository roleRepository;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -93,5 +91,9 @@ public class MemberServiceImpl implements MemberService {
         System.out.println("order");
     }
 
+//    @Transactional
+//    public Member getMember(String username) {
+//        return memberRepository.findByUsername(username);
+//    }
 
 }

@@ -17,4 +17,6 @@ public interface MemberService {
     void deleteUser(Long idx);
 
     void order();
+
+//    Member getMember(String username);
 }

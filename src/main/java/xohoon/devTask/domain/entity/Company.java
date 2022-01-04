@@ -30,7 +30,7 @@ public class Company {
     private String lastModifiedDate;
     private Long lastModifiedMemberId;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 }
