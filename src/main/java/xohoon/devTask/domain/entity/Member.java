@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Data
-@ToString(exclude = {"userRoles"})
+//@ToString(exclude = {"userRoles"})
 @Builder
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
@@ -35,7 +35,7 @@ public class Member {
             @JoinColumn(name = "role_id") })
     private Set<Role> userRoles = new HashSet<>();
 
-    @OneToMany(mappedBy = "members")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "members")
     private List<TaskSupport> supportTasks = new ArrayList<>();
 
 }

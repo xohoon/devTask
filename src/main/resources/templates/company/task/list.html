@@ -6,7 +6,31 @@
 <body>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
-    task list
+    <a class="btn btn-dark btn-lg" th:href="@{/co/task/register}">과제발행</a>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">제목</th>
+            <th scope="col">모집분야</th>
+            <th scope="col">진행기간</th>
+            <th scope="col">모집인원</th>
+            <th scope="col">마감기간</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="tasks, num:${tasks}">
+            <tr>
+                <th scope="row"><span th:text="${num.count}"></span></th>
+                <td><span th:text="${tasks.task_subject}"></span></td>
+                <td><span th:text="${tasks.getTask_parts()}"></span></td>
+                <td><span th:text="${tasks.getTasking_day()}"></span></td>
+                <td><span th:text="${tasks.getTask_part_personnel()}"></span></td>
+                <td><span th:text="${tasks.getTask_dead_day()}"></span></td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

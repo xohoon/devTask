@@ -11,29 +11,27 @@
             <div class="card sign_card">
                 <div class="card-body">
                     <div id="join_form">
-                        <h3>기업등록</h3><br />
-                        <form name="fm" th:action="@{/task/co/register}" method="POST">
-                            <span>회사명</span>
-                            <input type="text" name="company" id="company" placeholder="회사명" class="form-control"><br />
-                            <span>기업 홈페이지</span>
-                            <input type="text" name="site_url" id="site_url" placeholder="홈페이지 주소" class="form-control"><br />
-                            <span>기업 복지</span>
-                            <input type="text" name="welfare" id="welfare" placeholder="복지내용" class="form-control"><br />
-                            <span>웰컴 키트</span>
-                            <input type="text" name="kit" id="kit" placeholder="입사시 키트" class="form-control"><br />
-                            <span>재직인원</span>
-                            <input type="text" name="personnel" id="personnel" placeholder="재직인원" class="form-control"><br />
-                            <span>평균 연봉</span>
-                            <input type="text" name="salary" id="salary" placeholder="평균 연봉" class="form-control"><br />
-                            <span>주소</span>
-                            <input type="text" name="address" id="address" placeholder="주소" class="form-control"><br />
+                        <h3>과제등록</h3><br />
+                        <form name="fm" th:action="@{/co/task/register}" method="POST" th:object="${task}">
+                            <input th:type="hidden" name="id" th:value="*{id}" />
+                            <span>제목</span>
+                            <input type="text" name="task_subject" th:value="*{task_subject}" placeholder="제목" class="form-control"><br />
+                            <span>모집 분야</span>
+                            <input type="text" name="task_parts" th:value="*{task_parts}" placeholder="모집 분야" class="form-control"><br />
+                            <span>분야별 모집 인원</span>
+                            <input type="text" name="task_part_personnel" th:value="*{task_part_personnel}" placeholder="모집 인원" class="form-control"><br />
+                            <span>과제 진행기간</span>
+                            <input type="text" name="tasking_day" th:value="*{tasking_day}" placeholder="과제 진행기간" class="form-control"><br />
+                            <span>상세 기술</span>
+                            <input type="text" name="task_skill_content" th:value="*{task_skill_content}" placeholder="상세 기술" class="form-control"><br />
+                            <span>마감일</span>
+                            <input type="text" name="task_dead_day" th:value="*{task_dead_day}" placeholder="마감일" class="form-control"><br />
 
-                            <span>개인정보 동의 &nbsp;</span><input type="checkbox"><br /><br />
-                            <input type="submit" value="등록하기" class="btn btn-success" style="width:100%;">
+                            <input type="submit" value="발행하기" class="btn btn-success">
                         </form>
                     </div>
                     <br />
-                    <a th:href="@{'/co/main'}">취소</a>
+                    <a th:href="@{'/co/task/list'}">취소</a>
                 </div>
             </div>
         </div>

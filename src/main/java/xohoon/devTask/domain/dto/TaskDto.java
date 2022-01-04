@@ -13,9 +13,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class TaskDto {
     private Long id;
-    private String subject;
-    private int task_day;
-    private String detail_content;
+    private String task_subject;
+    private String task_parts;
+    private String task_part_personnel;
+    private int tasking_day;
+    private String task_skill_content;
+    private String task_dead_day; // 마감 날짜
+    private int tasking_status; // 마감 형태
+
     // common
     private LocalDateTime createDate;
     private LocalDateTime lastModifiedDate;

@@ -5,13 +5,20 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import xohoon.devTask.domain.dto.CompanyDto;
+import xohoon.devTask.domain.dto.TaskDto;
 import xohoon.devTask.domain.entity.Company;
 import xohoon.devTask.domain.entity.Member;
+import xohoon.devTask.domain.entity.Task;
+import xohoon.devTask.repository.TaskRepository;
 import xohoon.devTask.service.CompanyService;
+import xohoon.devTask.service.TaskService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "co")
@@ -19,6 +26,7 @@ import xohoon.devTask.service.CompanyService;
 public class CompanyController {
 
     private final CompanyService companyService;
+    private final TaskService taskService;
     /*
      * company
      * */
@@ -84,18 +92,33 @@ public class CompanyController {
     * task
     * */
     @GetMapping(value = "task/list")
-    public String taskList() {
+    public String taskList(Model model) {
+        ModelMapper modelMapper = new ModelMapper();
+        Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Task> taskList = taskService.getTaskList(member.getId());
+        List<TaskDto> tasks = modelMapper.map(taskList, new TypeToken<List<TaskDto>>() {}.getType());
+        model.addAttribute("tasks", tasks);
+
         return "company/task/list";
     }
 
     @GetMapping(value = "task/register") // 과제 글쓰기 폼
-    public String taskRegisterForm() {
+    public String taskRegisterForm(Model model) {
+        TaskDto task = new TaskDto();
+        model.addAttribute("task", task);
+
         return "company/task/register";
     }
 
     @PostMapping(value = "task/register") // 과제 저장
-    public String taskRegister() {
-        return "redirect:/co/task/detail";
+    public String taskRegister(TaskDto taskDto) {
+        ModelMapper mapper = new ModelMapper();
+        taskDto.setTasking_status(1);
+        Task task = mapper.map(taskDto, Task.class);
+        Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        taskService.registerTask(task, member);
+
+        return "redirect:/co/task/list";
     }
 
     @GetMapping(value = "task/detail")

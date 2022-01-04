@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name = "RESOURCES")
 @Data
-@ToString(exclude = {"roleSet"})
+//@ToString(exclude = {"roleSet"})
 @EntityListeners(value = { AuditingEntityListener.class })
 @EqualsAndHashCode(of = "id")
 @Builder
