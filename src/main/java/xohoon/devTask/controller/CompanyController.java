@@ -75,8 +75,8 @@ public class CompanyController {
     public String modifyForm(@PathVariable(value="id") String id, Model model) {
         ModelMapper modelMapper = new ModelMapper();
         Company companyDetail = companyService.getCompanyDetail(Long.valueOf(id));
-        CompanyDto companyDto = modelMapper.map(companyDetail, CompanyDto.class);
-        model.addAttribute("company", companyDto);
+        CompanyDto company = modelMapper.map(companyDetail, CompanyDto.class);
+        model.addAttribute("company", company);
 
         return "company/register";
     }
@@ -84,6 +84,7 @@ public class CompanyController {
     @PostMapping(value = "delete/{id}") // 삭제
     public String delete(@PathVariable(value = "id") String id) {
         companyService.deleteCompany(Long.valueOf(id));
+
         return "redirect:/co/main";
     }
 
@@ -121,23 +122,30 @@ public class CompanyController {
         return "redirect:/co/task/list";
     }
 
-    @GetMapping(value = "task/detail")
-    public String taskDetail() {
+    @GetMapping(value = "task/detail/{id}")
+    public String taskDetail(@PathVariable(value = "id") String id, Model model) {
+        ModelMapper modelMapper = new ModelMapper();
+        Task taskDetail = taskService.getTask(Long.valueOf(id));
+        TaskDto task = modelMapper.map(taskDetail, TaskDto.class);
+        model.addAttribute("task", task);
+
         return "company/task/detail";
     }
 
-    @GetMapping(value = "task/modify")
-    public String taskModifyForm() {
-        return "company/task/register";
+    @GetMapping(value = "task/modify/{id}")
+    public String taskModifyForm(@PathVariable(value="id") String id, Model model) {
+        ModelMapper modelMapper = new ModelMapper();
+        Task taskDetail = taskService.getTask(Long.valueOf(id));
+        TaskDto task = modelMapper.map(taskDetail, TaskDto.class);
+        model.addAttribute("task", task);
+
+        return "/company/task/register";
     }
 
-    @PostMapping(value = "task/modify")
-    public String taskModify() {
-        return "redirect:/co/task/detail";
-    }
+    @PostMapping(value = "task/delete/{id}")
+    public String taskDelete(@PathVariable(value = "id") String id) {
+        taskService.deleteTask(Long.valueOf(id));
 
-    @PostMapping(value = "task/delete")
-    public String taskDelete() {
         return "redirect:/co/task/list";
     }
 }

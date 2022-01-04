@@ -28,4 +28,13 @@ public class TaskService {
         return taskRepository.findAllByMember_id(id);
     }
 
+    public Task getTask(Long id) {
+        return taskRepository.findById(id).orElse(new Task());
+    }
+
+    @Transactional
+    public void deleteTask(Long id) {
+        taskRepository.deleteById(id);
+    }
+
 }
