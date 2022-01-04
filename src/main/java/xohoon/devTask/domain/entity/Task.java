@@ -2,17 +2,17 @@ package xohoon.devTask.domain.entity;
 
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
 public class Task {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "task_id")
     private Long id;
     private String subject;
@@ -24,4 +24,6 @@ public class Task {
     private LocalDateTime lastModifiedDate;
     private Long lastModifiedMemberId;
 
+    @OneToMany(mappedBy = "tasks")
+    private List<TaskSupport> supportMembers = new ArrayList<>();
 }

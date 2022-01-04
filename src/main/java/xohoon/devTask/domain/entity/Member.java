@@ -4,7 +4,9 @@ import lombok.*;
 import xohoon.devTask.domain.entity.admin.Role;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -32,5 +34,8 @@ public class Member {
     @JoinTable(name = "user_roles", joinColumns = { @JoinColumn(name = "member_id") }, inverseJoinColumns = {
             @JoinColumn(name = "role_id") })
     private Set<Role> userRoles = new HashSet<>();
+
+    @OneToMany(mappedBy = "members")
+    private List<TaskSupport> supportTasks = new ArrayList<>();
 
 }
