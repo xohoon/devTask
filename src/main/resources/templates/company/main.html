@@ -9,7 +9,10 @@
     기업전용 페이지<br /><br /><br /><br />
     <a th:if="${company == null}" class="btn btn-dark btn-lg" th:href="@{/co/register}">회사정보 입력하기</a>
     <a th:if="${company != null}" th:href="@{'/co/detail/'+${company.id}}">
-        <span th:text="${company.company}">기업</span>
+        기업 : <span th:text="${company.company}">기업</span>
+    </a><br />
+    <a th:href="@{/co/task/list}">
+        공고관리
     </a>
 </div>
 </body>

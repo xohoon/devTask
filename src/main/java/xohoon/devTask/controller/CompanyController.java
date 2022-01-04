@@ -73,8 +73,9 @@ public class CompanyController {
         return "company/register";
     }
 
-    @PostMapping(value = "co/delete") // 삭제
-    public String delete() {
+    @PostMapping(value = "delete/{id}") // 삭제
+    public String delete(@PathVariable(value = "id") String id) {
+        companyService.deleteCompany(Long.valueOf(id));
         return "redirect:/co/main";
     }
 
@@ -84,7 +85,7 @@ public class CompanyController {
     * */
     @GetMapping(value = "task/list")
     public String taskList() {
-        return "comapny/task/list";
+        return "company/task/list";
     }
 
     @GetMapping(value = "task/register") // 과제 글쓰기 폼

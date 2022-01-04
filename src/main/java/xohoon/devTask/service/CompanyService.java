@@ -32,4 +32,9 @@ public class CompanyService {
     public Company getCompanyDetail(Long id) {
         return companyRepository.findById(id).orElse(new Company());
     }
+
+    @Transactional
+    public void deleteCompany(Long id) {
+        companyRepository.deleteById(id);
+    }
 }

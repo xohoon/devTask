@@ -29,6 +29,9 @@
                     </div>
                     <br />
                     <a class="btn btn-dark btn-lg" th:href="@{'/co/modify/'+${company.id}}">수정</a>
+                    <form  th:action="@{'/co/delete/'+${company.id}}" method="post" style="float:left;">
+                        <input type="submit" value="삭제" class="btn btn-dark btn-lg">
+                    </form>
                     <a th:href="@{'/co/main'}">메인페이지</a>
                 </div>
             </div>
