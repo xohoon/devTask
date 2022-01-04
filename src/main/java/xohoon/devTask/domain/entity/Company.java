@@ -26,11 +26,11 @@ public class Company {
     private String address;
 
     // common
-    private LocalDateTime createDate;
-    private LocalDateTime lastModifiedDate;
+    private String createDate;
+    private String lastModifiedDate;
     private Long lastModifiedMemberId;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id")
     private Member member;
 }

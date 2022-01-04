@@ -3,13 +3,16 @@ package xohoon.devTask.controller;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import xohoon.devTask.domain.dto.CompanyDto;
-import xohoon.devTask.domain.dto.TaskDto;
 import xohoon.devTask.domain.entity.Company;
 import xohoon.devTask.repository.CompanyRepository;
+
+import java.security.Principal;
 
 @Controller
 @RequestMapping(value = "co")
@@ -24,6 +27,7 @@ public class CompanyController {
     public String main() {
         return "company/main";
     }
+
     @GetMapping(value = "register") // 기업 글쓰기 폼
     public String registerForm() {
         return "company/register";
@@ -33,13 +37,14 @@ public class CompanyController {
     public String register(CompanyDto companyDto) throws Exception {
         ModelMapper mapper = new ModelMapper();
         Company company = mapper.map(companyDto, Company.class);
+
         companyRepository.save(company);
 
         return "redirect:/co/register";
     }
 
-    @GetMapping(value = "detail")
-    public String detail() {
+    @GetMapping(value = "detail/{id}")
+    public String detail(@PathVariable String id, Model model) {
         return "company/detail";
     }
 

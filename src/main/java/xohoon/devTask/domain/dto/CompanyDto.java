@@ -22,7 +22,7 @@ public class CompanyDto {
     private String address;
 
     // common
-    private LocalDateTime createDate;
-    private LocalDateTime lastModifiedDate;
+    private String createDate;
+    private String lastModifiedDate;
     private Long lastModifiedMemberId;
 }
