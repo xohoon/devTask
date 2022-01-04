@@ -1,15 +1,22 @@
 package xohoon.devTask.controller;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import xohoon.devTask.domain.dto.CompanyDto;
 import xohoon.devTask.domain.dto.TaskDto;
+import xohoon.devTask.domain.entity.Company;
+import xohoon.devTask.repository.CompanyRepository;
 
 @Controller
 @RequestMapping(value = "co")
 public class CompanyController {
 
+    @Autowired
+    private CompanyRepository companyRepository;
     /*
      * company
      * */
@@ -23,9 +30,12 @@ public class CompanyController {
     }
 
     @PostMapping(value = "register") // 기업 글 저장
-    public String register(TaskDto taskDto) throws Exception {
+    public String register(CompanyDto companyDto) throws Exception {
+        ModelMapper mapper = new ModelMapper();
+        Company company = mapper.map(companyDto, Company.class);
+        companyRepository.save(company);
 
-        return "redirect:/company/detail";
+        return "redirect:/co/register";
     }
 
     @GetMapping(value = "detail")

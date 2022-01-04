@@ -1,21 +1,17 @@
-package xohoon.devTask.domain.entity;
+package xohoon.devTask.domain.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-@NoArgsConstructor
-@ToString
 @Data
-public class Company {
-
-    @Id
-    @GeneratedValue
-    @Column(name = "com_id")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class CompanyDto {
     private Long id;
     private String company;
     private String site_url;
@@ -29,8 +25,4 @@ public class Company {
     private LocalDateTime createDate;
     private LocalDateTime lastModifiedDate;
     private Long lastModifiedMemberId;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_id")
-    private Member member;
 }
