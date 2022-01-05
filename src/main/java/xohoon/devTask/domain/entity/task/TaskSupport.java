@@ -1,8 +1,9 @@
-package xohoon.devTask.domain.entity;
+package xohoon.devTask.domain.entity.task;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import xohoon.devTask.domain.entity.Member;
 
 import javax.persistence.*;
 
@@ -12,11 +13,17 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class TaskSupport {
     @Id @GeneratedValue
+    @Column(name = "ts_id")
     private Long id;
 
+    /*
+    * TaskDetail N : M Member
+    * TaskSupport N : 1 TaskDetail
+    * TaskSupport N : 1 Member
+    * */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "task_id")
-    private Task tasks;
+    @JoinColumn(name = "td_id")
+    private TaskDetail taskDetails;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")

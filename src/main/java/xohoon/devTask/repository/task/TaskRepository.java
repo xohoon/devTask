@@ -1,7 +1,7 @@
-package xohoon.devTask.repository;
+package xohoon.devTask.repository.task;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import xohoon.devTask.domain.entity.Task;
+import xohoon.devTask.domain.entity.task.Task;
 
 import java.util.List;
 

@@ -2,6 +2,7 @@ package xohoon.devTask.domain.entity;
 
 import lombok.*;
 import xohoon.devTask.domain.entity.admin.Role;
+import xohoon.devTask.domain.entity.task.TaskSupport;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -30,12 +31,18 @@ public class Member {
     @Column
     private int age;
 
+    /*
+    * 권한매핑
+    * */
     @ManyToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
     @JoinTable(name = "user_roles", joinColumns = { @JoinColumn(name = "member_id") }, inverseJoinColumns = {
             @JoinColumn(name = "role_id") })
     private Set<Role> userRoles = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "members")
+    /*
+    * Member 1 : N TaskSupport
+    * */
+    @OneToMany(mappedBy = "members", fetch = FetchType.EAGER)
     private List<TaskSupport> supportTasks = new ArrayList<>();
 
 }

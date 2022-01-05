@@ -3,20 +3,17 @@ package xohoon.devTask.controller;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import xohoon.devTask.domain.dto.CompanyDto;
-import xohoon.devTask.domain.dto.TaskDto;
+import xohoon.devTask.domain.dto.task.TaskDto;
 import xohoon.devTask.domain.entity.Company;
 import xohoon.devTask.domain.entity.Member;
-import xohoon.devTask.domain.entity.Task;
-import xohoon.devTask.repository.TaskRepository;
+import xohoon.devTask.domain.entity.task.Task;
 import xohoon.devTask.service.CompanyService;
-import xohoon.devTask.service.TaskService;
+import xohoon.devTask.service.task.TaskService;
 
 import java.util.List;
 
@@ -117,8 +114,8 @@ public class CompanyController {
         ModelMapper mapper = new ModelMapper();
         taskDto.setTasking_status(1);
         Task task = mapper.map(taskDto, Task.class);
-        Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        taskService.registerTask(task, member);
+        Company company = (Company) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        taskService.registerTask(task, company);
 
         return "redirect:/co/task/list";
     }

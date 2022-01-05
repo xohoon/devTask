@@ -30,6 +30,9 @@ public class Company {
     private String lastModifiedDate;
     private Long lastModifiedMemberId;
 
+    /*
+    * member 1 : 1 company
+    * */
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
