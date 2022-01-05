@@ -1,27 +1,49 @@
 package xohoon.devTask.controller;
 
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import xohoon.devTask.domain.dto.TaskDto;
+import xohoon.devTask.domain.entity.Task;
 import xohoon.devTask.repository.TaskRepository;
+import xohoon.devTask.service.TaskService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "task")
+@RequiredArgsConstructor
 public class TaskController {
 
+    private final TaskService taskService;
+
     /*
-    * user
+    * task
     * */
     @GetMapping(value = "list") // 리스트
-    public String list() {
+    public String taskList(Model model) {
+        ModelMapper modelMapper = new ModelMapper();
+        List<Task> taskList = taskService.getUserTaskList();
+        List<TaskDto> tasks = modelMapper.map(taskList, new TypeToken<List<TaskDto>>() {}.getType());
+        model.addAttribute("tasks", tasks);
+
         return "task/list";
     }
 
-    @GetMapping(value = "detail") // 상세보기
-    public String detailView() {
+    @GetMapping(value = "detail/{id}") // 상세보기
+    public String taskDetail(@PathVariable(value = "id") String id,  Model model) {
+        ModelMapper modelMapper = new ModelMapper();
+        Task taskDetail = taskService.getTask(Long.valueOf(id));
+        TaskDto task = modelMapper.map(taskDetail, TaskDto.class);
+        model.addAttribute("task", task);
+
         return "task/detail";
     }
 

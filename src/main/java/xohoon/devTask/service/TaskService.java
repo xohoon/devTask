@@ -37,4 +37,7 @@ public class TaskService {
         taskRepository.deleteById(id);
     }
 
+    public List<Task> getUserTaskList() {
+        return taskRepository.findAll();
+    }
 }

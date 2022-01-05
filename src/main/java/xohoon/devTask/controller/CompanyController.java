@@ -27,10 +27,11 @@ public class CompanyController {
 
     private final CompanyService companyService;
     private final TaskService taskService;
+
     /*
-     * company
+     * company CRUD
      * */
-    @GetMapping(value = "main")
+    @GetMapping(value = "main") // 기업 메인페이지 이동
     public String main(Model model) {
         ModelMapper modelMapper = new ModelMapper();
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -42,7 +43,7 @@ public class CompanyController {
         return "company/main";
     }
 
-    @GetMapping(value = "register") // 기업 글쓰기 폼
+    @GetMapping(value = "register") // 기업 글쓰기 폼 이동
     public String registerForm(Model model) {
         CompanyDto company = new CompanyDto();
         company.setCompany("newRegisterKey");
@@ -51,7 +52,7 @@ public class CompanyController {
         return "company/register";
     }
 
-    @PostMapping(value = "register") // 저장 및 수정
+    @PostMapping(value = "register") // 기업 저장 및 업데이트
     public String register(CompanyDto companyDto) throws Exception {
         ModelMapper mapper = new ModelMapper();
         Company company = mapper.map(companyDto, Company.class);
@@ -61,7 +62,7 @@ public class CompanyController {
         return "redirect:/co/main";
     }
 
-    @GetMapping(value = "detail/{id}") // 상세페이지
+    @GetMapping(value = "detail/{id}") // 기업 상세 보기
     public String detail(@PathVariable(value = "id") String id, Model model) {
         ModelMapper modelMapper = new ModelMapper();
         Company companyDetail = companyService.getCompanyDetail(Long.valueOf(id));
@@ -71,7 +72,7 @@ public class CompanyController {
         return "company/detail";
     }
 
-    @GetMapping(value = "modify/{id}") // 수정 페이지
+    @GetMapping(value = "modify/{id}") // 기업 수정 페이지
     public String modifyForm(@PathVariable(value="id") String id, Model model) {
         ModelMapper modelMapper = new ModelMapper();
         Company companyDetail = companyService.getCompanyDetail(Long.valueOf(id));
@@ -81,7 +82,7 @@ public class CompanyController {
         return "company/register";
     }
 
-    @PostMapping(value = "delete/{id}") // 삭제
+    @PostMapping(value = "delete/{id}") // 기업
     public String delete(@PathVariable(value = "id") String id) {
         companyService.deleteCompany(Long.valueOf(id));
 
@@ -90,9 +91,9 @@ public class CompanyController {
 
 
     /*
-    * task
+    * task CRUD
     * */
-    @GetMapping(value = "task/list")
+    @GetMapping(value = "task/list") // 과제 목록
     public String taskList(Model model) {
         ModelMapper modelMapper = new ModelMapper();
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -122,7 +123,7 @@ public class CompanyController {
         return "redirect:/co/task/list";
     }
 
-    @GetMapping(value = "task/detail/{id}")
+    @GetMapping(value = "task/detail/{id}") // 과제 상세 보기
     public String taskDetail(@PathVariable(value = "id") String id, Model model) {
         ModelMapper modelMapper = new ModelMapper();
         Task taskDetail = taskService.getTask(Long.valueOf(id));
@@ -132,7 +133,7 @@ public class CompanyController {
         return "company/task/detail";
     }
 
-    @GetMapping(value = "task/modify/{id}")
+    @GetMapping(value = "task/modify/{id}") // 과제 수정 폼
     public String taskModifyForm(@PathVariable(value="id") String id, Model model) {
         ModelMapper modelMapper = new ModelMapper();
         Task taskDetail = taskService.getTask(Long.valueOf(id));
@@ -142,7 +143,7 @@ public class CompanyController {
         return "/company/task/register";
     }
 
-    @PostMapping(value = "task/delete/{id}")
+    @PostMapping(value = "task/delete/{id}") // 과제 삭제
     public String taskDelete(@PathVariable(value = "id") String id) {
         taskService.deleteTask(Long.valueOf(id));
 
