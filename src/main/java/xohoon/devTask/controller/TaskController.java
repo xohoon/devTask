@@ -27,19 +27,12 @@ public class TaskController {
     @GetMapping(value = "list") // 리스트
     public String taskList(Model model) {
         ModelMapper modelMapper = new ModelMapper();
-        List<Task> taskList = taskService.getUserTaskList();
-        List<TaskDto> tasks = modelMapper.map(taskList, new TypeToken<List<TaskDto>>() {}.getType());
-        model.addAttribute("tasks", tasks);
-
         return "task/list";
     }
 
     @GetMapping(value = "detail/{id}") // 상세보기
     public String taskDetail(@PathVariable(value = "id") String id,  Model model) {
         ModelMapper modelMapper = new ModelMapper();
-        Task taskDetail = taskService.getTask(Long.valueOf(id));
-        TaskDto task = modelMapper.map(taskDetail, TaskDto.class);
-        model.addAttribute("task", task);
 
         return "task/detail";
     }

@@ -2,13 +2,14 @@ package xohoon.devTask.domain.entity.task;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import xohoon.devTask.domain.entity.Member;
 
 import javax.persistence.*;
 
 @Entity
-@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class TaskSupport {

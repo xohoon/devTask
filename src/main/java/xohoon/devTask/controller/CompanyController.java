@@ -94,9 +94,6 @@ public class CompanyController {
     public String taskList(Model model) {
         ModelMapper modelMapper = new ModelMapper();
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<Task> taskList = taskService.getTaskList(member.getId());
-        List<TaskDto> tasks = modelMapper.map(taskList, new TypeToken<List<TaskDto>>() {}.getType());
-        model.addAttribute("tasks", tasks);
 
         return "company/task/list";
     }
@@ -113,9 +110,6 @@ public class CompanyController {
     public String taskRegister(TaskDto taskDto) {
         ModelMapper mapper = new ModelMapper();
         taskDto.setTasking_status(1);
-        Task task = mapper.map(taskDto, Task.class);
-        Company company = (Company) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        taskService.registerTask(task, company);
 
         return "redirect:/co/task/list";
     }
@@ -123,9 +117,6 @@ public class CompanyController {
     @GetMapping(value = "task/detail/{id}") // 과제 상세 보기
     public String taskDetail(@PathVariable(value = "id") String id, Model model) {
         ModelMapper modelMapper = new ModelMapper();
-        Task taskDetail = taskService.getTask(Long.valueOf(id));
-        TaskDto task = modelMapper.map(taskDetail, TaskDto.class);
-        model.addAttribute("task", task);
 
         return "company/task/detail";
     }
@@ -133,16 +124,11 @@ public class CompanyController {
     @GetMapping(value = "task/modify/{id}") // 과제 수정 폼
     public String taskModifyForm(@PathVariable(value="id") String id, Model model) {
         ModelMapper modelMapper = new ModelMapper();
-        Task taskDetail = taskService.getTask(Long.valueOf(id));
-        TaskDto task = modelMapper.map(taskDetail, TaskDto.class);
-        model.addAttribute("task", task);
-
         return "/company/task/register";
     }
 
     @PostMapping(value = "task/delete/{id}") // 과제 삭제
     public String taskDelete(@PathVariable(value = "id") String id) {
-        taskService.deleteTask(Long.valueOf(id));
 
         return "redirect:/co/task/list";
     }

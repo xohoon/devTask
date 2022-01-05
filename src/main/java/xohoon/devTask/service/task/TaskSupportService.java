@@ -9,7 +9,6 @@ import xohoon.devTask.repository.task.TaskSupportRepository;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-@Slf4j
 public class TaskSupportService {
     private final TaskSupportRepository taskSupportRepository;
 }

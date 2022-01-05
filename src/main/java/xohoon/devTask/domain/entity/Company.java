@@ -1,5 +1,6 @@
 package xohoon.devTask.domain.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -8,9 +9,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@NoArgsConstructor
-@ToString
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Company {
 
     @Id

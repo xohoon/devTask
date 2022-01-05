@@ -16,26 +16,4 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
 
-    @Transactional
-    public void registerTask(Task task, Company company) {
-        task.setCompany(company);
-        taskRepository.save(task);
-    }
-
-    public List<Task> getTaskList(Long id) {
-        return taskRepository.findAllByMember_id(id);
-    }
-
-    public Task getTask(Long id) {
-        return taskRepository.findById(id).orElse(new Task());
-    }
-
-    @Transactional
-    public void deleteTask(Long id) {
-        taskRepository.deleteById(id);
-    }
-
-    public List<Task> getUserTaskList() {
-        return taskRepository.findAll();
-    }
 }
