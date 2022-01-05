@@ -25,21 +25,23 @@
             </tr>
         </thead>
         <tbody>
+        <!--
         <th:block th:each="tasks, num:${tasks}">
             <tr th:onclick="'javascript:move('+${tasks.id}+');'" style="cursor:pointer;">
                 <th scope="row"><span th:text="${num.count}"></span></th>
                 <td><span th:text="${tasks.task_subject}"></span></td>
-                <!--
+
                 <td><span th:text="${tasks.task_parts}"></span></td>
                 <td><span th:text="${tasks.tasking_day}"></span></td>
                 <td><span th:text="${tasks.task_part_personnel}"></span></td>
-                -->
+
                 <td><span th:text="${tasks.task_dead_day}"></span></td>
                 <td>
                     <span th:if="${tasks.tasking_status == 0}">마감됨</span>
                     <span th:if="${tasks.tasking_status == 1}">진행중</span>
                 </td>
             </tr>
+            -->
         </th:block>
         </tbody>
     </table>

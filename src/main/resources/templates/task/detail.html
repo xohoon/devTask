@@ -13,8 +13,9 @@
                     <div id="join_form">
                         <h3>과제</h3><br />
                         <span>제목</span>
-                        <input type="text" name="task_subject" th:value="${task.task_subject}" readonly class="form-control"><br />
                         <!--
+                        <input type="text" name="task_subject" th:value="${task.task_subject}" readonly class="form-control"><br />
+
                         <span>모집 분야</span>
                         <input type="text" name="task_parts" th:value="${task.task_parts}" readonly class="form-control"><br />
                         <span>분야별 모집 인원</span>
@@ -23,9 +24,10 @@
                         <input type="text" name="tasking_day" th:value="${task.tasking_day}" readonly class="form-control"><br />
                         <span>상세 기술</span>
                         <input type="text" name="task_skill_content" th:value="${task.task_skill_content}" readonly class="form-control"><br />
-                        -->
+
                         <span>마감일</span>
                         <input type="text" name="task_dead_day" th:value="${task.task_dead_day}" readonly class="form-control"><br />
+                        -->
                     </div>
                     <br />
                     <a th:href="@{'/task/list'}">목록</a>

@@ -1,5 +1,4 @@
 function tabChange(tabNum) {
-    console.log("개씨발새끼");
     if (tabNum == '1') {
         location.href = '/hide/admin/user';
     } else if (tabNum == '2') {
