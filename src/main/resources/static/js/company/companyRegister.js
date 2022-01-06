@@ -85,7 +85,7 @@ function saveTask() {
             xhr.setRequestHeader(header, token);
         },
         success : function(result, data) {
-
+            location.href="/co/task/list";
         },
         error : function(result) {
             console.log('ERROR');

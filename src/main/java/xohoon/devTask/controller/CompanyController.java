@@ -104,6 +104,17 @@ public class CompanyController {
     public String taskList(Model model) {
         ModelMapper modelMapper = new ModelMapper();
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Company company = companyService.getCompany(member.getId());
+        List<Task> tasks = taskService.getTasks((Long) company.getId());
+        List<Long> taskIds = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            taskIds.add(tasks.get(i).getId());
+        }
+        List<TaskDetail> taskDetails = taskDetailService.getTaskDetails(taskIds);
+        System.out.println("tasks = " + tasks);
+        System.out.println("taskDetails :: " + taskDetails.toString());
+
+//        model.addAttribute("tasks", tasks);
 
         return "company/task/list";
     }
@@ -111,37 +122,36 @@ public class CompanyController {
     @GetMapping(value = "task/register") // 과제 글쓰기 폼
     public String taskRegisterForm(Model model) {
         TaskDto task = new TaskDto();
+        TaskDetailDto taskDetail = new TaskDetailDto();
         model.addAttribute("task", task);
+        model.addAttribute("taskDetail", taskDetail);
 
         return "company/task/register";
     }
 
     @PostMapping(value = "get/task/register") // 과제 저장
     @ResponseBody
-    public Object taskRegister(@RequestBody Map<String, Object> params) throws Exception{
+    public Object taskRegister(@RequestBody Map<String, Object> params, TaskDto taskDto) throws Exception{
         JSONObject jsonObject = new JSONObject();
         ModelMapper mapper = new ModelMapper();
         Task task = new Task();
+        // task set
         task.setTask_title((String) params.get("task_title"));
         task.setTask_dead_day((String) params.get("task_dead_day"));
         task.setTasking_status(1);
+        // task save
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Company company = companyService.getCompany(member.getId());
         taskService.saveTask(task, company);
+        // task data remove
         params.remove("task_title");
         params.remove("task_dead_day");
-        System.out.println("size::" + params.size());
+        // taskDetail save
         for( String key : params.keySet() ){
-            System.out.println("params.get(key) = " + params.get(key));
             TaskDetailDto detailDto = mapper.map(params.get(key), TaskDetailDto.class);
             TaskDetail taskDetail = mapper.map(detailDto, TaskDetail.class);
-            System.out.println("taskDetail = " + taskDetail);
             taskDetailService.saveTaskDetail(taskDetail, task);
         }
-
-
-//        ModelMapper mapper = new ModelMapper();
-//        taskDto.setTasking_status(1);
 
         return jsonObject;
     }
