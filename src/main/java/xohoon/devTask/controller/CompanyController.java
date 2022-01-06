@@ -1,7 +1,9 @@
 package xohoon.devTask.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,14 +11,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import xohoon.devTask.domain.dto.CompanyDto;
+import xohoon.devTask.domain.dto.task.TaskDetailDto;
 import xohoon.devTask.domain.dto.task.TaskDto;
 import xohoon.devTask.domain.entity.Company;
 import xohoon.devTask.domain.entity.Member;
 import xohoon.devTask.domain.entity.task.Task;
 import xohoon.devTask.domain.entity.task.TaskDetail;
 import xohoon.devTask.service.CompanyService;
+import xohoon.devTask.service.task.TaskDetailService;
 import xohoon.devTask.service.task.TaskService;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +33,7 @@ public class CompanyController {
 
     private final CompanyService companyService;
     private final TaskService taskService;
+    private final TaskDetailService taskDetailService;
 
     /*
      * company CRUD
@@ -109,26 +116,34 @@ public class CompanyController {
         return "company/task/register";
     }
 
-    @GetMapping(value = "get/task/register") // 과제 저장
+    @PostMapping(value = "get/task/register") // 과제 저장
     @ResponseBody
-    public Object taskRegister(
-//            @RequestParam Map<String, Object> taskMap,
-            @RequestParam(value="taskData[]") List<String> taskDetails,
-            TaskDto taskDto) {
-        JSONObject jsonData = new JSONObject();
-        TaskDetail taskDetail = new TaskDetail();
-        int count = taskDetails.size()/5;
-        for (int i = 0; i < count; i ++) {
-            for (String detail : taskDetails) {
-            }
+    public Object taskRegister(@RequestBody Map<String, Object> params) throws Exception{
+        JSONObject jsonObject = new JSONObject();
+        ModelMapper mapper = new ModelMapper();
+        Task task = new Task();
+        task.setTask_title((String) params.get("task_title"));
+        task.setTask_dead_day((String) params.get("task_dead_day"));
+        task.setTasking_status(1);
+        Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Company company = companyService.getCompany(member.getId());
+        taskService.saveTask(task, company);
+        params.remove("task_title");
+        params.remove("task_dead_day");
+        System.out.println("size::" + params.size());
+        for( String key : params.keySet() ){
+            System.out.println("params.get(key) = " + params.get(key));
+            TaskDetailDto detailDto = mapper.map(params.get(key), TaskDetailDto.class);
+            TaskDetail taskDetail = mapper.map(detailDto, TaskDetail.class);
+            System.out.println("taskDetail = " + taskDetail);
+            taskDetailService.saveTaskDetail(taskDetail, task);
         }
 
-//        System.out.println("taskDetails = " + taskDetails.toString());
-//        System.out.println("taskDto = " + taskDetails.toString());
-        ModelMapper mapper = new ModelMapper();
-        taskDto.setTasking_status(1);
 
-        return jsonData;
+//        ModelMapper mapper = new ModelMapper();
+//        taskDto.setTasking_status(1);
+
+        return jsonObject;
     }
 
     @GetMapping(value = "task/detail/{id}") // 과제 상세 보기
