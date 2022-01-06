@@ -8,7 +8,7 @@
 <link rel="stylesheet" th:href="@{/css/company/register.css}"/>
 <script>
     $(function() {
-        $("#datepicker").datepicker();
+        $("#task_dead_day").datepicker();
     });
 </script>
 <div th:replace="fragments/nav::nav"></div>
@@ -19,10 +19,10 @@
                 <div class="card-body">
                     <div id="join_form">
                         <h3>과제등록</h3><br />
-                        <form name="fm" th:action="@{/co/task/register}" method="POST" th:object="${task}">
+                        <div th:object="${task}">
                             <input th:type="hidden" name="id" th:value="*{id}" />
                             <span>제목</span>
-                            <input type="text" name="task_subject" th:value="*{task_subject}" placeholder="제목" class="form-control"><br />
+                            <input type="text" name="task_title" id="task_title" th:value="*{task_title}" placeholder="제목" class="form-control"><br />
                             <span>분야선택</span>
                             <div class="card">
                                 <div class="card-body">
@@ -57,12 +57,11 @@
                                 </div>
                             </div>
                             <div id="tablePoint"></div>
-
                             <span>마감일</span>
-                            <input type="text" name="task_dead_day" id="datepicker" th:value="*{task_dead_day}" style="width: 35%;"
+                            <input type="text" name="task_dead_day" id="task_dead_day" th:value="*{task_dead_day}" style="width: 35%;"
                                    placeholder="마감일" class="form-control" readonly><br />
-                            <input type="submit" value="발행하기" class="btn btn-success">
-                        </form>
+                            <input type="submit" onclick="javascript:saveTask();" value="발행하기" class="btn btn-success">
+                        </div>
                     </div>
                     <br />
                     <a th:href="@{'/co/task/list'}">취소</a>

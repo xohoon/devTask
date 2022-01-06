@@ -17,6 +17,7 @@ public class TaskDetail {
     @Column(name = "td_id")
     private Long id;
 
+    private String task_subject; // main title
     private String task_part; // 전문분야
     private String task_part_personnel; // 분야 모집 인원
     private String tasking_day; // 진행 기간

@@ -1,9 +1,6 @@
 package xohoon.devTask.domain.dto.task;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -11,9 +8,11 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class TaskDetailDto {
     private Long id;
 
+    private String task_subject; // main title
     private String task_part; // 전문분야
     private String task_part_personnel; // 분야 모집 인원
     private String tasking_day; // 진행 기간

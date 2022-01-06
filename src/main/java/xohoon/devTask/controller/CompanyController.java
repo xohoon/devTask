@@ -1,6 +1,7 @@
 package xohoon.devTask.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONObject;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,10 +13,12 @@ import xohoon.devTask.domain.dto.task.TaskDto;
 import xohoon.devTask.domain.entity.Company;
 import xohoon.devTask.domain.entity.Member;
 import xohoon.devTask.domain.entity.task.Task;
+import xohoon.devTask.domain.entity.task.TaskDetail;
 import xohoon.devTask.service.CompanyService;
 import xohoon.devTask.service.task.TaskService;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "co")
@@ -106,12 +109,26 @@ public class CompanyController {
         return "company/task/register";
     }
 
-    @PostMapping(value = "task/register") // 과제 저장
-    public String taskRegister(TaskDto taskDto) {
+    @GetMapping(value = "get/task/register") // 과제 저장
+    @ResponseBody
+    public Object taskRegister(
+//            @RequestParam Map<String, Object> taskMap,
+            @RequestParam(value="taskData[]") List<String> taskDetails,
+            TaskDto taskDto) {
+        JSONObject jsonData = new JSONObject();
+        TaskDetail taskDetail = new TaskDetail();
+        int count = taskDetails.size()/5;
+        for (int i = 0; i < count; i ++) {
+            for (String detail : taskDetails) {
+            }
+        }
+
+//        System.out.println("taskDetails = " + taskDetails.toString());
+//        System.out.println("taskDto = " + taskDetails.toString());
         ModelMapper mapper = new ModelMapper();
         taskDto.setTasking_status(1);
 
-        return "redirect:/co/task/list";
+        return jsonData;
     }
 
     @GetMapping(value = "task/detail/{id}") // 과제 상세 보기

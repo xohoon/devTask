@@ -20,7 +20,7 @@ public class Task {
     @Id @GeneratedValue
     @Column(name = "task_id")
     private Long id;
-    private String task_subject; // 제목
+    private String task_title; // 제목
     private String task_dead_day; // 마감 날짜
     private int tasking_status; // 마감 형태
 
