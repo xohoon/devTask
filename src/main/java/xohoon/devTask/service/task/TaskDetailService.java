@@ -23,6 +23,6 @@ public class TaskDetailService {
     }
 
     public List<TaskDetail> getTaskDetails(List<Long> taskIds) {
-        return taskDetailRepository.findAllByTask_id(taskIds);
+        return taskDetailRepository.findAllByTaskid(taskIds);
     }
 }

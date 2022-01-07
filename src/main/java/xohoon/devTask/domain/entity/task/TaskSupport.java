@@ -18,7 +18,7 @@ public class TaskSupport {
     private Long id;
 
     /*
-    * TaskDetail N : M Member
+    * TaskDetail N : M Member 이므로
     * TaskSupport N : 1 TaskDetail
     * TaskSupport N : 1 Member
     * */

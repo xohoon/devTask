@@ -17,7 +17,7 @@ import java.util.Set;
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member {
+public class Member extends BaseEntity{
 
     @Id @GeneratedValue
     @Column(name="member_id")
@@ -39,10 +39,8 @@ public class Member {
             @JoinColumn(name = "role_id") })
     private Set<Role> userRoles = new HashSet<>();
 
-    /*
-    * Member 1 : N TaskSupport
-    * */
-    @OneToMany(mappedBy = "members", fetch = FetchType.EAGER)
-    private List<TaskSupport> supportTasks = new ArrayList<>();
+    // Member 1 : N TaskSupport
+    @OneToMany(mappedBy = "members")
+    private Set<TaskSupport> taskSupports = new HashSet<>();
 
 }

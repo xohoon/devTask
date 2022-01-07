@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import xohoon.devTask.repository.task.TaskSupportRepository;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 @RequiredArgsConstructor
 public class TaskSupportService {
     private final TaskSupportRepository taskSupportRepository;

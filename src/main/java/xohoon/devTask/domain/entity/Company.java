@@ -1,15 +1,19 @@
 package xohoon.devTask.domain.entity;
 
 import lombok.*;
+import xohoon.devTask.domain.entity.task.Task;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Company {
+public class Company extends BaseEntity{
 
     @Id
     @GeneratedValue
@@ -23,15 +27,12 @@ public class Company {
     private String salary;
     private String address;
 
-    // common
-    private String createDate;
-    private String lastModifiedDate;
-    private Long lastModifiedMemberId;
-
-    /*
-    * member 1 : 1 company
-    * */
-    @OneToOne(fetch = FetchType.LAZY)
+    // member 1 : 1 company
+    @OneToOne
     @JoinColumn(name = "member_id")
-    private Member member;
+    private Member member = new Member();
+
+    // company 1 : N task
+    @OneToMany(mappedBy = "company")
+    private List<Task> tasks = new ArrayList<>();
 }

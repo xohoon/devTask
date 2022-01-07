@@ -20,9 +20,4 @@ public class CompanyDto {
     private int personnel;
     private String salary;
     private String address;
-
-    // common
-    private String createDate;
-    private String lastModifiedDate;
-    private Long lastModifiedMemberId;
 }

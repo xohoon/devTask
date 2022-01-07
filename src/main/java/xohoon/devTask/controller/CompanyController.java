@@ -1,11 +1,8 @@
 package xohoon.devTask.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +18,6 @@ import xohoon.devTask.service.CompanyService;
 import xohoon.devTask.service.task.TaskDetailService;
 import xohoon.devTask.service.task.TaskService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +35,6 @@ public class CompanyController {
      * */
     @GetMapping(value = "main") // 기업 메인페이지 이동
     public String main(Model model) {
-        ModelMapper modelMapper = new ModelMapper();
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Company company = companyService.getCompany(member.getId());
         // 리스트 전달
@@ -102,17 +96,30 @@ public class CompanyController {
     * */
     @GetMapping(value = "task/list") // 과제 목록
     public String taskList(Model model) {
-        ModelMapper modelMapper = new ModelMapper();
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Company company = companyService.getCompany(member.getId());
-        List<Task> tasks = taskService.getTasks((Long) company.getId());
-        List<Long> taskIds = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            taskIds.add(tasks.get(i).getId());
-        }
-        List<TaskDetail> taskDetails = taskDetailService.getTaskDetails(taskIds);
-        System.out.println("tasks = " + tasks);
-        System.out.println("taskDetails :: " + taskDetails.toString());
+        System.out.println("check1"+company.getCompany()+"::"+company.getAddress());
+        System.out.println("check1"+company.getTasks().getClass());
+//        Task task =  taskService.getTask(company.getId());
+        List<Task> tasks = taskService.getTaskList("test");
+        System.out.println("task = " + tasks);
+//        List<Company> companyList = companyService.getCompanyList();
+//        System.out.println("check2"+companyList);
+//        for (Company companydata : companyList) {
+//            System.out.println("companydata = " + companydata.getCompany());
+//            System.out.println("companydata = " + companydata.getAddress());
+//        }
+
+//        System.out.println("check3"+tasks);
+
+
+//        Task task = taskService.getTasks(company.getId());
+//        List<Long> taskIds = new ArrayList<>();
+//        for (int i = 0; i < tasks.size(); i++) {
+//            taskIds.add(tasks.get(i).getId());
+//        }
+//        List<TaskDetail> taskDetails = taskDetailService.getTaskDetails(taskIds);
+//        System.out.println("taskDetails :: " + taskDetails.toString());
 
 //        model.addAttribute("tasks", tasks);
 

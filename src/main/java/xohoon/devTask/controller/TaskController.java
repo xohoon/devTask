@@ -2,17 +2,12 @@ package xohoon.devTask.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import xohoon.devTask.domain.dto.task.TaskDto;
-import xohoon.devTask.domain.entity.task.Task;
 import xohoon.devTask.service.task.TaskService;
-
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "task")

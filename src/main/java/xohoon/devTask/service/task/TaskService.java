@@ -22,7 +22,7 @@ public class TaskService {
         taskRepository.save(task);
     }
 
-    public List<Task> getTasks(Long id) {
-        return taskRepository.findAllByCom_id(id);
+    public List<Task> getTaskList(String test) {
+        return taskRepository.findAllByTask_title(test);
     }
 }
