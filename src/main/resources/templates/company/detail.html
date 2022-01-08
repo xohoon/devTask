@@ -12,20 +12,20 @@
                 <div class="card-body">
                     <div id="join_form">
                         <h3>기업정보</h3><br />
-                            <span>회사명</span>
-                            <input type="text" th:value="${company.getCompany()}" class="form-control" readonly><br />
-                            <span>기업 홈페이지</span>
-                            <input type="text" th:value="${company.getSite_url()}" class="form-control" readonly><br />
-                            <span>기업 복지</span>
-                            <input type="text" th:value="${company.getWelfare()}" class="form-control" readonly><br />
-                            <span>웰컴 키트</span>
-                            <input type="text" th:value="${company.getKit()}" class="form-control" readonly><br />
-                            <span>재직인원</span>
-                            <input type="text" th:value="${company.getPersonnel()}" class="form-control" readonly><br />
-                            <span>평균 연봉</span>
-                            <input type="text" th:value="${company.getSalary()}" class="form-control" readonly><br />
-                            <span>주소</span>
-                            <input type="text" th:value="${company.getAddress()}" class="form-control" readonly><br />
+                        <span>회사명</span>
+                        <input type="text" th:value="${company.getCompany()}" class="form-control" readonly><br />
+                        <span>기업 홈페이지</span>
+                        <input type="text" th:value="${company.getSite_url()}" class="form-control" readonly><br />
+                        <span>기업 복지</span>
+                        <input type="text" th:value="${company.getWelfare()}" class="form-control" readonly><br />
+                        <span>웰컴 키트</span>
+                        <input type="text" th:value="${company.getKit()}" class="form-control" readonly><br />
+                        <span>재직인원</span>
+                        <input type="text" th:value="${company.getPersonnel()}" class="form-control" readonly><br />
+                        <span>평균 연봉</span>
+                        <input type="text" th:value="${company.getSalary()}" class="form-control" readonly><br />
+                        <span>주소</span>
+                        <input type="text" th:value="${company.getAddress()}" class="form-control" readonly><br />
                     </div>
                     <br />
                     <a class="btn btn-dark btn-lg" th:href="@{'/co/modify/'+${company.id}}">수정</a>

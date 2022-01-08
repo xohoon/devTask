@@ -7,8 +7,8 @@ import xohoon.devTask.domain.entity.Company;
 import xohoon.devTask.domain.entity.task.Task;
 import xohoon.devTask.repository.task.TaskRepository;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -27,7 +27,7 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
-    public List<Task> getTaskDetails(Long id) {
-        return taskRepository.findAllById(Collections.singleton(id));
+    public Task getTaskDetail(Long id) {
+        return taskRepository.findById(id).orElse(new Task());
     }
 }

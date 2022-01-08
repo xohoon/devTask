@@ -108,10 +108,8 @@ public class CompanyController {
 
     @GetMapping(value = "task/register") // 과제 글쓰기 폼
     public String taskRegisterForm(Model model) {
-        TaskDto task = new TaskDto();
-        TaskDetailDto taskDetail = new TaskDetailDto();
+        Task task = new Task();
         model.addAttribute("task", task);
-        model.addAttribute("taskDetail", taskDetail);
 
         return "company/task/register";
     }
@@ -146,6 +144,8 @@ public class CompanyController {
     @GetMapping(value = "task/detail/{id}") // 과제 상세 보기
     public String taskDetail(@PathVariable(value = "id") String id, Model model) {
         ModelMapper modelMapper = new ModelMapper();
+        Task task = taskService.getTaskDetail(Long.valueOf(id));
+        model.addAttribute("task", task);
 
         return "company/task/detail";
     }
@@ -153,6 +153,9 @@ public class CompanyController {
     @GetMapping(value = "task/modify/{id}") // 과제 수정 폼
     public String taskModifyForm(@PathVariable(value="id") String id, Model model) {
         ModelMapper modelMapper = new ModelMapper();
+        Task task = taskService.getTaskDetail(Long.valueOf(id));
+        model.addAttribute("task", task);
+
         return "/company/task/register";
     }
 

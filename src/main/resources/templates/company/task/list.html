@@ -17,8 +17,8 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">제목</th>
-                <th scope="col">마감기간</th>
                 <th scope="col">과제분야</th>
+                <th scope="col">마감기간</th>
             </tr>
         </thead>
         <tbody>
@@ -28,10 +28,11 @@
                 <td><span th:text="${tasks.task_title}"></span></td>
                 <td>
                     <th:block th:each="taskDetail, num:${tasks.getTaskDetails()}">
-                        <span th:text="${taskDetail.task_subject}"></span>
+                        <span th:text="${taskDetail.task_subject}"></span><br />
                     </th:block>
                 </td>
                 <td>
+                    <span th:text="${tasks.task_dead_day}"></span><br />
                     <span th:if="${tasks.tasking_status == 0}">마감됨</span>
                     <span th:if="${tasks.tasking_status == 1}">진행중</span>
                 </td>

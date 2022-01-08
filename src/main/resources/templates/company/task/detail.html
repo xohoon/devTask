@@ -10,23 +10,64 @@
         <div class="container sign_container">
             <div class="card sign_card">
                 <div class="card-body">
-                    <div id="join_form">
-                        <h3>과제</h3><br />
-                            <span>제목</span>
-                            <input type="text" name="task_subject" th:value="${task.task_subject}" readonly class="form-control"><br />
-                        <!--
-                            <span>모집 분야</span>
-                            <input type="text" name="task_parts" th:value="${task.task_parts}" readonly class="form-control"><br />
-                            <span>분야별 모집 인원</span>
-                            <input type="text" name="task_part_personnel" th:value="${task.task_part_personnel}" readonly class="form-control"><br />
-                            <span>과제 진행기간</span>
-                            <input type="text" name="tasking_day" th:value="${task.tasking_day}" readonly class="form-control"><br />
-                            <span>상세 기술</span>
-                            <input type="text" name="task_skill_content" th:value="${task.task_skill_content}" readonly class="form-control"><br />
-                        -->
-                            <span>마감일</span>
-                            <input type="text" name="task_dead_day" th:value="${task.task_dead_day}" readonly class="form-control"><br />
-                    </div>
+                    <h3>과제</h3><br />
+                    <span>제목</span>
+                    <span th:text="${task.task_title}"></span>
+                    <th:block th:each="taskDetails, num:${task.getTaskDetails()}">
+                        <table class="table table-bordered">
+                            <thead style="border-top: white;border-left: white;border-right: white;">
+                            <tr scope="col" colspan="3">
+                                <th><span th:text="'TASK #'+${num.count}+' '+${taskDetails.task_subject}"></span></th>
+                            </tr>
+                            </thead>
+                            <thead class="table-light" style="text-align: center;">
+                            <tr>
+                                <th scope="col">과제분야</th>
+                                <th scope="col">모집인원</th>
+                                <th scope="col">과제 진행 기간</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style="width: 69%;">
+                                    <div class="card">
+                                        <div class="card-body" th:text="${taskDetails.task_part}">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="width: 15%;">
+                                    <div class="card">
+                                        <div class="card-body" th:text="${taskDetails.task_part_personnel}">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="width: 15%;">
+                                    <div class="card">
+                                        <div class="card-body" th:text="${taskDetails.tasking_day}">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <thead class="table-light" style="text-align: center;">
+                            <tr>
+                                <th scope="col" colspan="3">주요스킬</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td colspan="3">
+                                    <div class="card">
+                                        <div class="card-body" th:text="${taskDetails.task_need_skill}">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </th:block>
+                    <span>마감일</span>
+                    <span th:text="${task.task_dead_day}"></span>
                     <br />
                     <a class="btn btn-dark btn-lg" th:href="@{'/co/task/modify/'+${task.id}}">수정</a>
                     <form  th:action="@{'/co/task/delete/'+${task.id}}" method="post" style="float:left;">
