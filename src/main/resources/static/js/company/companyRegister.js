@@ -1,18 +1,8 @@
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
-var tableList = new Array();
-var taskMap = {};
-var dataMap = {};
+
 $(function() {
     $("#task_dead_day").datepicker();
-    if($("#task_title").val()) {
-        var task_subject = $("#task_subject").val();
-        console.log("있다");
-        $('input[value*=task_subject]');
-    }else if(!$("#task_title").val()) {
-        console.log("없으니까");
-    }
-
 });
 
 function addTaskDetail(title, id) { // 분야 추가 이벤트
@@ -142,13 +132,13 @@ function addTable(title, id) {
         html += '<tbody>';
             html += '<tr>';
                 html += '<td>';
-                    html += '<input type="text" name="task_part" class="form-control" value="test" placeholder="예)백엔드, 프론트엔드">';
+                    html += '<input type="text" name="task_part" class="form-control" placeholder="예)백엔드, 프론트엔드">';
                 html += '</td>';
                 html += '<td>';
-                    html += '<input type="text" name="task_part_personnel" class="form-control" value="1" placeholder="숫자만 입력">';
+                    html += '<input type="text" name="task_part_personnel" class="form-control" placeholder="숫자만 입력">';
                 html += '</td>';
                 html += '<td>';
-                    html += '<input type="text" name="tasking_day" class="form-control" value="2" placeholder="day 기준">';
+                    html += '<input type="text" name="tasking_day" class="form-control" placeholder="day 기준">';
                 html += '</td>';
             html += '</tr>';
         html += '</tbody>';
@@ -160,7 +150,7 @@ function addTable(title, id) {
         html += '<tbody>';
             html += '<tr>';
                 html += '<td colSpan="3">';
-                html += '<textarea class="form-control" name="task_need_skill" style="height: 150px;" placeholder="과제에 필요한 기능 및 기술을 상세히 기입해주세요.">qwe123</textarea>';
+                html += '<textarea class="form-control" name="task_need_skill" style="height: 150px;" placeholder="과제에 필요한 기능 및 기술을 상세히 기입해주세요."></textarea>';
                 html += '</td>';
             html += '</tr>';
         html += '</tbody>';
