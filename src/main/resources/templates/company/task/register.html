@@ -6,11 +6,6 @@
 <body>
 <script th:src="@{/js/company/companyRegister.js}"></script>
 <link rel="stylesheet" th:href="@{/css/company/register.css}"/>
-<script>
-    $(function() {
-        $("#task_dead_day").datepicker();
-    });
-</script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
     <div class="bg">
@@ -56,7 +51,61 @@
                                            onclick="javascript:addTaskDetail('blockchain', this.value, this.id);">
                                 </div>
                             </div>
-                            <div id="tablePoint"></div>
+                            <div id="tablePoint">
+                                <th:block th:if="${task}" th:each="taskDetails, num:${task.getTaskDetails()}">
+                                    <table class="table table-bordered">
+                                        <input type="hidden" name="task_subject" id="task_subject" th:value="${taskDetails.task_subject}">
+                                        <thead style="border-top: white;border-left: white;border-right: white;">
+                                        <tr scope="col">
+                                            <th colspan="2"><span th:text="'TASK #'+${num.count}+' '+${taskDetails.task_subject}"></span></th>
+                                            <th>
+                                                <input onClick='' type="button" class="btn btn-danger btn-sm" value="삭제" style="float:right;"/>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <thead class="table-light" style="text-align: center;">
+                                        <tr>
+                                            <th scope="col">과제분야</th>
+                                            <th scope="col">모집인원</th>
+                                            <th scope="col">과제 진행 기간</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td style="width: 69%;">
+                                                <div class="card">
+                                                    <input type="text" name="task_part" th:value="${taskDetails.task_part}" class="form-control">
+                                                </div>
+                                            </td>
+                                            <td style="width: 15%;">
+                                                <div class="card">
+                                                    <input type="text" name="task_part_personnel" th:value="${taskDetails.task_part_personnel}" class="form-control">
+                                                </div>
+                                            </td>
+                                            <td style="width: 15%;">
+                                                <div class="card">
+                                                    <input type="text" name="tasking_day" th:value="${taskDetails.tasking_day}" class="form-control">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                        <thead class="table-light" style="text-align: center;">
+                                        <tr>
+                                            <th scope="col" colspan="3">주요스킬</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td colspan="3">
+                                                <div class="card">
+                                                    <textarea class="form-control" name="task_need_skill" style="height: 150px;" th:text="${taskDetails.task_need_skill}">qwe123</textarea>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </th:block>
+                            </div>
                             <span>마감일</span>
                             <input type="text" name="task_dead_day" id="task_dead_day" th:value="*{task_dead_day}" style="width: 35%;"
                                    placeholder="마감일" class="form-control" readonly><br />

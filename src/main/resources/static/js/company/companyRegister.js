@@ -1,6 +1,9 @@
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
 var tableList = new Array();
+$(function() {
+    $("#task_dead_day").datepicker();
+});
 function addTaskDetail(value, title, id) {
     var table = id + "Table";
     addTable(value, title, id);
@@ -10,6 +13,12 @@ function addTaskDetail(value, title, id) {
 }
 
 function removeTable(id) {
+    if(id) {
+        if (confirm("기입한 내용은 모두 삭제됩니다.") == true){
+        }else{
+            return false;
+        }
+    }
     var table = id + "Table";
     console.log("??" + id + ":" + table);
     document.getElementById(id).style.display = "";
