@@ -7,7 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import xohoon.devTask.domain.dto.CompanyDto;
+import xohoon.devTask.domain.entity.Company;
 import xohoon.devTask.domain.entity.task.Task;
+import xohoon.devTask.domain.entity.task.TaskDetail;
 import xohoon.devTask.service.task.TaskService;
 
 import java.util.List;
@@ -33,6 +36,9 @@ public class TaskController {
     @GetMapping(value = "detail/{id}") // 상세보기
     public String taskDetail(@PathVariable(value = "id") String id,  Model model) {
         ModelMapper modelMapper = new ModelMapper();
+        List<Task> tasks = taskService.getTaskDetails(Long.valueOf(id));
+        System.out.println("tasks = " + tasks);
+        model.addAttribute("tasks", tasks);
 
         return "task/detail";
     }

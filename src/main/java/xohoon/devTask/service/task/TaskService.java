@@ -7,6 +7,7 @@ import xohoon.devTask.domain.entity.Company;
 import xohoon.devTask.domain.entity.task.Task;
 import xohoon.devTask.repository.task.TaskRepository;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -24,5 +25,9 @@ public class TaskService {
 
     public List<Task> getTasks() {
         return taskRepository.findAll();
+    }
+
+    public List<Task> getTaskDetails(Long id) {
+        return taskRepository.findAllById(Collections.singleton(id));
     }
 }

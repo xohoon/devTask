@@ -22,7 +22,7 @@
         </tr>
         </thead>
         <tbody>
-        <th:block th:each="tasks, num:${tasks}">s
+        <th:block th:each="tasks, num:${tasks}">
             <tr th:onclick="'javascript:move('+${tasks.id}+');'" style="cursor:pointer;">
                 <th scope="row"><span th:text="${num.count}"></span></th>
                 <td><span th:text="${tasks.task_title}"></span></td>
