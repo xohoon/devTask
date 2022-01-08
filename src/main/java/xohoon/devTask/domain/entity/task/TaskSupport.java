@@ -1,9 +1,6 @@
 package xohoon.devTask.domain.entity.task;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import xohoon.devTask.domain.entity.Member;
 
 import javax.persistence.*;
@@ -12,6 +9,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = {"taskDetails", "members"},of = {"id", "task_subject", "task_part"})
 public class TaskSupport {
     @Id @GeneratedValue
     @Column(name = "ts_id")

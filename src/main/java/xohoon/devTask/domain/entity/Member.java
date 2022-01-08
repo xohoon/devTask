@@ -12,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @Data
-//@ToString(exclude = {"userRoles"})
+@ToString(exclude = {"userRoles"}, of = {"id", "username", "email"})
 @Builder
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
@@ -39,8 +39,8 @@ public class Member extends BaseEntity{
             @JoinColumn(name = "role_id") })
     private Set<Role> userRoles = new HashSet<>();
 
-    // Member 1 : N TaskSupport
-    @OneToMany(mappedBy = "members")
+    // member 1 : N taskSupport
+    @OneToMany(mappedBy = "members", fetch = FetchType.EAGER)
     private Set<TaskSupport> taskSupports = new HashSet<>();
 
 }

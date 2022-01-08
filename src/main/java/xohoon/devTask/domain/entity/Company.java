@@ -13,6 +13,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(of = {"id", "company", "address"})
 public class Company extends BaseEntity{
 
     @Id
@@ -27,8 +28,8 @@ public class Company extends BaseEntity{
     private String salary;
     private String address;
 
-    // member 1 : 1 company
-    @OneToOne
+    // company 1 : 1 member
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member = new Member();
 

@@ -22,7 +22,7 @@ public class TaskService {
         taskRepository.save(task);
     }
 
-    public List<Task> getTaskList(String test) {
-        return taskRepository.findAllByTask_title(test);
+    public List<Task> getTasks() {
+        return taskRepository.findAll();
     }
 }
