@@ -1,18 +1,28 @@
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
 var tableList = new Array();
+var taskMap = {};
+var dataMap = {};
 $(function() {
     $("#task_dead_day").datepicker();
+    if($("#task_title").val()) {
+        var task_subject = $("#task_subject").val();
+        console.log("있다");
+        $('input[value*=task_subject]');
+    }else if(!$("#task_title").val()) {
+        console.log("없으니까");
+    }
+
 });
-function addTaskDetail(value, title, id) {
+
+function addTaskDetail(title, id) { // 분야 추가 이벤트
     var table = id + "Table";
-    addTable(value, title, id);
-    console.log("나와라"+id);
-    document.getElementById(id).style.display = "none";
-    tableList.push(table);
+    addTable(title, id); // 테이블 view 추가
+    document.getElementById(id).style.display = "none"; // button 숨김
+    tableList.push(table); // 추가된 테이블이름 리스트에 추가
 }
 
-function removeTable(id) {
+function removeTable(id) { // 테이블 삭제
     if(id) {
         if (confirm("기입한 내용은 모두 삭제됩니다.") == true){
         }else{
@@ -20,20 +30,18 @@ function removeTable(id) {
         }
     }
     var table = id + "Table";
-    console.log("??" + id + ":" + table);
     document.getElementById(id).style.display = "";
     document.getElementById(table).style.display = "none";
     tableList.pop(table);
 }
 
-var taskMap = {};
-var dataMap = {};
-function saveTask() {
+function saveTask() { // 데이터 저장
     var task_subject;
     var task_part;
     var task_part_personnel;
     var tasking_day;
     var task_need_skill;
+    var task_btn_id;
     var task_title = $("#task_title").val();
     var task_dead_day =$("#task_dead_day").val();
     if(!task_title) {
@@ -80,12 +88,18 @@ function saveTask() {
         }
         dataMap["task_need_skill"] = task_need_skill;
 
+        task_btn_id = $("input[name='task_btn_id']").eq(i).val();
+        if(!task_btn_id) {
+            task_btn_id = "nothing";
+        }
+        dataMap["task_btn_id"] = task_btn_id;
+
         taskMap[tableList[i]] = dataMap;
     }
 
     $.ajax({
         type : 'POST',
-        url : '/co/get/task/register',
+        url : '/co/task/register',
         dataType : 'JSON',
         contentType : 'application/json;charset=UTF-8;',
         async: false,
@@ -103,12 +117,13 @@ function saveTask() {
 
 }
 
-function addTable(value, title, id) {
+function addTable(title, id) {
     var changeId = JSON.stringify(id);
     var html = '';
     html += '<div id="'+id+'Table" value="test11123123123">';
     html += '<table class="table table-bordered" >';
     html += '<input type="hidden" name="task_subject" id="task_subject" value="'+title+'">';
+    html += '<input type="hidden" name="task_btn_id" id="task_btn_id" value="'+id+'">';
         html += '<thead style="border-top: white;border-left: white;border-right: white;">';
             html += '<tr>';
                 html += '<th scope="col" colSpan="2">TASK #'+title+'</th>';

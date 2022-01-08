@@ -114,7 +114,7 @@ public class CompanyController {
         return "company/task/register";
     }
 
-    @PostMapping(value = "get/task/register") // 과제 저장
+    @PostMapping(value = "task/register") // 과제 저장
     @ResponseBody
     public Object taskRegister(@RequestBody Map<String, Object> params, TaskDto taskDto) throws Exception{
         JSONObject jsonObject = new JSONObject();

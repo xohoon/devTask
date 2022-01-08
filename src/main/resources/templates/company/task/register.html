@@ -7,6 +7,7 @@
 <script th:src="@{/js/company/companyRegister.js}"></script>
 <link rel="stylesheet" th:href="@{/css/company/register.css}"/>
 <div th:replace="fragments/nav::nav"></div>
+
 <div class="container">
     <div class="bg">
         <div class="container sign_container">
@@ -21,38 +22,38 @@
                             <span>분야선택</span>
                             <div class="card">
                                 <div class="card-body">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="백엔드/서버개발" id="backBtn"
-                                            onclick="javascript:addTaskDetail('back', this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="프론트엔드" id="frontBtn"
-                                            onclick="javascript:addTaskDetail('front', this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="앱개발(Android)" id="androidBtn"
-                                            onclick="javascript:addTaskDetail('android', this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="앱개발(ios)" id="iosBtn"
-                                           onclick="javascript:addTaskDetail('ios', this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="퍼블리셔" id="publisherBtn"
-                                           onclick="javascript:addTaskDetail('publisher', this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="디자이너" id="designBtn"
-                                           onclick="javascript:addTaskDetail('design', this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="게임개발" id="gameBtn"
-                                           onclick="javascript:addTaskDetail('game', this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="웹개발" id="webBtn"
-                                           onclick="javascript:addTaskDetail('web', this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="데이터엔지니어" id="dbaBtn"
-                                           onclick="javascript:addTaskDetail('dba', this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="머신러닝" id="machineBtn"
-                                           onclick="javascript:addTaskDetail('machine', this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="딥러닝" id="deepBtn"
-                                           onclick="javascript:addTaskDetail('deep', this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="빅데이터" id="bigdataBtn"
-                                           onclick="javascript:addTaskDetail('bigdata', this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="정보보안" id="securityBtn"
-                                           onclick="javascript:addTaskDetail('security', this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="블록체인" id="blockchainBtn"
-                                           onclick="javascript:addTaskDetail('blockchain', this.value, this.id);">
+                                    <input type="button" class="btn btn-success btn-sm choice" value="백엔드/서버개발" id="back"
+                                            onclick="javascript:addTaskDetail(this.value, this.id);">
+                                    <input type="button" class="btn btn-success btn-sm choice" value="프론트엔드" id="front"
+                                            onclick="javascript:addTaskDetail(this.value, this.id);">
+                                    <input type="button" class="btn btn-success btn-sm choice" value="앱개발(Android)" id="android", name="android"
+                                            onclick="javascript:addTaskDetail(this.value, this.id);">
+                                    <input type="button" class="btn btn-success btn-sm choice" value="앱개발(ios)" id="ios"
+                                           onclick="javascript:addTaskDetail(this.value, this.id);">
+                                    <input type="button" class="btn btn-success btn-sm choice" value="퍼블리셔" id="publisher"
+                                           onclick="javascript:addTaskDetail(this.value, this.id);">
+                                    <input type="button" class="btn btn-success btn-sm choice" value="디자이너" id="design"
+                                           onclick="javascript:addTaskDetail(this.value, this.id);">
+                                    <input type="button" class="btn btn-success btn-sm choice" value="게임개발" id="game"
+                                           onclick="javascript:addTaskDetail(this.value, this.id);">
+                                    <input type="button" class="btn btn-success btn-sm choice" value="웹개발" id="web"
+                                           onclick="javascript:addTaskDetail(this.value, this.id);">
+                                    <input type="button" class="btn btn-success btn-sm choice" value="데이터엔지니어" id="dba"
+                                           onclick="javascript:addTaskDetail(this.value, this.id);">
+                                    <input type="button" class="btn btn-success btn-sm choice" value="머신러닝" id="machine"
+                                           onclick="javascript:addTaskDetail(this.value, this.id);">
+                                    <input type="button" class="btn btn-success btn-sm choice" value="딥러닝" id="deep"
+                                           onclick="javascript:addTaskDetail(this.value, this.id);">
+                                    <input type="button" class="btn btn-success btn-sm choice" value="빅데이터" id="bigdata"
+                                           onclick="javascript:addTaskDetail(this.value, this.id);">
+                                    <input type="button" class="btn btn-success btn-sm choice" value="정보보안" id="security"
+                                           onclick="javascript:addTaskDetail(this.value, this.id);">
+                                    <input type="button" class="btn btn-success btn-sm choice" value="블록체인" id="blockchain"
+                                           onclick="javascript:addTaskDetail(this.value, this.id);">
                                 </div>
                             </div>
                             <div id="tablePoint">
-                                <th:block th:if="${task}" th:each="taskDetails, num:${task.getTaskDetails()}">
+                                <th:block th:if="${task}" th:each="taskDetails, num:${task.getTaskDetails}">
                                     <table class="table table-bordered">
                                         <input type="hidden" name="task_subject" id="task_subject" th:value="${taskDetails.task_subject}">
                                         <thead style="border-top: white;border-left: white;border-right: white;">
@@ -120,6 +121,18 @@
         </div>
     </div>
 </div>
+<script  th:inline="javascript">
+    let task_value;
+    /*<![CDATA[*/
+    /*[# th:each="taskDetails : ${task.getTaskDetails}"]*/
+    task_value = /*[[${taskDetails.task_btn_id}]]*/;
+    document.getElementById(task_value).style.display = 'none';
+    /*[/]*/
+    /*]]>*/
+</script>
+</body>
+</html>
+
 
 <!-- table
 <table class="table table-bordered">
@@ -167,6 +180,3 @@
     </tbody>
 </table>
 -->
-
-</body>
-</html>
