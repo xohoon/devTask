@@ -171,4 +171,18 @@ public class CompanyController {
 
         return "redirect:/co/task/list";
     }
+
+    @GetMapping(value = "task/support/{id}")
+    public String taskSupport(@PathVariable(value = "id") String id, Model model) {
+        Task task = taskService.getTask(Long.valueOf(id));
+        for (int i = 0; i < task.getTaskDetails().size(); i++) {
+            for (int j = 0; j < task.getTaskDetails().get(i).getTaskSupports().size(); j++) {
+                System.out.println("task.getTaskDetails().get(0).getTaskSupports().get(0).getMembers() = " + task.getTaskDetails().get(i).getTaskSupports().get(j).getMembers());
+            }
+        }
+
+        model.addAttribute("task", task);
+
+        return "/company/task/support";
+    }
 }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<head th:replace="fragments/header::header">
+    <title>과제 지원자</title>
+</head>
+<body>
+<div th:replace="fragments/nav::nav"></div>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h5 th:text="${task.task_title}"></h5>
+            <th:block th:each="taskDetails, num:${task.getTaskDetails()}">
+                <h5 class="card-title" style="margin-top: 50px;" th:text="${taskDetails.task_subject}"></h5>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">지원자이름</th>
+                        <th scope="col">지원자 프로필 보기</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="taskSupport, count:*{taskDetails.taskSupports}">
+                        <tr>
+                            <th scope="row"><span th:text="*{count.count}"></span></th>
+                            <td><span th:text="*{taskSupport.getMembers().username}"></span></td>
+                            <td><button type="button" class="btn btn-warning">프로필</button></td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </th:block>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -25,7 +25,7 @@
                                         <span th:text="'(지원인원 : '+${taskDetails.taskSupports.size()}+')'" style="color: gray;"></span>
                                     </th>
                                     <th>
-                                        <button type="button"  class="btn btn-success" style="float:right;"
+                                        <button type="button"  class="btn btn-secondary" style="float:right;"
                                                 sec:authorize="hasAuthority('ROLE_DEV')"
                                                 th:id="${taskDetails.td_id}" th:value="supported"
                                                 onclick="javascript:taskSupport(this.value, this.id);"
@@ -37,11 +37,6 @@
                                                 onclick="javascript:taskSupport(this.value, this.id);"
                                                 th:if="*{supportUser.get(num.index) == 'notSupport'}">지원하기
                                         </button>
-<!--                                        <span th:text="*{username}"></span>-->
-<!--                                        <button type="button" class="btn btn-success" style="float:right;"-->
-<!--                                                sec:authorize="hasAuthority('ROLE_DEV')"-->
-<!--                                                th:id="${taskDetails.td_id}" th:value="${taskDetails.task_subject}"-->
-<!--                                                onclick="javascript:taskSupport(this.value, this.id);">지원하기</button>-->
                                     </th>
                                 </tr>
                             </thead>
