@@ -31,6 +31,6 @@ public class TaskDetail extends BaseEntity {
     private Task task;
 
     // taskDetail 1 : N taskSupport
-    @OneToMany(mappedBy = "taskDetails", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "taskDetails", fetch = FetchType.LAZY)
     private Set<TaskSupport> taskSupports = new HashSet<>();
 }

@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.List;
 
 public interface TaskDetailRepository extends JpaRepository<TaskDetail, Long> {
-
-    @Query("select td from TaskDetail td where td.task in :taskIds")
-    List<TaskDetail> findAllByTaskTd_id(@Param("taskIds")List<Long> taskIds);
+    @Query("select td from TaskDetail td where td.td_id = :td_id")
+    TaskDetail findByTd_id(@Param("td_id") Long td_id);
 }

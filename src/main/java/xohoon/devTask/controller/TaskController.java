@@ -1,23 +1,19 @@
 package xohoon.devTask.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
+import org.json.simple.JSONObject;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import xohoon.devTask.domain.dto.CompanyDto;
-import xohoon.devTask.domain.dto.task.TaskDto;
-import xohoon.devTask.domain.entity.Company;
+import org.springframework.web.bind.annotation.*;
+import xohoon.devTask.domain.entity.Member;
 import xohoon.devTask.domain.entity.task.Task;
 import xohoon.devTask.domain.entity.task.TaskDetail;
+import xohoon.devTask.service.task.TaskDetailService;
 import xohoon.devTask.service.task.TaskService;
+import xohoon.devTask.service.task.TaskSupportService;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "task")
@@ -25,6 +21,8 @@ import java.util.Optional;
 public class TaskController {
 
     private final TaskService taskService;
+    private final TaskDetailService taskDetailService;
+    private final TaskSupportService taskSupportService;
 
     /*
     * task
@@ -41,13 +39,25 @@ public class TaskController {
 
     @GetMapping(value = "detail/{id}") // 상세보기
     public String taskDetail(@PathVariable(value = "id") String id,  Model model) {
-        Task task = taskService.getTaskDetail(Long.valueOf(id));
+        Task task = taskService.getTask(Long.valueOf(id));
 //        ModelMapper modelMapper = new ModelMapper();
 //        TaskDto task = modelMapper.map(taskData, TaskDto.class);
 
         model.addAttribute("task", task);
 
         return "task/detail";
+    }
+
+    @PostMapping(value = "support")
+    @ResponseBody
+    public Object taskSupport(@RequestParam("td_id") String td_id) throws Exception{
+        JSONObject jsonObject = new JSONObject();
+        Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        TaskDetail taskDetail = taskDetailService.getTaskDetail(Long.valueOf(td_id));
+
+        taskSupportService.setTaskSupport(member, taskDetail);
+
+        return jsonObject;
     }
 
 }

@@ -9,11 +9,11 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"taskDetails", "members"},of = {"id", "task_subject", "task_part"})
+@ToString(exclude = {"taskDetails", "members"})
 public class TaskSupport {
     @Id @GeneratedValue
     @Column(name = "ts_id")
-    private Long id;
+    private Long ts_id;
 
     /*
     * TaskDetail N : M Member 이므로

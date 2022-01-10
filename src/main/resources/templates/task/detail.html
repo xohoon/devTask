@@ -4,6 +4,7 @@
     <title>debTask</title>
 </head>
 <body>
+<script th:src="@{/js/task/detail.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
     <div class="bg">
@@ -14,10 +15,20 @@
                     <span>제목</span>
                     <span th:text="${task.task_title}"></span>
                     <th:block th:each="taskDetails, num:${task.getTaskDetails()}">
+                        <input type="hidden" name="td_id" th:value="${taskDetails.td_id}">
                         <table class="table table-bordered">
                             <thead style="border-top: white;border-left: white;border-right: white;">
-                                <tr scope="col" colspan="3">
-                                    <th><span th:text="'TASK #'+${num.count}+' '+${taskDetails.task_subject}"></span></th>
+                                <tr scope="col">
+                                    <th colspan="2">
+                                        <span th:text="'TASK #'+${num.count}+' '+${taskDetails.task_subject}" style="font-size: 25px;"></span>
+                                        <span style="color: gray;">(지원인원 : )</span>
+                                    </th>
+                                    <th>
+                                        <button type="button" class="btn btn-success" style="float:right;"
+                                                sec:authorize="hasAuthority('ROLE_DEV')"
+                                                th:id="${taskDetails.td_id}" th:value="${taskDetails.task_subject}"
+                                                onclick="javascript:taskSupport(this.value, this.id);">지원하기</button>
+                                    </th>
                                 </tr>
                             </thead>
                             <thead class="table-light" style="text-align: center;">

@@ -22,7 +22,7 @@ public class TaskDetailService {
         taskDetailRepository.save(taskDetail);
     }
 
-    public List<TaskDetail> getTaskDetails(List<Long> taskIds) {
-        return taskDetailRepository.findAllByTaskTd_id(taskIds);
+    public TaskDetail getTaskDetail(Long td_id) {
+        return taskDetailRepository.findByTd_id(td_id);
     }
 }

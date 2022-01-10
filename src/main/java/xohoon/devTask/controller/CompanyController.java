@@ -116,7 +116,7 @@ public class CompanyController {
 
     @PostMapping(value = "task/register") // 과제 저장
     @ResponseBody
-    public Object taskRegister(@RequestBody Map<String, Object> params, TaskDto taskDto) throws Exception{
+    public Object taskRegister(@RequestBody Map<String, Object> params) throws Exception{
         JSONObject jsonObject = new JSONObject();
         ModelMapper mapper = new ModelMapper();
         Task task = new Task();
@@ -151,7 +151,7 @@ public class CompanyController {
     @GetMapping(value = "task/detail/{id}") // 과제 상세 보기
     public String taskDetail(@PathVariable(value = "id") String id, Model model) {
         ModelMapper modelMapper = new ModelMapper();
-        Task task = taskService.getTaskDetail(Long.valueOf(id));
+        Task task = taskService.getTask(Long.valueOf(id));
         model.addAttribute("task", task);
 
         return "company/task/detail";
@@ -160,7 +160,7 @@ public class CompanyController {
     @GetMapping(value = "task/modify/{id}") // 과제 수정 폼
     public String taskModifyForm(@PathVariable(value="id") String id, Model model) {
         ModelMapper modelMapper = new ModelMapper();
-        Task task = taskService.getTaskDetail(Long.valueOf(id));
+        Task task = taskService.getTask(Long.valueOf(id));
         model.addAttribute("task", task);
 
         return "/company/task/register";

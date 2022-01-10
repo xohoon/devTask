@@ -2,7 +2,7 @@ var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
 
 $(function() {
-    $("#task_dead_day").datepicker();
+    $("#task_dead_day").datepicker({dateFormat: 'yy-mm-dd'});
 });
 
 function addTaskDetail(title, id) { // 분야 추가 이벤트
@@ -36,7 +36,7 @@ function saveTask() { // 데이터 저장
     var id = $("#id").val();
     var task_title = $("#task_title").val();
     var task_dead_day =$("#task_dead_day").val();
-    if(id) {
+    if(id) { // update
         taskMap["id"] = id;
     }
     if(!task_title) {
@@ -54,7 +54,7 @@ function saveTask() { // 데이터 저장
     for (var i in tableList) {
         dataMap = {};
         td_id = $("input[name='td_id']").eq(i).val();
-        if(td_id) {
+        if(td_id) { // update
             dataMap["td_id"] = td_id;
         }
         task_subject = $("input[name='task_subject']").eq(i).val();
@@ -96,7 +96,6 @@ function saveTask() { // 데이터 저장
         taskMap[tableList[i]] = dataMap;
     }
 
-    console.log("DATA :: " + taskMap["id"]);
     $.ajax({
         type : 'POST',
         url : '/co/task/register',

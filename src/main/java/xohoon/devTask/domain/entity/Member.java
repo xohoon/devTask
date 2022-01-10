@@ -40,7 +40,7 @@ public class Member extends BaseEntity{
     private Set<Role> userRoles = new HashSet<>();
 
     // member 1 : N taskSupport
-    @OneToMany(mappedBy = "members", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "members", fetch = FetchType.LAZY)
     private Set<TaskSupport> taskSupports = new HashSet<>();
 
 }
