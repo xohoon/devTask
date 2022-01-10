@@ -59,20 +59,23 @@ public class TaskController {
         if (principal != null) {
             List<String> supportUser = new ArrayList<>();
             Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            for (int i = 0; i < task.getTaskDetails().size(); i++) {
-//                int count = taskSupportService.searchSupport(Long.valueOf(id), member.getId());
+            for (int i = 0; i < task.getTaskDetails().size(); i++) { // detail size
+                supportUser.add("notSupport");
+                System.out.println("TEST1 :: " + member.getUsername());
+                System.out.println("TEST1 support size :: " + task.getTaskDetails().get(i).getTaskSupports().size());
+                for (int j = 0; j < task.getTaskDetails().get(i).getTaskSupports().size(); j++) { // support size
+                    System.out.println("TEST2 size :: " + task.getTaskDetails().get(i).getTaskSupports().size());
+                    System.out.println("TEST2 size :: " + task.getTaskDetails().get(i).getTaskSupports().get(0).getMembers().getUsername());
+                    if (member.getUsername().equals(task.getTaskDetails().get(i).getTaskSupports().get(j).getMembers().getUsername())) {
+                        System.out.println("TEST = " + member.getUsername() + " ::: " + task.getTaskDetails().get(i).getTaskSupports().get(j).getMembers().getUsername());
+                        supportUser.remove(i);
+                        supportUser.add("supported");
+                    }
+                }
             }
-            model.addAttribute("username", member.getUsername());
+            model.addAttribute("supportUser", supportUser);
+            System.out.println("supportUser = " + supportUser.toString());
         }
-
-//        for (int j = 0; j < task.getTaskDetails().get(i).getTaskSupports().size(); j++) {
-//                    if (member.getUsername() == task.getTaskDetails().get(i).getTaskSupports().get(j).getMembers().getUsername()) {
-//                        supportUser.add("supported");
-//                        break;
-//                    }else {
-//                        supportUser.add("notSupport");
-//                    }
-//                }
 
         model.addAttribute("task", task);
 
