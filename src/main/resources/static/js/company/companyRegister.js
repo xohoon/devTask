@@ -26,14 +26,19 @@ function removeTable(id) { // 테이블 삭제
 }
 
 function saveTask() { // 데이터 저장
+    var td_id;
+    var task_btn_id;
     var task_subject;
     var task_part;
     var task_part_personnel;
     var tasking_day;
     var task_need_skill;
-    var task_btn_id;
+    var id = $("#id").val();
     var task_title = $("#task_title").val();
     var task_dead_day =$("#task_dead_day").val();
+    if(id) {
+        taskMap["id"] = id;
+    }
     if(!task_title) {
         alert("제목을 입력해주세요.");
         $("#task_title").focus();
@@ -48,6 +53,10 @@ function saveTask() { // 데이터 저장
     taskMap["task_dead_day"] = task_dead_day;
     for (var i in tableList) {
         dataMap = {};
+        td_id = $("input[name='td_id']").eq(i).val();
+        if(td_id) {
+            dataMap["td_id"] = td_id;
+        }
         task_subject = $("input[name='task_subject']").eq(i).val();
         if(!task_subject) {
             task_subject = "nothing";
@@ -87,6 +96,7 @@ function saveTask() { // 데이터 저장
         taskMap[tableList[i]] = dataMap;
     }
 
+    console.log("DATA :: " + taskMap["id"]);
     $.ajax({
         type : 'POST',
         url : '/co/task/register',

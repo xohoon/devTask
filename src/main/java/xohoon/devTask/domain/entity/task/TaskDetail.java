@@ -12,11 +12,11 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(of = {"id", "task_subject", "task_part"})
+@ToString(of = {"td_id", "task_subject", "task_part"})
 public class TaskDetail extends BaseEntity {
     @Id @GeneratedValue
     @Column(name = "td_id")
-    private Long id;
+    private Long td_id;
 
     private String task_subject; // main title
     private String task_part; // 전문분야

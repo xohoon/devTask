@@ -124,14 +124,21 @@ public class CompanyController {
         task.setTask_title((String) params.get("task_title"));
         task.setTask_dead_day((String) params.get("task_dead_day"));
         task.setTasking_status(1);
+        if(params.containsKey("id")) { // update
+            task.setId(Long.parseLong((String) params.get("id")));
+        }
         // task save
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Company company = companyService.getCompany(member.getId());
         taskService.saveTask(task, company);
         // task data remove
+        if(params.containsKey("id")) { // update
+            params.remove("id");
+        }
         params.remove("task_title");
         params.remove("task_dead_day");
         // taskDetail save
+        System.out.println("taskDetail = " + params.toString());
         for( String key : params.keySet() ){
             TaskDetailDto detailDto = mapper.map(params.get(key), TaskDetailDto.class);
             TaskDetail taskDetail = mapper.map(detailDto, TaskDetail.class);

@@ -16,7 +16,7 @@
                     <div id="join_form">
                         <h3>과제등록</h3><br />
                         <div th:object="${task}">
-                            <input th:type="hidden" name="id" th:value="*{id}" />
+                            <input th:type="hidden" name="id" id="id" th:value="*{id}" />
                             <span>제목</span>
                             <input type="text" name="task_title" id="task_title" th:value="*{task_title}" placeholder="제목" class="form-control"><br />
                             <span>분야선택</span>
@@ -73,6 +73,7 @@
     let dataMap = {};
     /*<![CDATA[*/
     /*[# th:each="taskDetails : ${task.getTaskDetails}"]*/
+    var td_id = /*[[${taskDetails.td_id}]]*/;
     var btn_id = /*[[${taskDetails.task_btn_id}]]*/;
     var task_subject = /*[[${taskDetails.task_subject}]]*/;
     var task_part = /*[[${taskDetails.task_part}]]*/;
@@ -86,11 +87,12 @@
     var html = '';
     html += '<div id="'+btn_id+'Table" value="test11123123123">';
     html += '<table class="table table-bordered" >';
-    html += '<input type="hidden" name="task_subject" id="task_subject" value="'+task_subject+'">';
+    html += '<input type="hidden" name="td_id" id="td_id" value="'+td_id+'">';
     html += '<input type="hidden" name="task_btn_id" id="task_btn_id" value="'+btn_id+'">';
+    html += '<input type="hidden" name="task_subject" id="task_subject" value="'+task_subject+'">';
     html += '<thead style="border-top: white;border-left: white;border-right: white;">';
     html += '<tr>';
-    html += '<th scope="col" colSpan="2">TASK #'+/*[[${taskDetails.task_subject}]]*/+'</th>';
+    html += '<th scope="col" colSpan="2">TASK #'+task_subject+'</th>';
     html += '<th>';
     html += '<input onClick='+"javascript:removeTable("+changeId+");"+' type="button" class="btn btn-danger btn-sm" style="float:right;" value="삭제" />';
     html += '</th>';
