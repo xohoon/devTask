@@ -4,7 +4,9 @@ import lombok.*;
 import xohoon.devTask.domain.entity.BaseEntity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -31,6 +33,6 @@ public class TaskDetail extends BaseEntity {
     private Task task;
 
     // taskDetail 1 : N taskSupport
-    @OneToMany(mappedBy = "taskDetails", fetch = FetchType.LAZY)
-    private Set<TaskSupport> taskSupports = new HashSet<>();
+    @OneToMany(mappedBy = "taskDetails")
+    private List<TaskSupport> taskSupports = new ArrayList<>();
 }

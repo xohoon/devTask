@@ -10,6 +10,8 @@ import xohoon.devTask.domain.entity.task.TaskDetail;
 import xohoon.devTask.domain.entity.task.TaskSupport;
 import xohoon.devTask.repository.task.TaskSupportRepository;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -23,4 +25,5 @@ public class TaskSupportService {
         taskSupport.setTaskDetails(taskDetail);
         taskSupportRepository.save(taskSupport);
     }
+
 }

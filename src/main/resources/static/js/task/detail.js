@@ -16,7 +16,7 @@ function taskSupport(value, id) {
                 xhr.setRequestHeader(header, token);
             },
             success : function(result, data) {
-                location.href="/task/list";
+                location.reload();
             },
             error : function(result) {
                 console.log('ERROR');

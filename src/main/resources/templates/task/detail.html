@@ -21,13 +21,27 @@
                                 <tr scope="col">
                                     <th colspan="2">
                                         <span th:text="'TASK #'+${num.count}+' '+${taskDetails.task_subject}" style="font-size: 25px;"></span>
-                                        <span style="color: gray;">(지원인원 : )</span>
+                                        <span th:text="'(지원인원 : '+${taskDetails.taskSupports.size()}+')'" style="color: gray;"></span>
                                     </th>
                                     <th>
-                                        <button type="button" class="btn btn-success" style="float:right;"
-                                                sec:authorize="hasAuthority('ROLE_DEV')"
-                                                th:id="${taskDetails.td_id}" th:value="${taskDetails.task_subject}"
-                                                onclick="javascript:taskSupport(this.value, this.id);">지원하기</button>
+                                        <th:block th:each="taskSupport, num:${taskDetails.taskSupports}">
+<!--                                            <span th:text="${taskSupport.members.getUsername()}"></span>-->
+                                            <button type="button"  class="btn btn-success" style="float:right;"
+                                                    sec:authorize="hasAuthority('ROLE_DEV')"
+                                                    th:if="*{taskSupport.members.getUsername() == username}">이미지원함
+                                            </button>
+                                            <button type="button"  class="btn btn-success" style="float:right;"
+                                                    sec:authorize="hasAuthority('ROLE_DEV')"
+                                                    th:id="${taskDetails.td_id}" th:value="${taskDetails.task_subject}"
+                                                    onclick="javascript:taskSupport(this.value, this.id);"
+                                                    th:if="*{taskSupport.members.getUsername() != username}">지원하기
+                                            </button>
+                                        </th:block>
+<!--                                        <span th:text="*{username}"></span>-->
+<!--                                        <button type="button" class="btn btn-success" style="float:right;"-->
+<!--                                                sec:authorize="hasAuthority('ROLE_DEV')"-->
+<!--                                                th:id="${taskDetails.td_id}" th:value="${taskDetails.task_subject}"-->
+<!--                                                onclick="javascript:taskSupport(this.value, this.id);">지원하기</button>-->
                                     </th>
                                 </tr>
                             </thead>

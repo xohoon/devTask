@@ -15,6 +15,9 @@ public class TaskSupport {
     @Column(name = "ts_id")
     private Long ts_id;
 
+//    private Long td_id;
+//    private Long member_id;
+
     /*
     * TaskDetail N : M Member 이므로
     * TaskSupport N : 1 TaskDetail

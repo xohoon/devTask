@@ -17,6 +17,10 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
 
+//    public List<Task> test(Long id) {
+//        return taskRepository.findByCom_id(id);
+//    }
+
     @Transactional
     public void saveTask(Task task, Company company) {
         task.setCompany(company);
@@ -30,4 +34,5 @@ public class TaskService {
     public Task getTask(Long id) {
         return taskRepository.findById(id).orElse(new Task());
     }
+
 }

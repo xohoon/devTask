@@ -6,13 +6,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import xohoon.devTask.domain.entity.Company;
 import xohoon.devTask.domain.entity.Member;
 import xohoon.devTask.domain.entity.task.Task;
 import xohoon.devTask.domain.entity.task.TaskDetail;
+import xohoon.devTask.service.CompanyService;
 import xohoon.devTask.service.task.TaskDetailService;
 import xohoon.devTask.service.task.TaskService;
 import xohoon.devTask.service.task.TaskSupportService;
 
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -20,6 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TaskController {
 
+    private final CompanyService companyService;
     private final TaskService taskService;
     private final TaskDetailService taskDetailService;
     private final TaskSupportService taskSupportService;
@@ -27,6 +32,16 @@ public class TaskController {
     /*
     * task
     * */
+
+    @GetMapping(value = "test")
+    public void test(Principal principal) {
+        if (principal != null) {
+            Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Company company = companyService.getCompany(member.getId());
+//            List<Task> task = taskService.test(company.getId());
+        }
+    }
+
     @GetMapping(value = "list") // 리스트
     public String taskList(Model model) {
         List<Task> tasks = taskService.getTasks();
@@ -38,10 +53,26 @@ public class TaskController {
     }
 
     @GetMapping(value = "detail/{id}") // 상세보기
-    public String taskDetail(@PathVariable(value = "id") String id,  Model model) {
+    public String taskDetail(@PathVariable(value = "id") String id, Model model, Principal principal) {
         Task task = taskService.getTask(Long.valueOf(id));
-//        ModelMapper modelMapper = new ModelMapper();
-//        TaskDto task = modelMapper.map(taskData, TaskDto.class);
+
+        if (principal != null) {
+            List<String> supportUser = new ArrayList<>();
+            Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            for (int i = 0; i < task.getTaskDetails().size(); i++) {
+//                int count = taskSupportService.searchSupport(Long.valueOf(id), member.getId());
+            }
+            model.addAttribute("username", member.getUsername());
+        }
+
+//        for (int j = 0; j < task.getTaskDetails().get(i).getTaskSupports().size(); j++) {
+//                    if (member.getUsername() == task.getTaskDetails().get(i).getTaskSupports().get(j).getMembers().getUsername()) {
+//                        supportUser.add("supported");
+//                        break;
+//                    }else {
+//                        supportUser.add("notSupport");
+//                    }
+//                }
 
         model.addAttribute("task", task);
 
@@ -54,7 +85,6 @@ public class TaskController {
         JSONObject jsonObject = new JSONObject();
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         TaskDetail taskDetail = taskDetailService.getTaskDetail(Long.valueOf(td_id));
-
         taskSupportService.setTaskSupport(member, taskDetail);
 
         return jsonObject;
