@@ -22,7 +22,11 @@
                     </li>
                     <!-- only company-->
                     <li class="nav-item" sec:authorize="hasAuthority('ROLE_CO')">
-                        <a class="nav-link text-light" th:href="@{/co/main}">기업전용페이지</a>
+                        <a class="nav-link text-light" th:href="@{/co/main}">기업전용</a>
+                    </li>
+                    <!-- only company-->
+                    <li class="nav-item" sec:authorize="hasAuthority('ROLE_DEV')">
+                        <a class="nav-link text-light" th:href="@{/dev/main}">개발자전용</a>
                     </li>
                     <!-- only user
                     <li class="nav-item" sec:authorize="isAuthenticated()">

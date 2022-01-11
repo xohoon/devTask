@@ -8,4 +8,5 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class ToyDetailDto {
+    private Long id;
 }

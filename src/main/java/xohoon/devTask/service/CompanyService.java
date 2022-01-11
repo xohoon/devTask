@@ -25,11 +25,11 @@ public class CompanyService {
         companyRepository.save(company);
     }
 
-    public Company getCompany(Long id) {
+    public Company getCompanyByMemberId(Long id) {
         return companyRepository.findByMember_id(id);
     }
 
-    public Company getCompanyDetail(Long id) {
+    public Company getCompanyById(Long id) {
         return companyRepository.findById(id).orElse(new Company());
     }
 

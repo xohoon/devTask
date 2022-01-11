@@ -11,36 +11,24 @@
             <div class="card sign_card">
                 <div class="card-body">
                     <div id="join_form">
-                        <h3>기업등록</h3><br />
-<!--                        -->
-<!--                        <form name="fm" th:action="@{/co/register}" method="POST" th:object="${company}">-->
-<!--                            <input th:type="hidden" name="id" th:value="*{id}" />-->
-<!--                            <span>회사명</span>-->
-<!--                            <input th:if="${company.company == 'newRegisterKey'}" type="text" name="company" placeholder="회사명" class="form-control"><br />-->
-<!--                            <input th:if="${company.company != 'newRegisterKey'}" type="text" name="company" th:value="*{company}" placeholder="회사명" class="form-control"><br />-->
-<!--                            <span>기업 홈페이지</span>-->
-<!--                            <input type="text" name="site_url" id="site_url" th:value="*{site_url}" placeholder="홈페이지 주소" class="form-control"><br />-->
-<!--                            <span>기업 복지</span>-->
-<!--                            <input type="text" name="welfare" id="welfare" th:value="*{welfare}" placeholder="복지내용" class="form-control"><br />-->
-<!--                            <span>웰컴 키트</span>-->
-<!--                            <input type="text" name="kit" id="kit" th:value="*{kit}" placeholder="입사시 키트" class="form-control"><br />-->
-<!--                            <span>재직인원</span>-->
-<!--                            <input type="text" name="personnel" id="personnel" th:value="*{personnel}" placeholder="재직인원" class="form-control"><br />-->
-<!--                            <span>평균 연봉</span>-->
-<!--                            <input type="text" name="salary" id="salary" th:value="*{salary}" placeholder="평균 연봉" class="form-control"><br />-->
-<!--                            <span>주소</span>-->
-<!--                            <input type="text" name="address" id="address" th:value="*{address}" placeholder="주소" class="form-control"><br />-->
-
-<!--                            <input th:if="${company.company == 'newRegisterKey'}"  type="text" name="createDate" id="createDate" th:value="${#calendars.format(#calendars.createNow(), 'yyy-MM-dd HH:mm:ss')}" />-->
-<!--                            <input th:if="${company.company != 'newRegisterKey'}" type="text" name="lastModifiedDate" id="lastModifiedDate" th:value="${#calendars.format(#calendars.createNow(), 'yyy-MM-dd HH:mm:ss')}" />-->
-
-<!--                            <span>개인정보 동의 &nbsp;</span><input type="checkbox"><br /><br />-->
-<!--                            <input type="submit" value="등록하기" class="btn btn-success">-->
-<!--                        </form>-->
-<!--                        -->
+                        <h3>포트폴리오 등록</h3><br />
+                        <form name="fm" th:action="@{/dev/register}" method="POST" th:object="${dev}">
+                            <input th:type="hidden" name="id" th:value="*{id}" />
+                            <span>제목</span>
+                            <input type="text" name="title" th:value="*{title}" placeholder="포트폴리오 제목" class="form-control"><br />
+                            <span>사용 가능 기술</span>
+                            <textarea class="form-control" name="useSkill" th:text="*{useSkill}" placeholder="사용가능 기술" style="height: 150px;"></textarea>
+                            <span>사이트주소1</span>
+                            <input type="text" name="url_1" id="url_1" th:value="*{url_1}" placeholder="포폴 주소" class="form-control"><br />
+                            <span>사이트주소2</span>
+                            <input type="text" name="url_2" id="url_2" th:value="*{url_2}" placeholder="포폴 주소" class="form-control"><br />
+                            <span>사이트주소3</span>
+                            <input type="text" name="url_3" id="url_3" th:value="*{url_3}" placeholder="포폴 주소" class="form-control"><br />
+                            <input type="submit" value="등록하기" class="btn btn-success">
+                        </form>
                     </div>
                     <br />
-                    <a th:href="@{'/co/main'}">취소</a>
+                    <a th:href="@{'/dev/main'}">취소</a>
                 </div>
             </div>
         </div>

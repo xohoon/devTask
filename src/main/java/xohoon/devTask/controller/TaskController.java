@@ -6,11 +6,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import xohoon.devTask.domain.entity.Company;
 import xohoon.devTask.domain.entity.Member;
 import xohoon.devTask.domain.entity.task.Task;
 import xohoon.devTask.domain.entity.task.TaskDetail;
-import xohoon.devTask.service.CompanyService;
 import xohoon.devTask.service.task.TaskDetailService;
 import xohoon.devTask.service.task.TaskService;
 import xohoon.devTask.service.task.TaskSupportService;
@@ -24,7 +22,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TaskController {
 
-    private final CompanyService companyService;
     private final TaskService taskService;
     private final TaskDetailService taskDetailService;
     private final TaskSupportService taskSupportService;
@@ -32,16 +29,6 @@ public class TaskController {
     /*
     * task
     * */
-
-    @GetMapping(value = "test")
-    public void test(Principal principal) {
-        if (principal != null) {
-            Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            Company company = companyService.getCompany(member.getId());
-//            List<Task> task = taskService.test(company.getId());
-        }
-    }
-
     @GetMapping(value = "list") // 리스트
     public String taskList(Model model) {
         List<Task> tasks = taskService.getTasks();

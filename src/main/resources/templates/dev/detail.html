@@ -11,30 +11,24 @@
             <div class="card sign_card">
                 <div class="card-body">
                     <div id="join_form">
-                        <h3>기업정보</h3><br />
-                        <span>회사명</span>
-<!--                        -->
-<!--                        <input type="text" th:value="${company.getCompany()}" class="form-control" readonly><br />-->
-<!--                        <span>기업 홈페이지</span>-->
-<!--                        <input type="text" th:value="${company.getSite_url()}" class="form-control" readonly><br />-->
-<!--                        <span>기업 복지</span>-->
-<!--                        <input type="text" th:value="${company.getWelfare()}" class="form-control" readonly><br />-->
-<!--                        <span>웰컴 키트</span>-->
-<!--                        <input type="text" th:value="${company.getKit()}" class="form-control" readonly><br />-->
-<!--                        <span>재직인원</span>-->
-<!--                        <input type="text" th:value="${company.getPersonnel()}" class="form-control" readonly><br />-->
-<!--                        <span>평균 연봉</span>-->
-<!--                        <input type="text" th:value="${company.getSalary()}" class="form-control" readonly><br />-->
-<!--                        <span>주소</span>-->
-<!--                        <input type="text" th:value="${company.getAddress()}" class="form-control" readonly><br />-->
-<!--                    </div>-->
-<!--                    <br />-->
-<!--                    <a class="btn btn-dark btn-lg" th:href="@{'/co/modify/'+${company.id}}">수정</a>-->
-<!--                    <form  th:action="@{'/co/delete/'+${company.id}}" method="post" style="float:left;">-->
-<!--                        <input type="submit" value="삭제" class="btn btn-dark btn-lg">-->
-<!--                    </form>-->
-<!--                    -->
-                    <a th:href="@{'/co/main'}">메인페이지</a>
+                        <h3>포트폴리오</h3><br />
+                        <span>제목</span>
+                        <input type="text" th:value="${dev.title}" class="form-control" readonly><br />
+                        <span>사용스킬</span>
+                        <input type="text" th:value="${dev.useSkill}" class="form-control" readonly><br />
+                        <span>사이트1</span>
+                        <input type="text" th:value="${dev.url_1}" class="form-control" readonly><br />
+                        <span>사이트2</span>
+                        <input type="text" th:value="${dev.url_2}" class="form-control" readonly><br />
+                        <span>사이트3</span>
+                        <input type="text" th:value="${dev.url_3}" class="form-control" readonly><br />
+                    </div>
+                    <br />
+                    <a class="btn btn-dark btn-lg" th:href="@{'/dev/modify/'+${dev.id}}">수정</a>
+                    <form  th:action="@{'/dev/delete/'+${dev.id}}" method="post" style="float:left;">
+                        <input type="submit" value="삭제" class="btn btn-dark btn-lg">
+                    </form>
+                    <a th:href="@{'/dev/main'}">메인페이지</a>
                 </div>
             </div>
         </div>

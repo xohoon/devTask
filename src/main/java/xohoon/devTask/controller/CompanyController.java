@@ -37,7 +37,7 @@ public class CompanyController {
     @GetMapping(value = "main") // 기업 메인페이지 이동
     public String main(Model model) {
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Company company = companyService.getCompany(member.getId());
+        Company company = companyService.getCompanyByMemberId(member.getId());
         // 리스트 전달
 //        List<CompanyDto> comList = modelMapper.map(companyList, new TypeToken<List<CompanyDto>>() {}.getType());
         model.addAttribute("company", company);
@@ -48,7 +48,6 @@ public class CompanyController {
     @GetMapping(value = "register") // 기업 글쓰기 폼 이동
     public String registerForm(Model model) {
         CompanyDto company = new CompanyDto();
-        company.setCompany("newRegisterKey");
         model.addAttribute("company", company);
 
         return "company/register";
@@ -67,7 +66,7 @@ public class CompanyController {
     @GetMapping(value = "detail/{id}") // 기업 상세 보기
     public String detail(@PathVariable(value = "id") String id, Model model) {
         ModelMapper modelMapper = new ModelMapper();
-        Company companyDetail = companyService.getCompanyDetail(Long.valueOf(id));
+        Company companyDetail = companyService.getCompanyById(Long.valueOf(id));
         CompanyDto company = modelMapper.map(companyDetail, CompanyDto.class);
         model.addAttribute("company", company);
 
@@ -77,7 +76,7 @@ public class CompanyController {
     @GetMapping(value = "modify/{id}") // 기업 수정 페이지
     public String modifyForm(@PathVariable(value="id") String id, Model model) {
         ModelMapper modelMapper = new ModelMapper();
-        Company companyDetail = companyService.getCompanyDetail(Long.valueOf(id));
+        Company companyDetail = companyService.getCompanyById(Long.valueOf(id));
         CompanyDto company = modelMapper.map(companyDetail, CompanyDto.class);
         model.addAttribute("company", company);
 
@@ -98,7 +97,7 @@ public class CompanyController {
     @GetMapping(value = "task/list") // 과제 목록
     public String taskList(Model model) {
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Company company = companyService.getCompany(member.getId());
+        Company company = companyService.getCompanyByMemberId(member.getId());
         List<Task> tasks = company.getTasks();
 
         model.addAttribute("tasks", tasks);
@@ -129,7 +128,7 @@ public class CompanyController {
         }
         // task save
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Company company = companyService.getCompany(member.getId());
+        Company company = companyService.getCompanyByMemberId(member.getId());
         taskService.saveTask(task, company);
         // task data remove
         if(params.containsKey("id")) { // update
