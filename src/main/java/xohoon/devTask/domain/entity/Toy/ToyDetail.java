@@ -2,10 +2,9 @@ package xohoon.devTask.domain.entity.Toy;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -14,4 +13,13 @@ public class ToyDetail {
     @GeneratedValue
     @Column(name = "td_id")
     private Long id;
+
+    // toyDetail N : 1 toy
+    @ManyToOne
+    @JoinColumn(name = "toy_id")
+    private Toy toy;
+
+    // toyDetail 1 : N toySupport
+    @OneToMany(mappedBy = "toyDetails")
+    private List<ToySupport> toySupports = new ArrayList<>();
 }

@@ -1,6 +1,7 @@
 package xohoon.devTask.domain.entity;
 
 import lombok.*;
+import xohoon.devTask.domain.entity.Toy.ToySupport;
 import xohoon.devTask.domain.entity.admin.Role;
 import xohoon.devTask.domain.entity.task.TaskSupport;
 
@@ -42,5 +43,10 @@ public class Member extends BaseEntity{
     // member 1 : N taskSupport
     @OneToMany(mappedBy = "members", fetch = FetchType.LAZY)
     private Set<TaskSupport> taskSupports = new HashSet<>();
+
+    // member 1 : N toySupport
+    @OneToMany(mappedBy = "members", fetch = FetchType.LAZY)
+    private Set<ToySupport> toySupports = new HashSet<>();
+
 
 }
