@@ -91,6 +91,15 @@ public class MemberServiceImpl implements MemberService {
         System.out.println("order");
     }
 
+    @Transactional
+    public void updateUser(MemberDto memberDto) {
+        ModelMapper modelMapper = new ModelMapper();
+        Member Member = modelMapper.map(memberDto, Member.class);
+
+        Member.setPassword(passwordEncoder.encode(memberDto.getPassword()));
+        memberRepository.save(Member);
+    }
+
 //    @Transactional
 //    public Member getMember(String username) {
 //        return memberRepository.findByUsername(username);

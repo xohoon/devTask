@@ -24,10 +24,11 @@
                     <li class="nav-item" sec:authorize="hasAuthority('ROLE_CO')">
                         <a class="nav-link text-light" th:href="@{/co/main}">기업전용페이지</a>
                     </li>
-                    <!-- only user-->
+                    <!-- only user
                     <li class="nav-item" sec:authorize="isAuthenticated()">
                         <a class="nav-link text-light" th:href="@{/mypage}">마이페이지</a>
                     </li>
+                    -->
                     <li class="nav-item" sec:authorize="isAuthenticated()">
                         <a class="nav-link text-light"th:href="@{/logout}">로그아웃</a>
                     </li>

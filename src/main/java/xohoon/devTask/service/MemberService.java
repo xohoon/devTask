@@ -18,5 +18,7 @@ public interface MemberService {
 
     void order();
 
+    void updateUser(MemberDto memberDto);
+
 //    Member getMember(String username);
 }

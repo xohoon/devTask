@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<head th:replace="fragments/header::header">
+    <title>MyPage</title>
+</head>
+<body>
+<script th:src="@{/js/member/mypage.js}"></script>
+<div th:replace="fragments/nav::nav"></div>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">My Page</h5>
+            <th:block th:object="${member}">
+            <table class="table">
+                <input type="hidden" id="id" th:value="${member.id}">
+                <input type="hidden" id="modifyKey" value="close"/>
+                <thead>
+                <tr>
+                    <th scope="col" colspan="4">회원정보
+                        <button type="button" class="btn btn-success btn-sm" onclick="memberModify()" id="modifyBtn"
+                                style="float: right;">수정하기</button>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">이름</th>
+                    <td>
+                        <input type="text" class="form-control form-control-sm" id="username" th:value="${member.username}" readonly>
+                    </td>
+                    <th scope="row">이메일</th>
+                    <td>
+                        <input type="text" class="form-control form-control-sm" id="email" th:value="${member.email}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">나이</th>
+                    <td>
+                        <input type="text" class="form-control form-control-sm" id="age" th:value="${member.age}" readonly>
+                    </td>
+                    <th scope="row">비밀번호</th>
+                    <td>
+                        <input type="text" class="form-control form-control-sm" id="password" readonly>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            </th:block>
+        </div>
+    </div>
+</div>
+</body>
+</html>

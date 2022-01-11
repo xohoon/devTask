@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import xohoon.devTask.domain.dto.MemberDto;
+import xohoon.devTask.domain.entity.Company;
 import xohoon.devTask.domain.entity.Member;
 import xohoon.devTask.service.MemberService;
 
@@ -67,5 +69,22 @@ public class MemberController {
         model.addAttribute("exception", exception);
 
         return "member/denied";
+    }
+
+    @GetMapping(value = "mypage")
+    public String mypage(Model model) {
+        Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("member", member);
+
+        return "member/mypage";
+    }
+
+    @PostMapping(value = "modify")
+    @ResponseBody
+    public Object userModify(MemberDto memberDto) {
+//        System.out.println("memberDto = " + memberDto.toString());
+//        memberService.updateUser(memberDto);
+
+        return "";
     }
 }
