@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import xohoon.devTask.domain.dto.CompanyDto;
 import xohoon.devTask.domain.dto.DevDto;
-import xohoon.devTask.domain.entity.Company;
 import xohoon.devTask.domain.entity.Dev;
 import xohoon.devTask.domain.entity.Member;
+import xohoon.devTask.domain.entity.task.TaskDetail;
+import xohoon.devTask.domain.entity.task.TaskSupport;
 import xohoon.devTask.service.DevService;
+import xohoon.devTask.service.task.TaskSupportService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "dev")
@@ -22,7 +25,11 @@ import xohoon.devTask.service.DevService;
 public class DevController {
 
     private final DevService devService;
+    private final TaskSupportService taskSupportService;
 
+    /*
+    * dev CRUD
+    * */
     @GetMapping(value = "main") // 메인페이지
     public String main(Model model) {
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -49,7 +56,7 @@ public class DevController {
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         devService.register(dev, member);
 
-        return "dev/main";
+        return "redirect:/dev/main";
     }
 
     @GetMapping(value = "detail/{id}") // 상세 페이지
@@ -62,14 +69,37 @@ public class DevController {
         return "dev/detail";
     }
 
-    @GetMapping(value = "modify/{id}") // 기업 수정 페이지
+    @GetMapping(value = "modify/{id}") // 수정 페이지
     public String modifyForm(@PathVariable(value="id") String id, Model model) {
         ModelMapper modelMapper = new ModelMapper();
         Dev devDetail = devService.getDevById(Long.valueOf(id));
         DevDto dev = modelMapper.map(devDetail, DevDto.class);
         model.addAttribute("dev", dev);
 
-        return "dev/main";
+        return "dev/register";
+    }
+
+    @PostMapping(value = "delete/{id}") // 삭제
+    public String delete(@PathVariable(value = "id") String id) {
+        devService.deleteDev(Long.valueOf(id));
+
+        return "redirect:/dev/main";
+    }
+
+    /*
+    * task support
+    * */
+    @GetMapping(value = "task/support")
+    public String taskList(Model model) {
+        Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<TaskSupport> taskSupport = taskSupportService.getSupportByMemberId(member.getId());
+        for (TaskSupport s : taskSupport) {
+            System.out.println("s = " + s.getTaskDetail().toString());
+        }
+
+        model.addAttribute("taskSupport", taskSupport);
+
+        return "dev/support";
     }
 
 }

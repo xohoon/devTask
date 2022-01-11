@@ -33,6 +33,6 @@ public class TaskDetail extends BaseEntity {
     private Task task;
 
     // taskDetail 1 : N taskSupport
-    @OneToMany(mappedBy = "taskDetails")
+    @OneToMany(mappedBy = "taskDetail")
     private List<TaskSupport> taskSupports = new ArrayList<>();
 }

@@ -13,17 +13,21 @@ import xohoon.devTask.repository.task.TaskSupportRepository;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class TaskSupportService {
+
     private final TaskSupportRepository taskSupportRepository;
 
     @Transactional
     public void setTaskSupport(Member member, TaskDetail taskDetail) {
         TaskSupport taskSupport = new TaskSupport();
-        taskSupport.setMembers(member);
-        taskSupport.setTaskDetails(taskDetail);
+        taskSupport.setMember(member);
+        taskSupport.setTaskDetail(taskDetail);
         taskSupportRepository.save(taskSupport);
     }
 
+    public List<TaskSupport> getSupportByMemberId(Long id) {
+        return taskSupportRepository.findAllByMember_id(id);
+    }
 }

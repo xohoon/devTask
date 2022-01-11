@@ -34,7 +34,7 @@ public class CompanyController {
     /*
      * company CRUD
      * */
-    @GetMapping(value = "main") // 기업 메인페이지 이동
+    @GetMapping(value = "main") // 메인페이지 이동
     public String main(Model model) {
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Company company = companyService.getCompanyByMemberId(member.getId());
@@ -45,7 +45,7 @@ public class CompanyController {
         return "company/main";
     }
 
-    @GetMapping(value = "register") // 기업 글쓰기 폼 이동
+    @GetMapping(value = "register") // 글쓰기 폼 이동
     public String registerForm(Model model) {
         CompanyDto company = new CompanyDto();
         model.addAttribute("company", company);
@@ -53,7 +53,7 @@ public class CompanyController {
         return "company/register";
     }
 
-    @PostMapping(value = "register") // 기업 저장 및 업데이트
+    @PostMapping(value = "register") // 저장 및 업데이트
     public String register(CompanyDto companyDto) throws Exception {
         ModelMapper mapper = new ModelMapper();
         Company company = mapper.map(companyDto, Company.class);
@@ -63,7 +63,7 @@ public class CompanyController {
         return "redirect:/co/main";
     }
 
-    @GetMapping(value = "detail/{id}") // 기업 상세 보기
+    @GetMapping(value = "detail/{id}") // 상세 보기
     public String detail(@PathVariable(value = "id") String id, Model model) {
         ModelMapper modelMapper = new ModelMapper();
         Company companyDetail = companyService.getCompanyById(Long.valueOf(id));
@@ -73,7 +73,7 @@ public class CompanyController {
         return "company/detail";
     }
 
-    @GetMapping(value = "modify/{id}") // 기업 수정 페이지
+    @GetMapping(value = "modify/{id}") // 수정 페이지
     public String modifyForm(@PathVariable(value="id") String id, Model model) {
         ModelMapper modelMapper = new ModelMapper();
         Company companyDetail = companyService.getCompanyById(Long.valueOf(id));
@@ -83,7 +83,7 @@ public class CompanyController {
         return "company/register";
     }
 
-    @PostMapping(value = "delete/{id}") // 기업
+    @PostMapping(value = "delete/{id}") // 삭제
     public String delete(@PathVariable(value = "id") String id) {
         companyService.deleteCompany(Long.valueOf(id));
 

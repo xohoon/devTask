@@ -17,10 +17,10 @@ public class ToySupport {
     // toySupport N : 1 toyDetail
     @ManyToOne
     @JoinColumn(name = "td_id")
-    private ToyDetail toyDetails;
+    private ToyDetail toyDetail = new ToyDetail();
 
     // toySupport N : 1 member
     @ManyToOne
     @JoinColumn(name = "member_id")
-    private Member members;
+    private Member member = new Member();
 }

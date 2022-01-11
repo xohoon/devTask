@@ -41,11 +41,11 @@ public class Member extends BaseEntity{
     private Set<Role> userRoles = new HashSet<>();
 
     // member 1 : N taskSupport
-    @OneToMany(mappedBy = "members", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private Set<TaskSupport> taskSupports = new HashSet<>();
 
     // member 1 : N toySupport
-    @OneToMany(mappedBy = "members", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private Set<ToySupport> toySupports = new HashSet<>();
 
 

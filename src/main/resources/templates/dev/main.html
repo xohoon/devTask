@@ -11,6 +11,9 @@
     <a th:if="${dev != null}" th:href="@{'/dev/detail/'+${dev.id}}">
         포폴 : <span th:text="${dev.title}"></span>
     </a><br />
+    <a th:href="@{/dev/task/support}">
+        공고지원현황
+    </a>
 </div>
 </body>
 </html>

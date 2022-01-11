@@ -28,4 +28,9 @@ public class DevService {
     public Dev getDevById(Long id) {
         return devRepository.findById(id).orElse(new Dev());
     }
+
+    @Transactional
+    public void deleteDev(Long id) {
+        devRepository.deleteById(id);
+    }
 }

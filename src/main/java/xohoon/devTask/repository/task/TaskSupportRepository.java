@@ -9,4 +9,5 @@ import xohoon.devTask.domain.entity.task.TaskSupport;
 import java.util.List;
 
 public interface TaskSupportRepository extends JpaRepository<TaskSupport, Long> {
+    List<TaskSupport> findAllByMember_id(Long id);
 }

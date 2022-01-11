@@ -20,6 +20,6 @@ public class ToyDetail {
     private Toy toy;
 
     // toyDetail 1 : N toySupport
-    @OneToMany(mappedBy = "toyDetails")
+    @OneToMany(mappedBy = "toyDetail")
     private List<ToySupport> toySupports = new ArrayList<>();
 }
