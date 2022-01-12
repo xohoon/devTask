@@ -17,7 +17,9 @@ public class TaskSupport {
     private Long id;
 
     @ColumnDefault("0")
-    private int support_status;
+    private int support_status; // company -> dev 과제 요청 상태
+    @ColumnDefault("0")
+    private int success_status; // dev -> dev 과제 완료 상태
 
 //    private Long td_id;
 //    private Long member_id;

@@ -93,7 +93,6 @@ public class DevController {
     public String taskList(Model model) {
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<TaskSupport> taskSupport = taskSupportService.getSupportByMemberId(member.getId());
-
         model.addAttribute("taskSupport", taskSupport);
 
         return "dev/support";

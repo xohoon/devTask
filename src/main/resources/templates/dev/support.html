@@ -17,6 +17,7 @@
                         <th scope="col">지원분야</th>
                         <th scope="col">진행기간</th>
                         <th scope="col">과제 상세보기</th>
+                        <th scope="col">진행상태</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -25,6 +26,10 @@
                             <td><span th:text="*{support.taskDetail.task_subject}"></span></td>
                             <td><span th:text="*{support.taskDetail.tasking_day}"></span></td>
                             <td><a class="btn btn-warning" th:href="@{'/task/detail/'+${support.taskDetail.task.id}}">공고보기</a></td>
+                            <td>
+                                <span class="btn btn-success" th:if="${support.support_status == 1}" th:text="진행중"></span>
+                                <span class="btn btn-secondary" th:if="${support.support_status == 0}" th:text="확인중"></span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
