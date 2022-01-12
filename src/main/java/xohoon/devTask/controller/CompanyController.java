@@ -9,16 +9,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import xohoon.devTask.domain.dto.CompanyDto;
 import xohoon.devTask.domain.dto.task.TaskDetailDto;
-import xohoon.devTask.domain.dto.task.TaskDto;
+import xohoon.devTask.domain.dto.task.TaskSupportDto;
 import xohoon.devTask.domain.entity.Company;
 import xohoon.devTask.domain.entity.Member;
 import xohoon.devTask.domain.entity.task.Task;
 import xohoon.devTask.domain.entity.task.TaskDetail;
+import xohoon.devTask.domain.entity.task.TaskSupport;
 import xohoon.devTask.service.CompanyService;
 import xohoon.devTask.service.task.TaskDetailService;
 import xohoon.devTask.service.task.TaskService;
+import xohoon.devTask.service.task.TaskSupportService;
 
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +32,8 @@ public class CompanyController {
     private final CompanyService companyService;
     private final TaskService taskService;
     private final TaskDetailService taskDetailService;
+    private final TaskSupportService taskSupportService;
+    private final EntityManager em;
 
     /*
      * company CRUD
@@ -178,5 +182,18 @@ public class CompanyController {
         model.addAttribute("task", task);
 
         return "/company/task/support";
+    }
+
+    @PostMapping(value = "task/support/confirm")
+    @ResponseBody
+    public String supportConfirm(TaskSupportDto taskSupportDto) {
+        TaskSupport taskSupport = new TaskSupport();
+        taskSupport.setSupport_status(1);
+        em.flush();
+//        ModelMapper modelMapper = new ModelMapper();
+//        TaskSupport taskSupport = modelMapper.map(taskSupportDto, TaskSupport.class);
+//        taskSupport.setSupport_status(1);
+//        taskSupportService.setStatus(taskSupportDto);
+        return "";
     }
 }

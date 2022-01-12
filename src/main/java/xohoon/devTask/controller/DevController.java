@@ -89,13 +89,10 @@ public class DevController {
     /*
     * task support
     * */
-    @GetMapping(value = "task/support")
+    @GetMapping(value = "task/support") // 지원 현황
     public String taskList(Model model) {
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<TaskSupport> taskSupport = taskSupportService.getSupportByMemberId(member.getId());
-        for (TaskSupport s : taskSupport) {
-            System.out.println("s = " + s.getTaskDetail().toString());
-        }
 
         model.addAttribute("taskSupport", taskSupport);
 

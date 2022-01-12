@@ -37,7 +37,7 @@ function saveTask() { // 데이터 저장
     var task_title = $("#task_title").val();
     var task_dead_day =$("#task_dead_day").val();
     if(id) { // update
-        taskMap["id"] = id;
+        taskMap["id"] = id; // task map 에 들어가는 id 는 task id
     }
     if(!task_title) {
         alert("제목을 입력해주세요.");
@@ -55,7 +55,7 @@ function saveTask() { // 데이터 저장
         dataMap = {};
         td_id = $("input[name='td_id']").eq(i).val();
         if(td_id) { // update
-            dataMap["td_id"] = td_id;
+            dataMap["id"] = td_id; // dataMap 에 들어가는 id 는 task detail id
         }
         task_subject = $("input[name='task_subject']").eq(i).val();
         if(!task_subject) {

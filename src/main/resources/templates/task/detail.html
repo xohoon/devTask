@@ -16,24 +16,24 @@
                     <span th:text="${task.task_title}"></span>
                     <th:block th:each="taskDetails, num:${task.getTaskDetails()}">
 <!--                        <th:block th:each="supportUser, *{supportUser}">-->
-                        <input type="hidden" name="td_id" th:value="${taskDetails.td_id}">
+                        <input type="hidden" name="td_id" th:value="${taskDetails.id}">
                         <table class="table table-bordered">
                             <thead style="border-top: white;border-left: white;border-right: white;">
                                 <tr scope="col">
                                     <th colspan="2">
-                                        <span th:text="'TASK #'+${num.count}+' '+${taskDetails.task_subject}" style="font-size: 25px;"></span>
+                                        <span th:text="'TASK # '+${taskDetails.task_subject}" style="font-size: 25px;"></span>
                                         <span th:text="'(지원인원 : '+${taskDetails.taskSupports.size()}+')'" style="color: gray;"></span>
                                     </th>
                                     <th>
                                         <button type="button"  class="btn btn-secondary" style="float:right;"
                                                 sec:authorize="hasAuthority('ROLE_DEV')"
-                                                th:id="${taskDetails.td_id}" th:value="supported"
+                                                th:id="${taskDetails.id}" th:value="supported"
                                                 onclick="javascript:taskSupport(this.value, this.id);"
                                                 th:if="*{supportUser.get(num.index) != 'notSupport'}">지원완료
                                         </button>
                                         <button type="button"  class="btn btn-success" style="float:right;"
                                                 sec:authorize="hasAuthority('ROLE_DEV')"
-                                                th:id="${taskDetails.td_id}" th:value="${taskDetails.task_subject}"
+                                                th:id="${taskDetails.id}" th:value="${taskDetails.task_subject}"
                                                 onclick="javascript:taskSupport(this.value, this.id);"
                                                 th:if="*{supportUser.get(num.index) == 'notSupport'}">지원하기
                                         </button>

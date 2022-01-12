@@ -5,26 +5,37 @@
 </head>
 <body>
 <div th:replace="fragments/nav::nav"></div>
+<script th:src="@{/js/dev/support.js}"></script>
 <div class="container">
     <div class="card">
         <div class="card-body">
             <h5 th:text="${task.task_title}"></h5>
-            <th:block th:each="taskDetails, num:${task.getTaskDetails()}">
-                <h5 class="card-title" style="margin-top: 50px;" th:text="${taskDetails.task_subject}"></h5>
+            <th:block th:each="taskDetails, num:${task.getTaskDetails}">
+                <span th:text="'TASK # '+${taskDetails.task_subject}" style="font-size: 25px;"></span>
+                <span th:text="'(지원인원 : '+${taskDetails.taskSupports.size()}+')'" style="color: gray;"></span>
                 <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">지원자이름</th>
                         <th scope="col">지원자 프로필 보기</th>
+                        <th scope="col">과제 요청</th>
                     </tr>
                     </thead>
                     <tbody>
                     <th:block th:each="taskSupport, count:*{taskDetails.taskSupports}">
                         <tr>
                             <th scope="row"><span th:text="*{count.count}"></span></th>
-                            <td><span th:text="*{taskSupport.getMembers().username}"></span></td>
-                            <td><button type="button" class="btn btn-warning">프로필</button></td>
+                            <td><span th:text="*{taskSupport.getMember.username}"></span></td>
+                            <td><a th:href="@{'/devDetail/'+${taskSupport.getMember.id}}" class="btn btn-success">프로필</a></td>
+                            <td>
+                                <input type="hidden" id="member_id" th:value="${taskSupport.getMember.id}">
+                                <input type="hidden" id="td_id" th:value="${taskSupport.getTaskDetail.id}">
+                                <button th:if="${taskSupport.support_status == 0}" th:value="${taskSupport.getMember.username}" th:id="${taskSupport.id}"
+                                        onclick="javascript:taskConfirm(this.value, this.id);"
+                                        type="button" class="btn btn-warning">진행 요청</button>
+                                <button th:if="${taskSupport.support_status == 1}" type="button" class="btn btn-secondary">진행중</button>
+                            </td>
                         </tr>
                     </th:block>
                     </tbody>

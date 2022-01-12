@@ -9,6 +9,6 @@ import java.util.Collection;
 import java.util.List;
 
 public interface TaskDetailRepository extends JpaRepository<TaskDetail, Long> {
-    @Query("select td from TaskDetail td where td.td_id = :td_id")
+    @Query("select td from TaskDetail td where td.id = :td_id")
     TaskDetail findByTd_id(@Param("td_id") Long td_id);
 }

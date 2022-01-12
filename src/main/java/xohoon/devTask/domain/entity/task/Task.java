@@ -28,7 +28,7 @@ public class Task extends BaseEntity implements Serializable {
 
     // task N : 1 company
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "com_id")
+    @JoinColumn(name = "company_id")
     private Company company;
 
     // task 1 : N taskDetail

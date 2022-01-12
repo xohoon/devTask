@@ -10,13 +10,13 @@ import javax.persistence.*;
 public class ToySupport {
     @Id
     @GeneratedValue
-    @Column(name = "ts_id")
+    @Column(name = "toy_support_id")
     private Long id;
 
     // toyDetail N : M member
     // toySupport N : 1 toyDetail
     @ManyToOne
-    @JoinColumn(name = "td_id")
+    @JoinColumn(name = "task_detail_id")
     private ToyDetail toyDetail = new ToyDetail();
 
     // toySupport N : 1 member

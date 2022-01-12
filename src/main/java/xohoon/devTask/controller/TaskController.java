@@ -13,6 +13,7 @@ import xohoon.devTask.service.task.TaskDetailService;
 import xohoon.devTask.service.task.TaskService;
 import xohoon.devTask.service.task.TaskSupportService;
 
+import javax.persistence.EntityManager;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;

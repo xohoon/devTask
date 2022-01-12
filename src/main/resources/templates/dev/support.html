@@ -24,7 +24,7 @@
                             <th scope="row"><span th:text="*{num.count}"></span></th>
                             <td><span th:text="*{support.taskDetail.task_subject}"></span></td>
                             <td><span th:text="*{support.taskDetail.tasking_day}"></span></td>
-                            <td><button type="button" class="btn btn-warning">상세보기</button></td>
+                            <td><a class="btn btn-warning" th:href="@{'/task/detail/'+${support.taskDetail.task.id}}">공고보기</a></td>
                         </tr>
                     </tbody>
                 </table>

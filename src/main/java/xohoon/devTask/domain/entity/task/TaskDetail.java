@@ -5,9 +5,7 @@ import xohoon.devTask.domain.entity.BaseEntity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
@@ -17,12 +15,13 @@ import java.util.Set;
 @ToString(of = {"td_id", "task_subject", "task_part"})
 public class TaskDetail extends BaseEntity {
     @Id @GeneratedValue
-    @Column(name = "td_id")
-    private Long td_id;
+    @Column(name = "task_detail_id")
+    private Long id;
 
     private String task_subject; // main title
     private String task_part; // 전문분야
     private String task_part_personnel; // 분야 모집 인원
+    private String task_confirm_personnel; // 확정 인원
     private String tasking_day; // 진행 기간
     private String task_need_skill; // 과제진행 필요한 기술
     private String task_btn_id; // 버튼 id

@@ -13,7 +13,7 @@
                     <h3>과제</h3><br />
                     <span>제목</span>
                     <span th:text="${task.task_title}"></span>
-                    <th:block th:each="taskDetails, num:${task.getTaskDetails()}">
+                    <th:block th:each="taskDetails, num:${task.taskDetails}">
                         <table class="table table-bordered">
                             <thead style="border-top: white;border-left: white;border-right: white;">
                             <tr scope="col" colspan="3">

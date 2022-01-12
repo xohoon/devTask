@@ -29,17 +29,17 @@
                 <th scope="row"><span th:text="${num.count}"></span></th>
                 <td><span th:text="${tasks.task_title}"></span></td>
                 <td>
-                    <th:block th:each="taskDetail, num:${tasks.getTaskDetails()}">
+                    <th:block th:each="taskDetail, num:${tasks.taskDetails}">
                         <span th:text="${taskDetail.task_subject}"></span><br />
                     </th:block>
                 </td>
                 <td>
-                    <th:block th:each="taskDetail, num:${tasks.getTaskDetails()}">
+                    <th:block th:each="taskDetail, num:${tasks.taskDetails}">
                         <span th:text="${taskDetail.task_part_personnel}"></span><br />
                     </th:block>
                 </td>
                 <td>
-                    <th:block th:each="taskDetail, num:${tasks.getTaskDetails()}">
+                    <th:block th:each="taskDetail, num:${tasks.taskDetails}">
                         <span th:text="${taskDetail.tasking_day}"></span><br />
                     </th:block>
                 </td>

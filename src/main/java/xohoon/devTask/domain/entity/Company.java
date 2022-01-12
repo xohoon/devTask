@@ -17,7 +17,7 @@ public class Company extends BaseEntity{
 
     @Id
     @GeneratedValue
-    @Column(name = "com_id")
+    @Column(name = "company_id")
     private Long id;
     private String company;
     private String site_url;

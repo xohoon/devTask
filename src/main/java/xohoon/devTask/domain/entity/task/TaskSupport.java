@@ -13,8 +13,8 @@ import javax.persistence.*;
 @ToString(exclude = {"taskDetails", "members"})
 public class TaskSupport {
     @Id @GeneratedValue
-    @Column(name = "ts_id")
-    private Long ts_id;
+    @Column(name = "task_support_id")
+    private Long id;
 
     @ColumnDefault("0")
     private int support_status;
@@ -28,7 +28,7 @@ public class TaskSupport {
     * TaskSupport N : 1 Member
     * */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "td_id")
+    @JoinColumn(name = "task_detail_id")
     private TaskDetail taskDetail;
 
     @ManyToOne(fetch = FetchType.LAZY)
