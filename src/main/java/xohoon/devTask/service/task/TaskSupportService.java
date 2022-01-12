@@ -34,4 +34,10 @@ public class TaskSupportService {
         return taskSupportRepository.findAllByMember_id(id);
     }
 
+    @Transactional
+    public void setStatus(Long id) {
+        TaskSupport taskSupport = em.getReference(TaskSupport.class, id);
+        taskSupport.setSupport_status(1);
+        taskSupportRepository.save(taskSupport);
+    }
 }

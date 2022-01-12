@@ -186,14 +186,9 @@ public class CompanyController {
 
     @PostMapping(value = "task/support/confirm")
     @ResponseBody
-    public String supportConfirm(TaskSupportDto taskSupportDto) {
-        TaskSupport taskSupport = new TaskSupport();
-        taskSupport.setSupport_status(1);
-        em.flush();
-//        ModelMapper modelMapper = new ModelMapper();
-//        TaskSupport taskSupport = modelMapper.map(taskSupportDto, TaskSupport.class);
-//        taskSupport.setSupport_status(1);
-//        taskSupportService.setStatus(taskSupportDto);
-        return "";
+    public Object supportConfirm(@RequestParam(value = "id") String id) {
+        JSONObject jsonObject = new JSONObject();
+        taskSupportService.setStatus(Long.valueOf(id));
+        return jsonObject;
     }
 }

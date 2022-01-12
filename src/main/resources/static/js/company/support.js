@@ -11,10 +11,7 @@ function taskConfirm(name, id) {
             dataType : 'JSON',
             async: false,
             data : {
-                ts_id : id,
-                td_id : td_id,
-                member_id : member_id,
-                username : name
+                id : id
             },
             beforeSend : function(xhr){
                 xhr.setRequestHeader(header, token);
@@ -23,7 +20,7 @@ function taskConfirm(name, id) {
                 location.reload();
             },
             error : function(result) {
-                console.log('ERROR');
+                console.log(result);
             }
         });
     }else {

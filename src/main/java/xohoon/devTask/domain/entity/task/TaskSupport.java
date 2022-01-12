@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"taskDetails", "members"})
+@ToString(exclude = {"id", "taskDetails", "members"})
 public class TaskSupport {
     @Id @GeneratedValue
     @Column(name = "task_support_id")
