@@ -57,7 +57,6 @@
                             <input type="text" name="task_dead_day" id="task_dead_day" th:value="*{task_dead_day}" style="width: 35%;"
                                    placeholder="마감일" class="form-control" readonly><br />
                             <input type="submit" onclick="javascript:saveTask();" value="발행하기" class="btn btn-success">
-                            <input type="submit" onclick="javascript:ajaxTest();" value="테스트" class="btn btn-success">
                         </div>
                     </div>
                     <br />
@@ -83,13 +82,14 @@
     document.getElementById(btn_id).style.display = 'none';
     var table = btn_id+"Table";
     var changeId = JSON.stringify(btn_id);
-    tableList.push(table); // 추가된 테이블이름 리스트에 추가
+    tableList.unshift(table); // 추가된 테이블이름 리스트에 추가
+    console.log("T#ESTL:::" + tableList.toString());
     var html = '';
     html += '<div id="'+btn_id+'Table" value="test11123123123">';
     html += '<table class="table table-bordered" >';
-    html += '<input type="hidden" name="td_id" id="td_id" value="'+td_id+'">';
-    html += '<input type="hidden" name="task_btn_id" id="task_btn_id" value="'+btn_id+'">';
-    html += '<input type="hidden" name="task_subject" id="task_subject" value="'+task_subject+'">';
+    html += '<input type="text" name="td_id" id="td_id" value="'+td_id+'">';
+    html += '<input type="text" name="task_btn_id" id="task_btn_id" value="'+btn_id+'">';
+    html += '<input type="text" name="task_subject" id="task_subject" value="'+task_subject+'">';
     html += '<thead style="border-top: white;border-left: white;border-right: white;">';
     html += '<tr>';
     html += '<th scope="col" colSpan="2">TASK #'+task_subject+'</th>';

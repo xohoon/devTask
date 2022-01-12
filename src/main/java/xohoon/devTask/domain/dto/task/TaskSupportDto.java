@@ -10,7 +10,7 @@ import xohoon.devTask.domain.entity.task.TaskDetail;
 @AllArgsConstructor
 @ToString
 public class TaskSupportDto {
-    private Long ts_id;
+    private Long id;
     private Long member_id;
     private Long td_id;
 }

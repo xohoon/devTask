@@ -127,6 +127,7 @@ public class CompanyController {
         task.setTask_title((String) params.get("task_title"));
         task.setTask_dead_day((String) params.get("task_dead_day"));
         task.setTasking_status(1);
+        System.out.println("params1 = " + params.toString());
         if(params.containsKey("id")) { // update
             task.setId(Long.parseLong((String) params.get("id")));
         }
@@ -141,7 +142,6 @@ public class CompanyController {
         params.remove("task_title");
         params.remove("task_dead_day");
         // taskDetail save
-        System.out.println("taskDetail = " + params.toString());
         for( String key : params.keySet() ){
             TaskDetailDto detailDto = mapper.map(params.get(key), TaskDetailDto.class);
             TaskDetail taskDetail = mapper.map(detailDto, TaskDetail.class);

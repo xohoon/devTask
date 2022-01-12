@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @ToString
 public class TaskDetailDto {
-    private Long td_id;
+    private Long id;
 
     private String task_subject; // main title
     private String task_part; // 전문분야

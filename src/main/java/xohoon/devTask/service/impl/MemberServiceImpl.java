@@ -30,13 +30,13 @@ public class MemberServiceImpl implements MemberService {
 
     @Transactional
     @Override
-    public void createUser(Member Member){
+    public void createUser(Member member){
 
         Role role = roleRepository.findByRoleName("ROLE_USER");
         Set<Role> roles = new HashSet<>();
         roles.add(role);
-        Member.setUserRoles(roles);
-        memberRepository.save(Member);
+        member.setUserRoles(roles);
+        memberRepository.save(member);
     }
 
     @Transactional
