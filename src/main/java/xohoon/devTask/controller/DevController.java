@@ -22,6 +22,7 @@ import xohoon.devTask.service.DevService;
 import xohoon.devTask.service.task.TaskSupportService;
 import xohoon.devTask.service.toy.ToyDetailService;
 import xohoon.devTask.service.toy.ToyService;
+import xohoon.devTask.service.toy.ToySupportService;
 
 import java.util.List;
 import java.util.Map;
@@ -35,6 +36,7 @@ public class DevController {
     private final TaskSupportService taskSupportService;
     private final ToyService toyService;
     private final ToyDetailService toyDetailService;
+    private final ToySupportService toySupportService;
 
     /*
     * dev CRUD
@@ -184,6 +186,23 @@ public class DevController {
     public String taskDelete(@PathVariable(value = "id") String id) {
 
         return "redirect:/dev/toy/main";
+    }
+
+    @GetMapping(value = "toy/support/{id}") // 지원현황
+    public String toySupportForm(@PathVariable(value = "id") String id, Model model) {
+        Toy toy = toyService.getToyById(Long.valueOf(id));
+
+        model.addAttribute("toy", toy);
+
+        return "/dev/toy/support";
+    }
+
+    @PostMapping(value = "toy/support/confirm")
+    @ResponseBody
+    public Object taskSupport(@RequestParam(value = "id") String id) {
+        JSONObject jsonObject = new JSONObject();
+        toySupportService.setStatus(Long.valueOf(id));
+        return jsonObject;
     }
 
 }

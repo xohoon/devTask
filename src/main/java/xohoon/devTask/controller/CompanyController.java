@@ -174,7 +174,7 @@ public class CompanyController {
     }
 
     @GetMapping(value = "task/support/{id}") // 지원현황
-    public String taskSupport(@PathVariable(value = "id") String id, Model model) {
+    public String taskSupportForm(@PathVariable(value = "id") String id, Model model) {
         Task task = taskService.getTaskById(Long.valueOf(id));
 
         model.addAttribute("task", task);
@@ -184,7 +184,7 @@ public class CompanyController {
 
     @PostMapping(value = "task/support/confirm")
     @ResponseBody
-    public Object supportConfirm(@RequestParam(value = "id") String id) {
+    public Object taskSupport(@RequestParam(value = "id") String id) {
         JSONObject jsonObject = new JSONObject();
         taskSupportService.setStatus(Long.valueOf(id));
         return jsonObject;

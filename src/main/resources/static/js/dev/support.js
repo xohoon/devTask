@@ -1,11 +1,11 @@
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
 
-function taskConfirm(name, id) {
+function toyConfirm(name, id) {
     if(confirm(name+"님에게 과제 진행 요청을 하시겠습니까?")) {
         $.ajax({
             type : 'POST',
-            url : '/co/task/support/confirm',
+            url : '/dev/toy/support/confirm',
             dataType : 'JSON',
             async: false,
             data : {

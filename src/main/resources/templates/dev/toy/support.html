@@ -5,14 +5,14 @@
 </head>
 <body>
 <div th:replace="fragments/nav::nav"></div>
-<script th:src="@{/js/company/support.js}"></script>
+<script th:src="@{/js/dev/support.js}"></script>
 <div class="container">
     <div class="card">
         <div class="card-body">
-            <h5 th:text="${task.task_title}"></h5>
-            <th:block th:each="taskDetail, num:${task.taskDetails}">
-                <span th:text="'TASK # '+${taskDetail.task_subject}" style="font-size: 25px;"></span>
-                <span th:text="'(지원인원 : '+${taskDetail.taskSupports.size()}+')'" style="color: gray;"></span>
+            <h5 th:text="${toy.toy_title}"></h5>
+            <th:block th:each="toyDetail, num:${toy.toyDetails}">
+                <span th:text="'TASK # '+${toyDetail.toy_subject}" style="font-size: 25px;"></span>
+                <span th:text="'(지원인원 : '+${toyDetail.toySupports.size()}+')'" style="color: gray;"></span>
                 <table class="table">
                     <thead>
                     <tr>
@@ -23,16 +23,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <th:block th:each="taskSupport, count:*{taskDetail.taskSupports}">
+                    <th:block th:each="taskSupport, count:*{toyDetail.toySupports}">
                         <tr>
                             <th scope="row"><span th:text="*{count.count}"></span></th>
                             <td><span th:text="*{taskSupport.member.username}"></span></td>
                             <td><a th:href="@{'/devDetail/'+${taskSupport.member.id}}" class="btn btn-success">프로필</a></td>
                             <td>
                                 <input type="hidden" id="member_id" th:value="${taskSupport.member.id}">
-                                <input type="hidden" id="td_id" th:value="${taskSupport.taskDetail.id}">
-                                <button th:if="${taskSupport.support_status == 0}" th:value="${taskSupport.member.username}" th:id="${taskSupport.id}"
-                                        onclick="javascript:taskConfirm(this.value, this.id);"
+                                <input type="hidden" id="td_id" th:value="${taskSupport.toyDetail.id}">
+                                <button th:if="${taskSupport.support_status == 0}" th:value="${taskSupport.getMember.username}" th:id="${taskSupport.id}"
+                                        onclick="javascript:toyConfirm(this.value, this.id);"
                                         type="button" class="btn btn-warning">진행 요청</button>
                                 <button th:if="${taskSupport.support_status == 1}" type="button" class="btn btn-secondary">진행중</button>
                             </td>
