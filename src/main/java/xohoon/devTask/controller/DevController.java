@@ -164,5 +164,13 @@ public class DevController {
 
         return jsonObject;
     }
+    @GetMapping(value = "toy/detail/{id}") // 과제 상세 보기
+    public String toyDetail(@PathVariable(value = "id") String id, Model model) {
+        Toy toy = toyService.getToyById(Long.valueOf(id));
+        model.addAttribute("toy", toy);
+
+        return "dev/toy/detail";
+    }
+
 
 }

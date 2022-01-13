@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xohoon.devTask.domain.entity.Member;
 import xohoon.devTask.domain.entity.Toy.Toy;
+import xohoon.devTask.domain.entity.task.Task;
 import xohoon.devTask.repository.toy.ToyRepository;
 
 import java.util.List;
@@ -23,5 +24,9 @@ public class ToyService {
 
     public List<Toy> getToyByMemberId(Long id) {
         return toyRepository.findAllByMember_id(id);
+    }
+
+    public Toy getToyById(Long id) {
+        return toyRepository.findById(id).orElse(new Toy());
     }
 }
