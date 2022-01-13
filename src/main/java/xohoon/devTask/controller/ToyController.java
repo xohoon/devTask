@@ -1,15 +1,17 @@
 package xohoon.devTask.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONObject;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import xohoon.devTask.domain.entity.Member;
 import xohoon.devTask.domain.entity.Toy.Toy;
+import xohoon.devTask.domain.entity.Toy.ToyDetail;
+import xohoon.devTask.service.toy.ToyDetailService;
 import xohoon.devTask.service.toy.ToyService;
+import xohoon.devTask.service.toy.ToySupportService;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -20,6 +22,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ToyController {
     private final ToyService toyService;
+    private final ToyDetailService toyDetailService;
+    private final ToySupportService toySupportService;
 
     /*
     * user
@@ -54,5 +58,17 @@ public class ToyController {
 
         return "toy/detail";
     }
+
+    @PostMapping(value = "support")
+    @ResponseBody
+    public Object toySupport(@RequestParam("id") String id) throws Exception{
+        JSONObject jsonObject = new JSONObject();
+        Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        ToyDetail toyDetail = toyDetailService.getToyDetailById(Long.valueOf(id));
+        toySupportService.setToySupport(member, toyDetail);
+
+        return jsonObject;
+    }
+
 
 }

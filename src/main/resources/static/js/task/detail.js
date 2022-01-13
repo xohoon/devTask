@@ -7,14 +7,13 @@ function taskSupport(value, id) {
         return false;
     }
     if(confirm(value+" 파트에 지원하시겠습니까?")) {
-        console.log("DATA::"+value+"::"+typeof (id));
         $.ajax({
             type : 'POST',
             url : '/task/support',
             dataType : 'JSON',
             async: false,
             data : {
-                td_id : id
+                id : id
             },
             beforeSend : function(xhr){
                 xhr.setRequestHeader(header, token);

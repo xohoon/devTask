@@ -65,10 +65,10 @@ public class TaskController {
 
     @PostMapping(value = "support")
     @ResponseBody
-    public Object taskSupport(@RequestParam("td_id") String td_id) throws Exception{
+    public Object taskSupport(@RequestParam("id") String id) throws Exception{
         JSONObject jsonObject = new JSONObject();
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        TaskDetail taskDetail = taskDetailService.getTaskDetail(Long.valueOf(td_id));
+        TaskDetail taskDetail = taskDetailService.getTaskDetailById(Long.valueOf(id));
         taskSupportService.setTaskSupport(member, taskDetail);
 
         return jsonObject;

@@ -15,8 +15,6 @@
                     <span>제목</span>
                     <span th:text="${task.task_title}"></span>
                     <th:block th:each="taskDetail, num:${task.taskDetails}">
-<!--                        <th:block th:each="supportUser, *{supportUser}">-->
-                        <input type="hidden" name="td_id" th:value="${taskDetail.id}">
                         <table class="table table-bordered">
                             <thead style="border-top: white;border-left: white;border-right: white;">
                                 <tr scope="col">

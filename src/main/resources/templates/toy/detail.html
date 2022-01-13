@@ -15,8 +15,6 @@
                     <span>제목</span>
                     <span th:text="${toy.toy_title}"></span>
                     <th:block th:each="toyDetail, num:${toy.toyDetails}">
-                        <!--                        <th:block th:each="supportUser, *{supportUser}">-->
-                        <input type="hidden" name="td_id" th:value="${toyDetail.id}">
                         <table class="table table-bordered">
                             <thead style="border-top: white;border-left: white;border-right: white;">
                             <tr scope="col">
@@ -28,13 +26,13 @@
                                     <button type="button"  class="btn btn-secondary" style="float:right;"
                                             sec:authorize="hasAuthority('ROLE_DEV')"
                                             th:id="${toyDetail.id}" th:value="supported"
-                                            onclick="javascript:taskSupport(this.value, this.id);"
+                                            onclick="javascript:toySupport(this.value, this.id);"
                                             th:if="*{supportUser.get(num.index) != 'notSupport'}">지원완료
                                     </button>
                                     <button type="button"  class="btn btn-success" style="float:right;"
                                             sec:authorize="hasAuthority('ROLE_DEV')"
                                             th:id="${toyDetail.id}" th:value="${toyDetail.toy_subject}"
-                                            onclick="javascript:taskSupport(this.value, this.id);"
+                                            onclick="javascript:toySupport(this.value, this.id);"
                                             th:if="*{supportUser.get(num.index) == 'notSupport'}">지원하기
                                     </button>
                                 </th>
