@@ -13,6 +13,8 @@
                     <h3>과제</h3><br />
                     <span>제목</span>
                     <span th:text="${toy.toy_title}"></span>
+                    <span>내용</span>
+                    <textarea class="form-control" name="toy_content" th:text="${toy.toy_content}" style="height: 150px;"></textarea>
                     <th:block th:each="toyDetail, num:${toy.toyDetails}">
                         <table class="table table-bordered">
                             <thead style="border-top: white;border-left: white;border-right: white;">

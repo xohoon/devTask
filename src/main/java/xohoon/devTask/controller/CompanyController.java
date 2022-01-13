@@ -96,7 +96,7 @@ public class CompanyController {
     /*
     * task CRUD
     * */
-    @GetMapping(value = "task/main") // 과제 목록
+    @GetMapping(value = "task/main") // 목록
     public String taskList(Model model) {
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Company company = companyService.getCompanyByMemberId(member.getId());
@@ -107,7 +107,7 @@ public class CompanyController {
         return "company/task/main";
     }
 
-    @GetMapping(value = "task/register") // 과제 글쓰기 폼
+    @GetMapping(value = "task/register") // 글쓰기 폼
     public String taskRegisterForm(Model model) {
         Task task = new Task();
         model.addAttribute("task", task);
@@ -115,7 +115,7 @@ public class CompanyController {
         return "company/task/register";
     }
 
-    @PostMapping(value = "task/register") // 과제 저장
+    @PostMapping(value = "task/register") // 저장
     @ResponseBody
     public Object taskRegister(@RequestBody Map<String, Object> params) throws Exception{
         JSONObject jsonObject = new JSONObject();
@@ -149,7 +149,7 @@ public class CompanyController {
         return jsonObject;
     }
 
-    @GetMapping(value = "task/detail/{id}") // 과제 상세 보기
+    @GetMapping(value = "task/detail/{id}") // 상세 보기
     public String taskDetail(@PathVariable(value = "id") String id, Model model) {
         ModelMapper modelMapper = new ModelMapper();
         Task task = taskService.getTask(Long.valueOf(id));
@@ -158,7 +158,7 @@ public class CompanyController {
         return "company/task/detail";
     }
 
-    @GetMapping(value = "task/modify/{id}") // 과제 수정 폼
+    @GetMapping(value = "task/modify/{id}") // 수정 폼
     public String taskModifyForm(@PathVariable(value="id") String id, Model model) {
         ModelMapper modelMapper = new ModelMapper();
         Task task = taskService.getTask(Long.valueOf(id));
@@ -167,13 +167,13 @@ public class CompanyController {
         return "/company/task/register";
     }
 
-    @PostMapping(value = "task/delete/{id}") // 과제 삭제
+    @PostMapping(value = "task/delete/{id}") // 삭제
     public String taskDelete(@PathVariable(value = "id") String id) {
 
         return "redirect:/co/task/main";
     }
 
-    @GetMapping(value = "task/support/{id}")
+    @GetMapping(value = "task/support/{id}") // 지원현황
     public String taskSupport(@PathVariable(value = "id") String id, Model model) {
         Task task = taskService.getTask(Long.valueOf(id));
 

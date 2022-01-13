@@ -164,7 +164,7 @@ public class DevController {
 
         return jsonObject;
     }
-    @GetMapping(value = "toy/detail/{id}") // 과제 상세 보기
+    @GetMapping(value = "toy/detail/{id}") // 상세 보기
     public String toyDetail(@PathVariable(value = "id") String id, Model model) {
         Toy toy = toyService.getToyById(Long.valueOf(id));
         model.addAttribute("toy", toy);
@@ -172,5 +172,18 @@ public class DevController {
         return "dev/toy/detail";
     }
 
+    @GetMapping(value = "toy/modify/{id}") // 수정 폼
+    public String toyModifyForm(@PathVariable(value="id") String id, Model model) {
+        Toy toy = toyService.getToyById(Long.valueOf(id));
+        model.addAttribute("toy", toy);
+
+        return "/dev/toy/register";
+    }
+
+    @PostMapping(value = "toy/delete/{id}") // 삭제
+    public String taskDelete(@PathVariable(value = "id") String id) {
+
+        return "redirect:/dev/toy/main";
+    }
 
 }

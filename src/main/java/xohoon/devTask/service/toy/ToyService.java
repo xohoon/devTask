@@ -29,4 +29,8 @@ public class ToyService {
     public Toy getToyById(Long id) {
         return toyRepository.findById(id).orElse(new Toy());
     }
+
+    public List<Toy> getToys() {
+        return toyRepository.findAll();
+    }
 }

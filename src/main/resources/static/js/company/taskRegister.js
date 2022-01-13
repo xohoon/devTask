@@ -13,7 +13,7 @@ function addTaskDetail(title, id) { // 분야 추가 이벤트
     taskTableList.push(table); // 추가된 테이블이름 리스트에 추가
 }
 
-function removeTable(id) { // 테이블 삭제
+function removeTaskTable(id) { // 테이블 삭제
     if(id) {
         if (confirm("기입한 내용은 모두 삭제됩니다.") == true){
         }else{
@@ -58,7 +58,7 @@ function saveTask() { // 데이터 저장
         taskDetailMap = {};
         td_id = $("input[name='td_id']").eq(i).val();
         if(td_id) { // update
-            taskDetailMap["id"] = td_id; // dataMap 에 들어가는 id 는 task detail id
+            taskDetailMap["id"] = td_id; // detailMap 에 들어가는 id 는 task detail id
         }
         task_subject = $("input[name='task_subject']").eq(i).val();
         if(!task_subject) {
@@ -130,7 +130,7 @@ function addTable(title, id) {
             html += '<tr>';
                 html += '<th scope="col" colSpan="2">TASK #'+title+'</th>';
                 html += '<th>';
-    html += '<input onClick='+"javascript:removeTable("+changeId+");"+' type="button" class="btn btn-danger btn-sm" style="float:right;" value="삭제" />';
+    html += '<input onClick='+"javascript:removeTaskTable("+changeId+");"+' type="button" class="btn btn-danger btn-sm" style="float:right;" value="삭제" />';
                 html += '</th>';
             html += '</tr>';
         html += '</thead>';

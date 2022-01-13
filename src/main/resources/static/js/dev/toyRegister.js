@@ -42,7 +42,7 @@ function saveToy() { // 데이터 저장
     var toy_dead_day =$("#toy_dead_day").val();
 
     if(id) { // update
-        toyMap["id"] = id; // task map 에 들어가는 id 는 task id
+        toyMap["id"] = id; // toy map 에 들어가는 id 는 toy id
     }
     if(!toy_title) {
         alert("제목을 입력해주세요.");
@@ -67,7 +67,7 @@ function saveToy() { // 데이터 저장
         toyDetailMap = {};
         td_id = $("input[name='td_id']").eq(i).val();
         if(td_id) { // update
-            toyDetailMap["id"] = td_id; // dataMap 에 들어가는 id 는 task detail id
+            toyDetailMap["id"] = td_id; // detailMap 에 들어가는 id 는 toy detail id
         }
         toy_subject = $("input[name='toy_subject']").eq(i).val();
         if(!toy_subject) {

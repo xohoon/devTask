@@ -70,19 +70,19 @@
     let taskTableList = new Array();
 
     /*<![CDATA[*/
-    /*[# th:each="taskDetails : ${task.getTaskDetails}"]*/
-    var td_id = /*[[${taskDetails.id}]]*/;
-    var btn_id = /*[[${taskDetails.task_btn_id}]]*/;
-    var task_subject = /*[[${taskDetails.task_subject}]]*/;
-    var task_part = /*[[${taskDetails.task_part}]]*/;
-    var task_part_personnel = /*[[${taskDetails.task_part_personnel}]]*/;
-    var tasking_day = /*[[${taskDetails.tasking_day}]]*/;
-    var task_need_skill = /*[[${taskDetails.task_need_skill}]]*/;
+    /*[# th:each="taskDetail : ${task.getTaskDetails}"]*/
+    var td_id = /*[[${taskDetail.id}]]*/;
+    var task_subject = /*[[${taskDetail.task_subject}]]*/;
+    var task_part = /*[[${taskDetail.task_part}]]*/;
+    var task_part_personnel = /*[[${taskDetail.task_part_personnel}]]*/;
+    var tasking_day = /*[[${taskDetail.tasking_day}]]*/;
+    var task_need_skill = /*[[${taskDetail.task_need_skill}]]*/;
+    var btn_id = /*[[${taskDetail.task_btn_id}]]*/;
+    var changeId = JSON.stringify(btn_id);
     document.getElementById(btn_id).style.display = 'none';
     var table = btn_id+"Table";
-    var changeId = JSON.stringify(btn_id);
     taskTableList.unshift(table); // 추가된 테이블이름 리스트에 추가
-    console.log("T#ESTL:::" + taskTableList.toString());
+
     var html = '';
     html += '<div id="'+btn_id+'Table" value="test11123123123">';
     html += '<table class="table table-bordered" >';
@@ -93,7 +93,7 @@
     html += '<tr>';
     html += '<th scope="col" colSpan="2">TASK #'+task_subject+'</th>';
     html += '<th>';
-    html += '<input onClick='+"javascript:removeTable("+changeId+");"+' type="button" class="btn btn-danger btn-sm" style="float:right;" value="삭제" />';
+    html += '<input onClick='+"javascript:removeTaskTable("+changeId+");"+' type="button" class="btn btn-danger btn-sm" style="float:right;" value="삭제" />';
     html += '</th>';
     html += '</tr>';
     html += '</thead>';
