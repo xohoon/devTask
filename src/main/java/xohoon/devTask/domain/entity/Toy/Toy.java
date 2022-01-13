@@ -15,10 +15,10 @@ public class Toy {
     private Long id;
     private String toy_title;
     private String toy_content;
-    private String toying_day;
+    private String toy_dead_day;
     private int toy_status;
 
-    // toy 1 : 1 member
+    // toy N : 1 member
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;

@@ -1,6 +1,7 @@
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
-
+let taskDetailMap = {};
+let taskMap = {};
 $(function() {
     $("#task_dead_day").datepicker({dateFormat: 'yy-mm-dd'});
 });
@@ -9,7 +10,7 @@ function addTaskDetail(title, id) { // 분야 추가 이벤트
     var table = id + "Table";
     addTable(title, id); // 테이블 view 추가
     document.getElementById(id).style.display = "none"; // button 숨김
-    tableList.push(table); // 추가된 테이블이름 리스트에 추가
+    taskTableList.push(table); // 추가된 테이블이름 리스트에 추가
 }
 
 function removeTable(id) { // 테이블 삭제
@@ -22,10 +23,11 @@ function removeTable(id) { // 테이블 삭제
     var table = id + "Table";
     document.getElementById(id).style.display = "";
     document.getElementById(table).style.display = "none";
-    tableList.pop(table);
+    taskTableList.pop(table);
 }
 
 function saveTask() { // 데이터 저장
+    // detail data
     var td_id;
     var task_btn_id;
     var task_subject;
@@ -33,6 +35,7 @@ function saveTask() { // 데이터 저장
     var task_part_personnel;
     var tasking_day;
     var task_need_skill;
+    // task data
     var id = $("#id").val();
     var task_title = $("#task_title").val();
     var task_dead_day =$("#task_dead_day").val();
@@ -51,49 +54,49 @@ function saveTask() { // 데이터 저장
         return false;
     }
     taskMap["task_dead_day"] = task_dead_day;
-    for (var i in tableList) {
-        dataMap = {};
+    for (var i in taskTableList) {
+        taskDetailMap = {};
         td_id = $("input[name='td_id']").eq(i).val();
         if(td_id) { // update
-            dataMap["id"] = td_id; // dataMap 에 들어가는 id 는 task detail id
+            taskDetailMap["id"] = td_id; // dataMap 에 들어가는 id 는 task detail id
         }
         task_subject = $("input[name='task_subject']").eq(i).val();
         if(!task_subject) {
             task_subject = "nothing";
         }
-        dataMap["task_subject"] = task_subject;
+        taskDetailMap["task_subject"] = task_subject;
 
         task_part = $("input[name='task_part']").eq(i).val();
         if(!task_part){
             task_part = "nothing";
         }
-        dataMap["task_part"] = task_part;
+        taskDetailMap["task_part"] = task_part;
 
         task_part_personnel = $("input[name='task_part_personnel']").eq(i).val();
         if(!task_part_personnel) {
             task_part_personnel = "nothing";
         }
-        dataMap["task_part_personnel"] = task_part_personnel;
+        taskDetailMap["task_part_personnel"] = task_part_personnel;
 
         tasking_day = $("input[name='tasking_day']").eq(i).val();
         if(!tasking_day) {
             tasking_day = "nothing";
         }
-        dataMap["tasking_day"] = tasking_day;
+        taskDetailMap["tasking_day"] = tasking_day;
 
         task_need_skill = $("textarea[name='task_need_skill']").eq(i).val();
         if(!task_need_skill) {
             task_need_skill = "nothing";
         }
-        dataMap["task_need_skill"] = task_need_skill;
+        taskDetailMap["task_need_skill"] = task_need_skill;
 
         task_btn_id = $("input[name='task_btn_id']").eq(i).val();
         if(!task_btn_id) {
             task_btn_id = "nothing";
         }
-        dataMap["task_btn_id"] = task_btn_id;
+        taskDetailMap["task_btn_id"] = task_btn_id;
 
-        taskMap[tableList[i]] = dataMap;
+        taskMap[taskTableList[i]] = taskDetailMap;
     }
 
     $.ajax({
@@ -107,7 +110,7 @@ function saveTask() { // 데이터 저장
             xhr.setRequestHeader(header, token);
         },
         success : function(result, data) {
-            location.href="/co/task/list";
+            location.href="/co/task/main";
         },
         error : function(result) {
             console.log('ERROR');

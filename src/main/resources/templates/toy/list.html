@@ -6,6 +6,7 @@
 <body>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
+        <a sec:authorize="hasAuthority('ROLE_DEV')" class="btn btn-success" th:href="@{/dev/toy/register}">토이프로젝트 등록하기</a>
     toy list
 </div>
 </body>

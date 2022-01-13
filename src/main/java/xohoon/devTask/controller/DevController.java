@@ -1,23 +1,30 @@
 package xohoon.devTask.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONObject;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import xohoon.devTask.domain.dto.DevDto;
+import xohoon.devTask.domain.dto.task.TaskDetailDto;
+import xohoon.devTask.domain.dto.toy.ToyDetailDto;
+import xohoon.devTask.domain.entity.Company;
 import xohoon.devTask.domain.entity.Dev;
 import xohoon.devTask.domain.entity.Member;
+import xohoon.devTask.domain.entity.Toy.Toy;
+import xohoon.devTask.domain.entity.Toy.ToyDetail;
+import xohoon.devTask.domain.entity.task.Task;
 import xohoon.devTask.domain.entity.task.TaskDetail;
 import xohoon.devTask.domain.entity.task.TaskSupport;
 import xohoon.devTask.service.DevService;
 import xohoon.devTask.service.task.TaskSupportService;
+import xohoon.devTask.service.toy.ToyDetailService;
+import xohoon.devTask.service.toy.ToyService;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "dev")
@@ -26,6 +33,8 @@ public class DevController {
 
     private final DevService devService;
     private final TaskSupportService taskSupportService;
+    private final ToyService toyService;
+    private final ToyDetailService toyDetailService;
 
     /*
     * dev CRUD
@@ -96,6 +105,61 @@ public class DevController {
         model.addAttribute("taskSupport", taskSupport);
 
         return "dev/support";
+    }
+
+    /*
+    * toy CRUD
+    * */
+    @GetMapping(value = "toy/main")
+    public String toyList(Model model) {
+
+        return "dev/toy/main";
+    }
+
+    @GetMapping(value = "toy/register")
+    public String toyRegisterForm(Model model) {
+        Toy toy = new Toy();
+        model.addAttribute("toy", toy);
+
+        return "dev/toy/register";
+    }
+
+    @PostMapping(value = "toy/register")
+    @ResponseBody
+    public Object toyRegister(@RequestBody Map<String, Object> params) throws Exception {
+        System.out.println("params = " + params.toString());
+        JSONObject jsonObject = new JSONObject();
+        ModelMapper mapper = new ModelMapper();
+        Toy toy = new Toy();
+        // toy set
+        toy.setToy_title((String) params.get("toy_title"));
+        toy.setToy_content((String) params.get("toy_content"));
+        toy.setToy_dead_day((String) params.get("toy_dead_day"));
+        toy.setToy_status(1);
+        System.out.println("params1 = " + params.toString());
+        if(params.containsKey("id")) { // update
+            toy.setId(Long.parseLong((String) params.get("id")));
+        }
+        // toy save
+        Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        toyService.saveToy(toy, member);
+        // toy data remove
+        if(params.containsKey("id")) { // toy update
+            params.remove("id");
+        }
+        params.remove("toy_title");
+        params.remove("toy_content");
+        params.remove("toy_dead_day");
+        // toyDetail save
+        System.out.println("key = " + params.toString());
+        for( String key : params.keySet() ){
+            System.out.println("key = " + key.toString());
+            ToyDetailDto toyDetailDto = mapper.map(params.get(key), ToyDetailDto.class);
+            ToyDetail toyDetail = mapper.map(toyDetailDto, ToyDetail.class);
+            toyDetailService.saveToyDetail(toyDetail, toy);
+        }
+
+        return jsonObject;
     }
 
 }

@@ -9,12 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import xohoon.devTask.domain.dto.CompanyDto;
 import xohoon.devTask.domain.dto.task.TaskDetailDto;
-import xohoon.devTask.domain.dto.task.TaskSupportDto;
 import xohoon.devTask.domain.entity.Company;
 import xohoon.devTask.domain.entity.Member;
 import xohoon.devTask.domain.entity.task.Task;
 import xohoon.devTask.domain.entity.task.TaskDetail;
-import xohoon.devTask.domain.entity.task.TaskSupport;
 import xohoon.devTask.service.CompanyService;
 import xohoon.devTask.service.task.TaskDetailService;
 import xohoon.devTask.service.task.TaskService;
@@ -98,7 +96,7 @@ public class CompanyController {
     /*
     * task CRUD
     * */
-    @GetMapping(value = "task/list") // 과제 목록
+    @GetMapping(value = "task/main") // 과제 목록
     public String taskList(Model model) {
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Company company = companyService.getCompanyByMemberId(member.getId());
@@ -106,7 +104,7 @@ public class CompanyController {
 
         model.addAttribute("tasks", tasks);
 
-        return "company/task/list";
+        return "company/task/main";
     }
 
     @GetMapping(value = "task/register") // 과제 글쓰기 폼
@@ -172,7 +170,7 @@ public class CompanyController {
     @PostMapping(value = "task/delete/{id}") // 과제 삭제
     public String taskDelete(@PathVariable(value = "id") String id) {
 
-        return "redirect:/co/task/list";
+        return "redirect:/co/task/main";
     }
 
     @GetMapping(value = "task/support/{id}")

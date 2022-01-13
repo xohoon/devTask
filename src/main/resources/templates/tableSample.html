@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- table
+<table class="table table-bordered">
+    <thead style="border-top: white;border-left: white;border-right: white;">
+        <tr scope="col" colspan="2">
+            <th>TASK #1</th>
+            <th>
+                <input type="button" class="btn btn-success btn-sm choice" style="float: right;" value="삭제"
+            onclick="javascript:removeTable();">
+            </th>
+        </tr>
+
+    </thead>
+    <thead class="table-light" style="text-align: center;">
+        <tr>
+            <th scope="col">과제분야</th>
+            <th scope="col">모집인원</th>
+            <th scope="col">과제 진행 기간</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <input type="text" class="form-control" placeholder="예)백엔드, 프론트엔드">
+            </td>
+            <td>
+                <input type="text" class="form-control" placeholder="숫자만 입력">
+            </td>
+            <td>
+                <input type="text" class="form-control" placeholder="day 기준">
+            </td>
+            </tr>
+    </tbody>
+    <thead class="table-light" style="text-align: center;">
+        <tr>
+            <th scope="col" colspan="3">주요스킬</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="3">
+                <textarea class="form-control" style="height: 150px;" placeholder="과제에 필요한 기능 및 기술을 상세히 기입해주세요."></textarea>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<th:block th:if="${task}" th:each="taskDetails, num:${task.getTaskDetails}">
+    <table class="table table-bordered">
+        <input type="hidden" name="task_subject" id="task_subject" th:value="${taskDetails.task_subject}">
+        <thead style="border-top: white;border-left: white;border-right: white;">
+        <tr scope="col">
+            <th colspan="2"><span th:text="'TASK #'+${num.count}+' '+${taskDetails.task_subject}"></span></th>
+            <th>
+                <input onClick='' type="button" class="btn btn-danger btn-sm" value="삭제" style="float:right;"/>
+            </th>
+        </tr>
+        </thead>
+        <thead class="table-light" style="text-align: center;">
+        <tr>
+            <th scope="col">과제분야</th>
+            <th scope="col">모집인원</th>
+            <th scope="col">과제 진행 기간</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td style="width: 69%;">
+                <div class="card">
+                    <input type="text" name="task_part" th:value="${taskDetails.task_part}" class="form-control">
+                </div>
+            </td>
+            <td style="width: 15%;">
+                <div class="card">
+                    <input type="text" name="task_part_personnel" th:value="${taskDetails.task_part_personnel}" class="form-control">
+                </div>
+            </td>
+            <td style="width: 15%;">
+                <div class="card">
+                    <input type="text" name="tasking_day" th:value="${taskDetails.tasking_day}" class="form-control">
+                </div>
+            </td>
+        </tr>
+        </tbody>
+        <thead class="table-light" style="text-align: center;">
+        <tr>
+            <th scope="col" colspan="3">주요스킬</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td colspan="3">
+                <div class="card">
+                    <textarea class="form-control" name="task_need_skill" style="height: 150px;" th:text="${taskDetails.task_need_skill}">qwe123</textarea>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</th:block>
+-->
+</body>
+</html>
