@@ -4,10 +4,46 @@
     <title>debTask</title>
 </head>
 <body>
+<script>
+    function move(value) {
+        location.href="/dev/toy/detail/"+value;
+    }
+</script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
-    <a class="btn btn-success" th:href="@{/dev/toy/register}">토이프로젝트 등록하기</a>
-    toy main
+    <a class="btn btn-dark btn-lg" th:href="@{/co/task/register}">과제발행</a>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">제목</th>
+            <th scope="col">과제분야</th>
+            <th scope="col">마감기간</th>
+            <th scope="col">지원현황</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="toy, num:${toys}">
+            <tr th:onclick="'javascript:move('+${toy.id}+');'" style="cursor:pointer;">
+                <th scope="row"><span th:text="${num.count}"></span></th>
+                <td><span th:text="${toy.toy_title}"></span></td>
+                <td>
+                    <th:block th:each="toyDetail, num:${toy.toyDetails}">
+                        <span th:text="${toyDetail.toy_subject}"></span><br />
+                    </th:block>
+                </td>
+                <td>
+                    <span th:text="${toy.toy_dead_day}"></span><br />
+                    <span th:if="${toy.toy_status == 0}">마감됨</span>
+                    <span th:if="${toy.toy_status == 1}">진행중</span>
+                </td>
+                <td onclick="event.cancelBubble=true">
+                    <a class="btn btn-success" th:href="@{'/dev/toy/support/'+${toy.id}}"> 지원자 보기</a>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

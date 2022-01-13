@@ -112,6 +112,9 @@ public class DevController {
     * */
     @GetMapping(value = "toy/main")
     public String toyList(Model model) {
+        Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Toy> toys = toyService.getToyByMemberId(member.getId());
+        model.addAttribute("toys", toys);
 
         return "dev/toy/main";
     }

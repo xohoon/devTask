@@ -48,5 +48,4 @@ public class Member extends BaseEntity{
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private Set<ToySupport> toySupports = new HashSet<>();
 
-
 }
