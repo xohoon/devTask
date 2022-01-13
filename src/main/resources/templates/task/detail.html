@@ -14,26 +14,26 @@
                     <h3>과제</h3><br />
                     <span>제목</span>
                     <span th:text="${task.task_title}"></span>
-                    <th:block th:each="taskDetails, num:${task.getTaskDetails()}">
+                    <th:block th:each="taskDetail, num:${task.taskDetails}">
 <!--                        <th:block th:each="supportUser, *{supportUser}">-->
-                        <input type="hidden" name="td_id" th:value="${taskDetails.id}">
+                        <input type="hidden" name="td_id" th:value="${taskDetail.id}">
                         <table class="table table-bordered">
                             <thead style="border-top: white;border-left: white;border-right: white;">
                                 <tr scope="col">
                                     <th colspan="2">
-                                        <span th:text="'TASK # '+${taskDetails.task_subject}" style="font-size: 25px;"></span>
-                                        <span th:text="'(지원인원 : '+${taskDetails.taskSupports.size()}+')'" style="color: gray;"></span>
+                                        <span th:text="'TASK # '+${taskDetail.task_subject}" style="font-size: 25px;"></span>
+                                        <span th:text="'(지원인원 : '+${taskDetail.taskSupports.size()}+')'" style="color: gray;"></span>
                                     </th>
                                     <th>
                                         <button type="button"  class="btn btn-secondary" style="float:right;"
                                                 sec:authorize="hasAuthority('ROLE_DEV')"
-                                                th:id="${taskDetails.id}" th:value="supported"
+                                                th:id="${taskDetail.id}" th:value="supported"
                                                 onclick="javascript:taskSupport(this.value, this.id);"
                                                 th:if="*{supportUser.get(num.index) != 'notSupport'}">지원완료
                                         </button>
                                         <button type="button"  class="btn btn-success" style="float:right;"
                                                 sec:authorize="hasAuthority('ROLE_DEV')"
-                                                th:id="${taskDetails.id}" th:value="${taskDetails.task_subject}"
+                                                th:id="${taskDetail.id}" th:value="${taskDetail.task_subject}"
                                                 onclick="javascript:taskSupport(this.value, this.id);"
                                                 th:if="*{supportUser.get(num.index) == 'notSupport'}">지원하기
                                         </button>
@@ -51,19 +51,19 @@
                                 <tr>
                                     <td style="width: 69%;">
                                         <div class="card">
-                                            <div class="card-body" th:text="${taskDetails.task_part}">
+                                            <div class="card-body" th:text="${taskDetail.task_part}">
                                             </div>
                                         </div>
                                     </td>
                                     <td style="width: 15%;">
                                         <div class="card">
-                                            <div class="card-body" th:text="${taskDetails.task_part_personnel}">
+                                            <div class="card-body" th:text="${taskDetail.task_part_personnel}">
                                             </div>
                                         </div>
                                     </td>
                                     <td style="width: 15%;">
                                         <div class="card">
-                                            <div class="card-body" th:text="${taskDetails.tasking_day}">
+                                            <div class="card-body" th:text="${taskDetail.tasking_day}">
                                             </div>
                                         </div>
                                     </td>
@@ -78,7 +78,7 @@
                                 <tr>
                                     <td colspan="3">
                                         <div class="card">
-                                            <div class="card-body" th:text="${taskDetails.task_need_skill}">
+                                            <div class="card-body" th:text="${taskDetail.task_need_skill}">
                                             </div>
                                         </div>
                                     </td>

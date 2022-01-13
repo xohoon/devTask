@@ -152,7 +152,7 @@ public class CompanyController {
     @GetMapping(value = "task/detail/{id}") // 상세 보기
     public String taskDetail(@PathVariable(value = "id") String id, Model model) {
         ModelMapper modelMapper = new ModelMapper();
-        Task task = taskService.getTask(Long.valueOf(id));
+        Task task = taskService.getTaskById(Long.valueOf(id));
         model.addAttribute("task", task);
 
         return "company/task/detail";
@@ -161,7 +161,7 @@ public class CompanyController {
     @GetMapping(value = "task/modify/{id}") // 수정 폼
     public String taskModifyForm(@PathVariable(value="id") String id, Model model) {
         ModelMapper modelMapper = new ModelMapper();
-        Task task = taskService.getTask(Long.valueOf(id));
+        Task task = taskService.getTaskById(Long.valueOf(id));
         model.addAttribute("task", task);
 
         return "/company/task/register";
@@ -175,7 +175,7 @@ public class CompanyController {
 
     @GetMapping(value = "task/support/{id}") // 지원현황
     public String taskSupport(@PathVariable(value = "id") String id, Model model) {
-        Task task = taskService.getTask(Long.valueOf(id));
+        Task task = taskService.getTaskById(Long.valueOf(id));
 
         model.addAttribute("task", task);
 

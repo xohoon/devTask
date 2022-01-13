@@ -42,7 +42,7 @@ public class TaskController {
 
     @GetMapping(value = "detail/{id}") // 상세보기
     public String taskDetail(@PathVariable(value = "id") String id, Model model, Principal principal) {
-        Task task = taskService.getTask(Long.valueOf(id));
+        Task task = taskService.getTaskById(Long.valueOf(id));
 
         if (principal != null) {
             List<String> supportUser = new ArrayList<>();
