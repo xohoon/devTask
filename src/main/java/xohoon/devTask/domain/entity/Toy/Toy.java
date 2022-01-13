@@ -1,6 +1,6 @@
 package xohoon.devTask.domain.entity.Toy;
 
-import lombok.Data;
+import lombok.*;
 import xohoon.devTask.domain.entity.Member;
 
 import javax.persistence.*;
@@ -9,6 +9,10 @@ import java.util.List;
 
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(exclude = {"id", "toy_title", "toy_content"})
 public class Toy {
     @Id @GeneratedValue
     @Column(name = "toy_id")

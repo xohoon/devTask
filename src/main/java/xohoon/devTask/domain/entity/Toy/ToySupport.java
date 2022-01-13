@@ -1,6 +1,6 @@
 package xohoon.devTask.domain.entity.Toy;
 
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import xohoon.devTask.domain.entity.Member;
 
@@ -8,6 +8,10 @@ import javax.persistence.*;
 
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(exclude = {"id", "toyDetail", "member"})
 public class ToySupport {
     @Id
     @GeneratedValue
@@ -20,12 +24,12 @@ public class ToySupport {
 
     // toyDetail N : M member
     // toySupport N : 1 toyDetail
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_detail_id")
     private ToyDetail toyDetail = new ToyDetail();
 
     // toySupport N : 1 member
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member = new Member();
 }

@@ -9,6 +9,7 @@ import xohoon.devTask.domain.entity.Toy.ToySupport;
 import xohoon.devTask.repository.toy.ToySupportRepository;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -31,5 +32,9 @@ public class ToySupportService {
         ToySupport toySupport = em.getReference(ToySupport.class, id);
         toySupport.setSupport_status(1);
         toySupportRepository.save(toySupport);
+    }
+
+    public List<ToySupport> getSupportByMemberId(Long id) {
+        return toySupportRepository.findAllByMember_id(id);
     }
 }

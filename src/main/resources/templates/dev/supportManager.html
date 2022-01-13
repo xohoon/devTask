@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<head th:replace="fragments/header::header">
+    <title>지원현황</title>
+</head>
+<body>
+<div th:replace="fragments/nav::nav"></div>
+<div class="container">
+
+    <div class="card-body">
+        <h5 class="card-title">기업 지원</h5>
+        <th:block th:each="taskSupport, num:*{taskSupports}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">기업이름</th>
+                <th scope="col">지원분야</th>
+                <th scope="col">지원상태</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row"><span th:text="*{num.count}"></span></th>
+                <td><span th:text="*{taskSupport.taskDetail.task.company.company}"></span></td>
+                <td><span th:text="*{taskSupport.taskDetail.task_part}"></span></td>
+                <td>
+                    <span th:if="*{taskSupport.support_status == 1}" th:text="진행중"></span>
+                    <span th:if="*{taskSupport.support_status == 0}" th:text="확인중"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        </th:block>
+    </div>
+
+    <div class="card-body">
+        <h5 class="card-title">토이프로젝트 지원</h5>
+        <th:block th:each="toySupport, num:*{toySupports}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">프로젝트 제목</th>
+                <th scope="col">지원분야</th>
+                <th scope="col">지원상태</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row"><span th:text="*{num.count}"></span></th>
+                <td><span th:text="*{toySupport.toyDetail.toy.toy_title}"></span></td>
+                <td><span th:text="*{toySupport.toyDetail.toy_part}"></span></td>
+                <td>
+                    <span th:if="*{toySupport.support_status == 1}" th:text="진행중"></span>
+                    <span th:if="*{toySupport.support_status == 0}" th:text="확인중"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        </th:block>
+    </div>
+
+</div>
+</body>
+</html>

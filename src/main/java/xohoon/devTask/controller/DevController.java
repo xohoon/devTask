@@ -8,15 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import xohoon.devTask.domain.dto.DevDto;
-import xohoon.devTask.domain.dto.task.TaskDetailDto;
 import xohoon.devTask.domain.dto.toy.ToyDetailDto;
-import xohoon.devTask.domain.entity.Company;
 import xohoon.devTask.domain.entity.Dev;
 import xohoon.devTask.domain.entity.Member;
 import xohoon.devTask.domain.entity.Toy.Toy;
 import xohoon.devTask.domain.entity.Toy.ToyDetail;
-import xohoon.devTask.domain.entity.task.Task;
-import xohoon.devTask.domain.entity.task.TaskDetail;
+import xohoon.devTask.domain.entity.Toy.ToySupport;
 import xohoon.devTask.domain.entity.task.TaskSupport;
 import xohoon.devTask.service.DevService;
 import xohoon.devTask.service.task.TaskSupportService;
@@ -106,7 +103,7 @@ public class DevController {
         List<TaskSupport> taskSupport = taskSupportService.getSupportByMemberId(member.getId());
         model.addAttribute("taskSupport", taskSupport);
 
-        return "dev/support";
+        return "supportManager";
     }
 
     /*
@@ -194,15 +191,26 @@ public class DevController {
 
         model.addAttribute("toy", toy);
 
-        return "/dev/toy/support";
+        return "dev/toy/support";
     }
 
-    @PostMapping(value = "toy/support/confirm")
+    @PostMapping(value = "toy/support/confirm") // 지원 컨펌
     @ResponseBody
     public Object taskSupport(@RequestParam(value = "id") String id) {
         JSONObject jsonObject = new JSONObject();
         toySupportService.setStatus(Long.valueOf(id));
         return jsonObject;
+    }
+
+    @GetMapping(value = "support/manager") // 지원 관리
+    public String supportManager(Model model) {
+        Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<ToySupport> toySupports = toySupportService.getSupportByMemberId(member.getId());
+        List<TaskSupport> taskSupports = taskSupportService.getSupportByMemberId(member.getId());
+        model.addAttribute("toySupports", toySupports);
+        model.addAttribute("taskSupports", taskSupports);
+
+        return "dev/supportManager";
     }
 
 }

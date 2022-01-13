@@ -1,6 +1,6 @@
 package xohoon.devTask.domain.entity.Toy;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -8,6 +8,10 @@ import java.util.List;
 
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(exclude = {"id", "toy_subject", "toy_part"})
 public class ToyDetail {
     @Id @GeneratedValue
     @Column(name = "toy_detail_id")
@@ -21,7 +25,7 @@ public class ToyDetail {
     private String toy_btn_id; // 버튼 id
 
     // toyDetail N : 1 toy
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "toy_id")
     private Toy toy;
 

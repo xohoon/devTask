@@ -7,34 +7,30 @@
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
     <div class="bg">
-        <div class="container sign_container">
-            <div class="card sign_card">
-                <div class="card-body">
-                    <div id="join_form">
-                        <h3>기업정보</h3><br />
-                        <span>회사명</span>
-                        <input type="text" th:value="${company.company}" class="form-control" readonly><br />
-                        <span>기업 홈페이지</span>
-                        <input type="text" th:value="${company.site_url}" class="form-control" readonly><br />
-                        <span>기업 복지</span>
-                        <input type="text" th:value="${company.welfare}" class="form-control" readonly><br />
-                        <span>웰컴 키트</span>
-                        <input type="text" th:value="${company.kit}" class="form-control" readonly><br />
-                        <span>재직인원</span>
-                        <input type="text" th:value="${company.personnel}" class="form-control" readonly><br />
-                        <span>평균 연봉</span>
-                        <input type="text" th:value="${company.salary}" class="form-control" readonly><br />
-                        <span>주소</span>
-                        <input type="text" th:value="${company.address}" class="form-control" readonly><br />
-                    </div>
-                    <br />
-                    <a class="btn btn-dark btn-lg" th:href="@{'/co/modify/'+${company.id}}">수정</a>
-                    <form  th:action="@{'/co/delete/'+${company.id}}" method="post" style="float:left;">
-                        <input type="submit" value="삭제" class="btn btn-dark btn-lg">
-                    </form>
-                    <a th:href="@{'/co/main'}">메인페이지</a>
-                </div>
+        <div class="container">
+            <div class="card-body">
+                <h3>기업정보</h3><br />
+                <span>회사명</span>
+                <input type="text" th:value="${company.company}" class="form-control" readonly><br />
+                <span>기업 홈페이지</span>
+                <input type="text" th:value="${company.site_url}" class="form-control" readonly><br />
+                <span>기업 복지</span>
+                <input type="text" th:value="${company.welfare}" class="form-control" readonly><br />
+                <span>웰컴 키트</span>
+                <input type="text" th:value="${company.kit}" class="form-control" readonly><br />
+                <span>재직인원</span>
+                <input type="text" th:value="${company.personnel}" class="form-control" readonly><br />
+                <span>평균 연봉</span>
+                <input type="text" th:value="${company.salary}" class="form-control" readonly><br />
+                <span>주소</span>
+                <input type="text" th:value="${company.address}" class="form-control" readonly><br />
             </div>
+            <br />
+            <a class="btn btn-dark btn-lg" th:href="@{'/co/modify/'+${company.id}}">수정</a>
+            <form  th:action="@{'/co/delete/'+${company.id}}" method="post" style="float:left;">
+                <input type="submit" value="삭제" class="btn btn-dark btn-lg">
+            </form>
+            <a th:href="@{'/co/main'}">메인페이지</a>
         </div>
     </div>
 </div>

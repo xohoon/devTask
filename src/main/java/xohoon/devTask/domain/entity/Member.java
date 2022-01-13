@@ -15,7 +15,6 @@ import java.util.Set;
 @Data
 @ToString(exclude = {"userRoles"}, of = {"id", "username", "email"})
 @Builder
-@EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Member extends BaseEntity{

@@ -179,10 +179,10 @@ public class CompanyController {
 
         model.addAttribute("task", task);
 
-        return "/company/task/support";
+        return "company/task/support";
     }
 
-    @PostMapping(value = "task/support/confirm")
+    @PostMapping(value = "task/support/confirm") // 지원 컨펌
     @ResponseBody
     public Object taskSupport(@RequestParam(value = "id") String id) {
         JSONObject jsonObject = new JSONObject();

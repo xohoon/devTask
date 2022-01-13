@@ -45,8 +45,8 @@
                 </td>
                 <td>
                     <span th:text="${task.task_dead_day}"></span><br />
-                    <span th:if="${task.task_status == 0}">마감됨</span>
-                    <span th:if="${task.task_status == 1}">진행중</span>
+                    <span th:if="${task.task_status == 1}">마감됨</span>
+                    <span th:if="${task.task_status == 0}">진행중</span>
                 </td>
             </tr>
         </th:block>
