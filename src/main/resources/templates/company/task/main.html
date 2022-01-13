@@ -33,12 +33,12 @@
                     </th:block>
                 </td>
                 <td>
-                    <span th:text="${tasks.task_dead_day}"></span><br />
-                    <span th:if="${tasks.tasking_status == 0}">마감됨</span>
-                    <span th:if="${tasks.tasking_status == 1}">진행중</span>
+                    <span th:text="${task.task_dead_day}"></span><br />
+                    <span th:if="${task.task_status == 0}">마감됨</span>
+                    <span th:if="${task.task_status == 1}">진행중</span>
                 </td>
                 <td onclick="event.cancelBubble=true">
-                    <a class="btn btn-success" th:href="@{'/co/task/support/'+${tasks.id}}"> 지원자 보기</a>
+                    <a class="btn btn-success" th:href="@{'/co/task/support/'+${task.id}}"> 지원자 보기</a>
                 </td>
             </tr>
         </th:block>

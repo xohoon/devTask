@@ -124,7 +124,7 @@ public class CompanyController {
         // task set
         task.setTask_title((String) params.get("task_title"));
         task.setTask_dead_day((String) params.get("task_dead_day"));
-        task.setTasking_status(1);
+        task.setTask_status(1);
         System.out.println("params1 = " + params.toString());
         if(params.containsKey("id")) { // update
             task.setId(Long.parseLong((String) params.get("id")));
