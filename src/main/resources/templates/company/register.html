@@ -1,40 +1,85 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head th:replace="fragments/header::header">
-    <title>debTask</title>
 </head>
+<title>TASK REGISTER</title>
 <body>
+<script th:src="@{/js/common/tab.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
-    <div class="bg">
-        <div class="container">
-            <div class="card-body">
-                <h3>기업등록</h3><br />
-                <form name="fm" th:action="@{/co/register}" method="POST" th:object="${company}">
-                    <input th:type="hidden" name="id" th:value="*{id}" />
-                    <span>회사명</span>
-                    <input type="text" name="company" th:value="*{company}" placeholder="회사명" class="form-control"><br />
-                    <span>기업 홈페이지</span>
-                    <input type="text" name="site_url" id="site_url" th:value="*{site_url}" placeholder="홈페이지 주소" class="form-control"><br />
-                    <span>기업 복지</span>
-                    <input type="text" name="welfare" id="welfare" th:value="*{welfare}" placeholder="복지내용" class="form-control"><br />
-                    <span>웰컴 키트</span>
-                    <input type="text" name="kit" id="kit" th:value="*{kit}" placeholder="입사시 키트" class="form-control"><br />
-                    <span>재직인원</span>
-                    <input type="text" name="personnel" id="personnel" th:value="*{personnel}" placeholder="재직인원" class="form-control"><br />
-                    <span>평균 연봉</span>
-                    <input type="text" name="salary" id="salary" th:value="*{salary}" placeholder="평균 연봉" class="form-control"><br />
-                    <span>주소</span>
-                    <input type="text" name="address" id="address" th:value="*{address}" placeholder="주소" class="form-control"><br />
-
-                    <span>개인정보 동의 &nbsp;</span><input type="checkbox"><br /><br />
-                    <input type="submit" value="등록하기" class="btn btn-success">
-                </form>
-            </div>
-            <br />
-            <a th:href="@{'/co/main'}">취소</a>
+    <h1 class="text-primary">COMPANY REGISTER</h1>
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <!--// on : 현재 위치 //-->
+                <li class="nav-item">
+                    <a href="javascript:void(0);" class="nav-link active">기업정보</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:companyTabChange('2');" class="nav-link">공고관리</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <form name="fm" th:action="@{/co/register}" method="POST" th:object="${company}">
+                <input th:type="hidden" name="id" th:value="*{id}" />
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col" colspan="2">기업정보 등록</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">회사명</th>
+                        <td>
+                            <input type="text" class="form-control" name="company" th:value="*{company}" placeholder="회사명">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">기업 홈페이지</th>
+                        <td>
+                            <input type="text" class="form-control" name="site_url" id="site_url" th:value="*{site_url}" placeholder="홈페이지 주소">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">기업 복지</th>
+                        <td>
+                            <input type="text" class="form-control" name="welfare" id="welfare" th:value="*{welfare}" placeholder="복지내용">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">웰컴 키트</th>
+                        <td>
+                            <input type="text" class="form-control" name="kit" id="kit" th:value="*{kit}" placeholder="입사시 키트">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">재직인원</th>
+                        <td>
+                            <input type="text" class="form-control" name="personnel" id="personnel" th:value="*{personnel}" placeholder="재직인원">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">평균 연봉</th>
+                        <td>
+                            <input type="text" class="form-control" name="salary" id="salary" th:value="*{salary}" placeholder="평균 연봉">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">주소</th>
+                        <td>
+                            <input type="text" class="form-control" name="address" id="address" th:value="*{address}" placeholder="주소">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <input type="submit" value="등록하기" class="btn btn-success">
+                <a class="btn btn-dark" th:href="@{'/co/detail'}">목록</a>
+            </form>
         </div>
     </div>
 </div>
+</body>
 </body>
 </html>

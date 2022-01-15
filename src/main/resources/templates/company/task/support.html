@@ -1,15 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head th:replace="fragments/header::header">
-    <title>과제 지원자</title>
 </head>
+<title>과제 지원자</title>
 <body>
-<div th:replace="fragments/nav::nav"></div>
 <script th:src="@{/js/company/support.js}"></script>
+<script th:src="@{/js/common/tab.js}"></script>
+<div th:replace="fragments/nav::nav"></div>
 <div class="container">
+    <h1 class="text-primary">COMPANY TASK MANAGER</h1>
     <div class="card">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <!--// on : 현재 위치 //-->
+                <li class="nav-item">
+                    <a href="javascript:companyTabChange('1');" class="nav-link">기업정보</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:void(0);" class="nav-link active">공고관리</a>
+                </li>
+            </ul>
+        </div>
         <div class="card-body">
-            <h5 th:text="${task.task_title}"></h5>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col" colspan="2" th:text="${task.task_title}"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">마감일</th>
+                    <td th:text="${task.task_dead_day}"></td>
+                </tr>
+                </tbody>
+            </table>
             <th:block th:each="taskDetail, num:${task.taskDetails}">
                 <span th:text="'TASK # '+${taskDetail.task_subject}" style="font-size: 25px;"></span>
                 <span th:text="'(지원인원 : '+${taskDetail.taskSupports.size()}+')'" style="color: gray;"></span>
@@ -41,6 +66,7 @@
                     </tbody>
                 </table>
             </th:block>
+            <a class="btn btn-dark" th:href="@{'/co/task/main'}">목록</a>
         </div>
     </div>
 </div>

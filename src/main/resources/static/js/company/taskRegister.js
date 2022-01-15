@@ -128,7 +128,7 @@ function addTable(title, id) {
     html += '<input type="hidden" name="task_btn_id" id="task_btn_id" value="'+id+'">';
         html += '<thead style="border-top: white;border-left: white;border-right: white;">';
             html += '<tr>';
-                html += '<th scope="col" colSpan="2">TASK #'+title+'</th>';
+                html += '<th scope="col" colSpan="2">TASK # '+title+'</th>';
                 html += '<th>';
     html += '<input onClick='+"javascript:removeTaskTable("+changeId+");"+' type="button" class="btn btn-danger btn-sm" style="float:right;" value="삭제" />';
                 html += '</th>';

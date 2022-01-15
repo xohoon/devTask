@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head th:replace="fragments/header::header">
-    <title>debTask</title>
 </head>
+<title>COMPANY</title>
 <body>
+<script th:src="@{/js/common/tab.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
-    기업전용 페이지<br /><br /><br /><br />
-    <a th:if="${company == null}" class="btn btn-dark btn-lg" th:href="@{/co/register}">회사정보 입력하기</a>
-    <a th:if="${company != null}" th:href="@{'/co/detail/'+${company.id}}">
-        기업 : <span th:text="${company.company}">기업</span>
-    </a><br />
-    <a th:href="@{/co/task/main}">
-        공고관리
-    </a>
+    <h1 class="text-primary">COMPANY MAIN</h1>
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <input th:if="${company != null}" type="hidden" id="company_id" th:value="${company.id}">
+                <!--// on : 현재 위치 //-->
+                <li class="nav-item">
+                    <a href="javascript:companyTabChange('1');" class="nav-link">기업정보</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:companyTabChange('2');" class="nav-link">공고관리</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">COMPANY MAIN PAGE</h5>
+        </div>
+    </div>
 </div>
 </body>
 </html>

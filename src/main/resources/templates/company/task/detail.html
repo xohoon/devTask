@@ -4,78 +4,94 @@
     <title>debTask</title>
 </head>
 <body>
+<script th:src="@{/js/common/tab.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
-    <div class="bg">
-        <div class="container sign_container">
-            <div class="card sign_card">
-                <div class="card-body">
-                    <h3>과제</h3><br />
-                    <span>제목</span>
-                    <span th:text="${task.task_title}"></span>
-                    <th:block th:each="taskDetail, num:${task.taskDetails}">
-                        <table class="table table-bordered">
-                            <thead style="border-top: white;border-left: white;border-right: white;">
-                            <tr scope="col" colspan="3">
-                                <th><span th:text="'TASK #'+${num.count}+' '+${taskDetail.task_subject}"></span></th>
-                            </tr>
-                            </thead>
-                            <thead class="table-light" style="text-align: center;">
-                            <tr>
-                                <th scope="col">과제분야</th>
-                                <th scope="col">모집인원</th>
-                                <th scope="col">과제 진행 기간</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td style="width: 69%;">
-                                    <div class="card">
-                                        <div class="card-body" th:text="${taskDetail.task_part}">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td style="width: 15%;">
-                                    <div class="card">
-                                        <div class="card-body" th:text="${taskDetail.task_part_personnel}">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td style="width: 15%;">
-                                    <div class="card">
-                                        <div class="card-body" th:text="${taskDetail.tasking_day}">
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                            <thead class="table-light" style="text-align: center;">
-                            <tr>
-                                <th scope="col" colspan="3">주요스킬</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td colspan="3">
-                                    <div class="card">
-                                        <div class="card-body" th:text="${taskDetail.task_need_skill}">
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </th:block>
-                    <span>마감일</span>
-                    <span th:text="${task.task_dead_day}"></span>
-                    <br />
-                    <a class="btn btn-dark btn-lg" th:href="@{'/co/task/modify/'+${task.id}}">수정</a>
-                    <form  th:action="@{'/co/task/delete/'+${task.id}}" method="post" style="float:left;">
-                        <input type="submit" value="삭제" class="btn btn-dark btn-lg">
-                    </form>
-                    <a th:href="@{'/co/task/main'}">취소</a>
-                </div>
-            </div>
+    <h1 class="text-primary">COMPANY MANAGER</h1>
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <!--// on : 현재 위치 //-->
+                <li class="nav-item">
+                    <a href="javascript:companyTabChange('1');" class="nav-link">기업정보</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:void(0);" class="nav-link active">공고관리</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col" colspan="2" th:text="${task.task_title}"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">마감일</th>
+                    <td th:text="${task.task_dead_day}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <th:block th:each="taskDetail, num:${task.taskDetails}">
+                <table class="table table-bordered">
+                    <thead style="border-top: white;border-left: white;border-right: white;">
+                    <tr scope="col" colspan="3">
+                        <th><span th:text="'TASK # '+${taskDetail.task_subject}"></span></th>
+                    </tr>
+                    </thead>
+                    <thead class="table-light" style="text-align: center;">
+                    <tr>
+                        <th scope="col">과제분야</th>
+                        <th scope="col">모집인원</th>
+                        <th scope="col">과제 진행 기간</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td style="width: 69%;">
+                            <div class="card">
+                                <div class="card-body" th:text="${taskDetail.task_part}">
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 15%;">
+                            <div class="card">
+                                <div class="card-body" th:text="${taskDetail.task_part_personnel}">
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 15%;">
+                            <div class="card">
+                                <div class="card-body" th:text="${taskDetail.tasking_day}">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <thead class="table-light" style="text-align: center;">
+                    <tr>
+                        <th scope="col" colspan="3">주요스킬</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td colspan="3">
+                            <div class="card">
+                                <div class="card-body" th:text="${taskDetail.task_need_skill}">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </th:block>
+            <a class="btn btn-dark" th:href="@{'/co/task/modify/'+${task.id}}">수정</a>
+            <form  th:action="@{'/co/task/delete/'+${task.id}}" method="post" style="float:left;">
+                <input type="submit" value="삭제" class="btn btn-dark">
+            </form>
+            <a class="btn btn-dark" th:href="@{'/co/task/main'}">목록</a>
         </div>
     </div>
 </div>

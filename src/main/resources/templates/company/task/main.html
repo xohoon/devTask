@@ -1,49 +1,71 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head th:replace="fragments/header::header">
-    <title>debTask</title>
 </head>
+<title>TASK</title>
 <body>
 <script>
     function move(value) {
         location.href="/co/task/detail/"+value;
     }
 </script>
+<script th:src="@{/js/common/tab.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
-    <a class="btn btn-dark btn-lg" th:href="@{/co/task/register}">과제발행</a>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">제목</th>
-                <th scope="col">과제분야</th>
-                <th scope="col">마감기간</th>
-                <th scope="col">지원현황</th>
-            </tr>
-        </thead>
-        <tbody>
-        <th:block th:each="task, num:${tasks}">
-            <tr th:onclick="'javascript:move('+${task.id}+');'" style="cursor:pointer;">
-                <th scope="row"><span th:text="${num.count}"></span></th>
-                <td><span th:text="${task.task_title}"></span></td>
-                <td>
-                    <th:block th:each="taskDetail, num:${task.taskDetails}">
-                        <span th:text="${taskDetail.task_subject}"></span><br />
-                    </th:block>
-                </td>
-                <td>
-                    <span th:text="${task.task_dead_day}"></span><br />
-                    <span th:if="${task.task_status == 0}">마감됨</span>
-                    <span th:if="${task.task_status == 1}">진행중</span>
-                </td>
-                <td onclick="event.cancelBubble=true">
-                    <a class="btn btn-success" th:href="@{'/co/task/support/'+${task.id}}"> 지원자 보기</a>
-                </td>
-            </tr>
-        </th:block>
-        </tbody>
-    </table>
+    <h1 class="text-primary">COMPANY TASK MANAGER</h1>
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <!--// on : 현재 위치 //-->
+                <li class="nav-item">
+                    <a href="javascript:companyTabChange('1');" class="nav-link">기업정보</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:void(0);" class="nav-link active">공고관리</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <th:block th:if="${tasks != null}">
+            <a class="btn btn-dark" th:href="@{/co/task/register}">과제발행</a>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">제목</th>
+                    <th scope="col">과제분야</th>
+                    <th scope="col">마감기간</th>
+                    <th scope="col">지원현황</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="task, num:${tasks}">
+                    <tr th:onclick="'javascript:move('+${task.id}+');'" style="cursor:pointer;">
+                        <th scope="row"><span th:text="${num.count}"></span></th>
+                        <td><span th:text="${task.task_title}"></span></td>
+                        <td>
+                            <th:block th:each="taskDetail, num:${task.taskDetails}">
+                                <span th:text="${taskDetail.task_subject}"></span><br />
+                            </th:block>
+                        </td>
+                        <td>
+                            <span th:text="${task.task_dead_day}"></span><br />
+                            <span th:if="${task.task_status == 0}">마감됨</span>
+                            <span th:if="${task.task_status == 1}">진행중</span>
+                        </td>
+                        <td onclick="event.cancelBubble=true">
+                            <a class="btn btn-success" th:href="@{'/co/task/support/'+${task.id}}"> 지원자 보기</a>
+                        </td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+            </th:block>
+            <th:block th:if="${tasks == null}">
+                <a class="btn btn-dark" th:href="@{/co/register}">회사등록</a>
+            </th:block>
+        </div>
+    </div>
 </div>
 </body>
 </html>

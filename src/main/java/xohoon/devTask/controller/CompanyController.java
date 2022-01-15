@@ -19,6 +19,7 @@ import xohoon.devTask.service.task.TaskService;
 import xohoon.devTask.service.task.TaskSupportService;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -62,17 +63,25 @@ public class CompanyController {
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         companyService.register(company, member);
 
-        return "redirect:/co/main";
+        return "redirect:/co/detail";
     }
 
-    @GetMapping(value = "detail/{id}") // 상세 보기
-    public String detail(@PathVariable(value = "id") String id, Model model) {
+    @GetMapping(value = "detail") // 상세 보기
+    public String detail(Model model) {
         ModelMapper modelMapper = new ModelMapper();
-        Company companyDetail = companyService.getCompanyById(Long.valueOf(id));
-        CompanyDto company = modelMapper.map(companyDetail, CompanyDto.class);
-        model.addAttribute("company", company);
-
-        return "company/detail";
+        Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Company companyInfo = companyService.getCompanyByMemberId(member.getId());
+        CompanyDto company = new CompanyDto();
+        if(companyInfo == null) {
+            company = new CompanyDto();
+            model.addAttribute("company", company);
+            return "company/register";
+        }else {
+            Company companyDetail = companyService.getCompanyById(companyInfo.getId());
+            company = modelMapper.map(companyDetail, CompanyDto.class);
+            model.addAttribute("company", company);
+            return "company/detail";
+        }
     }
 
     @GetMapping(value = "modify/{id}") // 수정 페이지
@@ -100,7 +109,12 @@ public class CompanyController {
     public String taskList(Model model) {
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Company company = companyService.getCompanyByMemberId(member.getId());
-        List<Task> tasks = company.getTasks();
+        List<Task> tasks = new ArrayList<>();
+        if(company == null) {
+            tasks = null;
+        }else {
+            tasks = company.getTasks();
+        }
 
         model.addAttribute("tasks", tasks);
 
