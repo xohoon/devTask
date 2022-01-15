@@ -1,36 +1,72 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head th:replace="fragments/header::header">
-    <title>debTask</title>
 </head>
+<title>PORTFOLIO REGISTER</title>
 <body>
+<script th:src="@{/js/common/tab.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
-    <div class="bg">
-        <div class="container sign_container">
-            <div class="card sign_card">
-                <div class="card-body">
-                    <div id="join_form">
-                        <h3>포트폴리오 등록</h3><br />
-                        <form name="fm" th:action="@{/dev/register}" method="POST" th:object="${dev}">
-                            <input th:type="hidden" name="id" th:value="*{id}" />
-                            <span>제목</span>
-                            <input type="text" name="title" th:value="*{title}" placeholder="포트폴리오 제목" class="form-control"><br />
-                            <span>사용 가능 기술</span>
+    <h1 class="text-primary">USER - PORTFOLIO</h1>
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <!--// on : 현재 위치 //-->
+                <li class="nav-item">
+                    <a href="javascript:void(0);" class="nav-link active">포트폴리오</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:devTabChange('2');" class="nav-link">토이프로젝트 관리</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:devTabChange('3');" class="nav-link">지원 관리</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <form name="fm" th:action="@{/dev/register}" method="POST" th:object="${dev}">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col" colspan="2">포트폴리</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">제목</th>
+                        <td>
+                            <input type="text" class="form-control" name="title" th:value="*{title}" placeholder="포트폴리오 제목">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">사용스킬</th>
+                        <td>
                             <textarea class="form-control" name="useSkill" th:text="*{useSkill}" placeholder="사용가능 기술" style="height: 150px;"></textarea>
-                            <span>사이트주소1</span>
-                            <input type="text" name="url_1" id="url_1" th:value="*{url_1}" placeholder="포폴 주소" class="form-control"><br />
-                            <span>사이트주소2</span>
-                            <input type="text" name="url_2" id="url_2" th:value="*{url_2}" placeholder="포폴 주소" class="form-control"><br />
-                            <span>사이트주소3</span>
-                            <input type="text" name="url_3" id="url_3" th:value="*{url_3}" placeholder="포폴 주소" class="form-control"><br />
-                            <input type="submit" value="등록하기" class="btn btn-success">
-                        </form>
-                    </div>
-                    <br />
-                    <a th:href="@{'/dev/main'}">취소</a>
-                </div>
-            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">사이트1</th>
+                        <td>
+                            <input type="text" class="form-control" name="url_1" id="url_1" th:value="*{url_1}" placeholder="포폴 주소">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">사이트2</th>
+                        <td>
+                            <input type="text" class="form-control" name="url_2" id="url_2" th:value="*{url_2}" placeholder="포폴 주소">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">사이트3</th>
+                        <td>
+                            <input type="text" class="form-control" name="url_3" id="url_3" th:value="*{url_3}" placeholder="포폴 주소">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <input type="submit" value="등록하기" class="btn btn-success">
+            </form>
+            <a class="btn btn-dark" th:href="@{'/dev/main'}">메인페이지</a>
         </div>
     </div>
 </div>

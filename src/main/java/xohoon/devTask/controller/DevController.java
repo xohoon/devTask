@@ -67,14 +67,21 @@ public class DevController {
         return "redirect:/dev/main";
     }
 
-    @GetMapping(value = "detail/{id}") // 상세 페이지
-    public String detail(@PathVariable(value = "id") String id, Model model) {
+    @GetMapping(value = "detail") // 상세 페이지
+    public String detail(Model model) {
         ModelMapper modelMapper = new ModelMapper();
-        Dev devDetail = devService.getDevById(Long.valueOf(id));
-        DevDto dev = modelMapper.map(devDetail, DevDto.class);
-        model.addAttribute("dev", dev);
-
-        return "dev/detail";
+        Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Dev devDetail = devService.getDevByMemberId(member.getId());
+        DevDto dev = new DevDto();
+        if (devDetail == null) {
+            dev = new DevDto();
+            model.addAttribute("dev", dev);
+            return "dev/register";
+        }else {
+            dev = modelMapper.map(devDetail, DevDto.class);
+            model.addAttribute("dev", dev);
+            return "dev/detail";
+        }
     }
 
     @GetMapping(value = "modify/{id}") // 수정 페이지

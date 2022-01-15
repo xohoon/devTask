@@ -1,73 +1,103 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head th:replace="fragments/header::header">
-    <title>debTask</title>
 </head>
+<title>TOY REGISTER</title>
 <body>
 <script th:src="@{/js/dev/toyRegister.js}"></script>
 <link rel="stylesheet" th:href="@{/css/company/register.css}"/>
+<script th:src="@{/js/common/tab.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
 
 <div class="container">
-    <div class="bg">
-        <div class="container sign_container">
-            <div class="card sign_card">
-                <div class="card-body">
-                    <div id="join_form">
-                        <h3>과제등록</h3><br />
-                        <div th:object="${toy}">
-                            <input th:type="hidden" name="id" id="id" th:value="*{id}" />
-                            <span>제목</span>
-                            <input type="text" name="toy_title" id="toy_title" th:value="*{toy_title}" placeholder="제목" class="form-control"><br />
-                            <span>내용</span>
-                            <textarea class="form-control" name="toy_content" th:text="*{toy_content}" style="height: 150px;" placeholder="프로젝트 상세 내용을 기입해주세요."></textarea>
-                            <span>모집분야</span>
-                            <div class="card">
-                                <div class="card-body">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="백엔드/서버개발" id="back"
-                                           onclick="javascript:addToyDetail(this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="프론트엔드" id="front"
-                                           onclick="javascript:addToyDetail(this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="앱개발(Android)" id="android"
-                                           onclick="javascript:addToyDetail(this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="앱개발(ios)" id="ios"
-                                           onclick="javascript:addToyDetail(this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="퍼블리셔" id="publisher"
-                                           onclick="javascript:addToyDetail(this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="디자이너" id="design"
-                                           onclick="javascript:addToyDetail(this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="게임개발" id="game"
-                                           onclick="javascript:addToyDetail(this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="웹개발" id="web"
-                                           onclick="javascript:addToyDetail(this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="데이터엔지니어" id="dba"
-                                           onclick="javascript:addToyDetail(this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="머신러닝" id="machine"
-                                           onclick="javascript:addToyDetail(this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="딥러닝" id="deep"
-                                           onclick="javascript:addToyDetail(this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="빅데이터" id="bigdata"
-                                           onclick="javascript:addToyDetail(this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="정보보안" id="security"
-                                           onclick="javascript:addToyDetail(this.value, this.id);">
-                                    <input type="button" class="btn btn-success btn-sm choice" value="블록체인" id="blockchain"
-                                           onclick="javascript:addToyDetail(this.value, this.id);">
-                                </div>
-                            </div>
-                            <div id="tablePoint"></div>
-                            <span>예상 종료일</span>
-                            <input type="text" name="toy_dead_day" id="toy_dead_day" th:value="*{toy_dead_day}" style="width: 35%;"
-                                   placeholder="마감일" class="form-control" readonly><br />
-                            <input type="button" onclick="javascript:saveToy();" value="발행하기" class="btn btn-success">
-                        </div>
+    <h1 class="text-primary">TASK MANAGER - REGISTER</h1>
+    <div class="card">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <!--// on : 현재 위치 //-->
+                <li class="nav-item">
+                    <a href="javascript:devTabChange('1');" class="nav-link">포트폴리오</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:void(0);" class="nav-link active">토이프로젝트 관리</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:devTabChange('3');" class="nav-link">지원 관리</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div th:object="${toy}">
+                <input th:type="hidden" name="id" id="id" th:value="*{id}" />
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" colspan="2">과제 등록</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">제목</th>
+                            <td>
+                                <input type="text" class="form-control" name="toy_title" id="toy_title" th:value="*{toy_title}" placeholder="제목">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">내용</th>
+                            <td>
+                                <textarea class="form-control" name="toy_content" th:text="*{toy_content}" style="height: 150px;" placeholder="프로젝트 상세 내용을 기입해주세요."></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">마감일</th>
+                            <td>
+                                <input type="text" class="form-control" name="toy_dead_day" id="toy_dead_day"
+                                       th:value="*{toy_dead_day}" style="width: 35%;" placeholder="마감일" readonly>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">분야선택</h5>
+                        <input type="button" class="btn btn-success btn-sm choice" value="백엔드/서버개발" id="back"
+                                onclick="javascript:addToyDetail(this.value, this.id);">
+                        <input type="button" class="btn btn-success btn-sm choice" value="프론트엔드" id="front"
+                               onclick="javascript:addToyDetail(this.value, this.id);">
+                        <input type="button" class="btn btn-success btn-sm choice" value="앱개발(Android)" id="android"
+                               onclick="javascript:addToyDetail(this.value, this.id);">
+                        <input type="button" class="btn btn-success btn-sm choice" value="앱개발(ios)" id="ios"
+                               onclick="javascript:addToyDetail(this.value, this.id);">
+                        <input type="button" class="btn btn-success btn-sm choice" value="퍼블리셔" id="publisher"
+                               onclick="javascript:addToyDetail(this.value, this.id);">
+                        <input type="button" class="btn btn-success btn-sm choice" value="디자이너" id="design"
+                               onclick="javascript:addToyDetail(this.value, this.id);">
+                        <input type="button" class="btn btn-success btn-sm choice" value="게임개발" id="game"
+                               onclick="javascript:addToyDetail(this.value, this.id);">
+                        <input type="button" class="btn btn-success btn-sm choice" value="웹개발" id="web"
+                               onclick="javascript:addToyDetail(this.value, this.id);">
+                        <input type="button" class="btn btn-success btn-sm choice" value="데이터엔지니어" id="dba"
+                               onclick="javascript:addToyDetail(this.value, this.id);">
+                        <input type="button" class="btn btn-success btn-sm choice" value="머신러닝" id="machine"
+                               onclick="javascript:addToyDetail(this.value, this.id);">
+                        <input type="button" class="btn btn-success btn-sm choice" value="딥러닝" id="deep"
+                               onclick="javascript:addToyDetail(this.value, this.id);">
+                        <input type="button" class="btn btn-success btn-sm choice" value="빅데이터" id="bigdata"
+                               onclick="javascript:addToyDetail(this.value, this.id);">
+                        <input type="button" class="btn btn-success btn-sm choice" value="정보보안" id="security"
+                               onclick="javascript:addToyDetail(this.value, this.id);">
+                        <input type="button" class="btn btn-success btn-sm choice" value="블록체인" id="blockchain"
+                               onclick="javascript:addToyDetail(this.value, this.id);">
                     </div>
-                    <br />
-                    <a th:href="@{'/dev/toy/main'}">취소</a>
                 </div>
+                <div id="tablePoint"></div>
+                <input type="button" onclick="javascript:saveToy();" value="발행하기" class="btn btn-success">
+                <a class="btn btn-dark" th:href="@{'/dev/toy/main'}">목록</a>
             </div>
         </div>
     </div>
 </div>
+
 <script  th:inline="javascript">
     let ToyTableList = new Array();
 
@@ -88,9 +118,9 @@
     var html = '';
     html += '<div id="'+btn_id+'Table" value="test11123123123">';
     html += '<table class="table table-bordered" >';
-    html += '<input type="text" name="td_id" id="td_id" value="'+td_id+'">';
-    html += '<input type="text" name="toy_btn_id" id="toy_btn_id" value="'+btn_id+'">';
-    html += '<input type="text" name="toy_subject" id="toy_subject" value="'+toy_subject+'">';
+    html += '<input type="hidden" name="td_id" id="td_id" value="'+td_id+'">';
+    html += '<input type="hidden" name="toy_btn_id" id="toy_btn_id" value="'+btn_id+'">';
+    html += '<input type="hidden" name="toy_subject" id="toy_subject" value="'+toy_subject+'">';
     html += '<thead style="border-top: white;border-left: white;border-right: white;">';
     html += '<tr>';
     html += '<th scope="col" colSpan="2">TASK #'+toy_subject+'</th>';

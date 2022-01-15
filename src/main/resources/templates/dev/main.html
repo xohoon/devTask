@@ -1,18 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head th:replace="fragments/header::header">
-    <title>debTask</title>
 </head>
+<title>USER MANAGER</title>
 <body>
+<script th:src="@{/js/common/tab.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
-    개발자 전용 페이지<br /><br /><br /><br />
-    <a th:if="${dev == null}" class="btn btn-dark btn-lg" th:href="@{/dev/register}">포폴 작성</a>
-    <a th:if="${dev != null}" th:href="@{'/dev/detail/'+${dev.id}}">
-        포폴 : <span th:text="${dev.title}"></span>
-    </a><br />
-    <a th:href="@{/dev/support/manager}">지원관리</a>
-    <a th:href="@{/dev/toy/main}">토이관리</a>
+    <h1 class="text-primary">USER MANAGER</h1>
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <!--// on : 현재 위치 //-->
+                <li class="nav-item">
+                    <a href="javascript:devTabChange('1');" class="nav-link">포트폴리오</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:devTabChange('2');" class="nav-link">토이프로젝트 관리</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:devTabChange('3');" class="nav-link">지원 관리</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">USER MAIN PAGE</h5>
+        </div>
+    </div>
 </div>
 </body>
 </html>

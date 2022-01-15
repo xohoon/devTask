@@ -1,36 +1,73 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head th:replace="fragments/header::header">
-    <title>debTask</title>
 </head>
+<title>USER PORTFOLIO</title>
 <body>
+<script th:src="@{/js/common/tab.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
-    <div class="bg">
-        <div class="container sign_container">
-            <div class="card sign_card">
-                <div class="card-body">
-                    <div id="join_form">
-                        <h3>포트폴리오</h3><br />
-                        <span>제목</span>
-                        <input type="text" th:value="${dev.title}" class="form-control" readonly><br />
-                        <span>사용스킬</span>
-                        <input type="text" th:value="${dev.useSkill}" class="form-control" readonly><br />
-                        <span>사이트1</span>
-                        <input type="text" th:value="${dev.url_1}" class="form-control" readonly><br />
-                        <span>사이트2</span>
-                        <input type="text" th:value="${dev.url_2}" class="form-control" readonly><br />
-                        <span>사이트3</span>
-                        <input type="text" th:value="${dev.url_3}" class="form-control" readonly><br />
-                    </div>
-                    <br />
-                    <a class="btn btn-dark btn-lg" th:href="@{'/dev/modify/'+${dev.id}}">수정</a>
-                    <form  th:action="@{'/dev/delete/'+${dev.id}}" method="post" style="float:left;">
-                        <input type="submit" value="삭제" class="btn btn-dark btn-lg">
-                    </form>
-                    <a th:href="@{'/dev/main'}">메인페이지</a>
-                </div>
-            </div>
+    <h1 class="text-primary">USER - PORTFOLIO</h1>
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <!--// on : 현재 위치 //-->
+                <li class="nav-item">
+                    <a href="javascript:void(0);" class="nav-link active">포트폴리오</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:devTabChange('2');" class="nav-link">토이프로젝트 관리</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:devTabChange('3');" class="nav-link">지원 관리</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col" colspan="2">포트폴리</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">제목</th>
+                    <td>
+                        <input type="text" class="form-control" th:value="${dev.title}"  readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">사용스킬</th>
+                    <td>
+                        <input type="text" th:value="${dev.useSkill}" class="form-control" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">사이트1</th>
+                    <td>
+                        <input type="text" th:value="${dev.url_1}" class="form-control" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">사이트2</th>
+                    <td>
+                        <input type="text" th:value="${dev.url_2}" class="form-control" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">사이트3</th>
+                    <td>
+                        <input type="text" th:value="${dev.url_3}" class="form-control" readonly>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <a class="btn btn-dark" th:href="@{'/dev/modify/'+${dev.id}}">수정</a>
+            <form  th:action="@{'/dev/delete/'+${dev.id}}" method="post" style="float:left;">
+                <input type="submit" value="삭제" class="btn btn-dark">
+            </form>
+            <a class="btn btn-dark" th:href="@{'/dev/main'}">메인페이지</a>
         </div>
     </div>
 </div>
