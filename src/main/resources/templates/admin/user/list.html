@@ -1,45 +1,60 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head th:replace="fragments/header::header">
-    <title>devTask</title>
 </head>
+<title>ADMIN USER</title>
 <body>
+<script>
+    function move(value) {
+        location.href="/hide/admin/user/"+value;
+    }
+</script>
 <script th:src="@{/js/admin/common.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
-<div id="maininner"><!-- maininner (s)-->
-    <div class="cc-tab-con">
-        <a href="javascript:void(0);" class="cc-tab-item on">사용자관리</a>        <!--// on : 현재 위치 //-->
-        <a href="javascript:tabChange('2');" class="cc-tab-item">권한관리</a>
-        <a href="javascript:tabChange('3');" class="cc-tab-item">리소스관리</a>
-    </div>
-    <div class="tbl_wrp">
-        <table class="table">
-            <thead>
-            <tr class="table-info">
-                <th scope="col">이름</th>
-                <th scope="col">이메일</th>
-                <th scope="col">나이</th>
-                <th scope="col">권한</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="link_btn hover" th:each="member : ${members}">
-
-                <td style="text-align: left;">
-                    <a th:href="@{'/hide/admin/user/' + ${member.id}}"><span th:text="${member.username}">회원</span></a>
-                </td>
-                <td style="text-align: left;" th:text="${member.email}"></td>
-                <td style="text-align: left;" th:text="${member.age}"></td>
-                <td style="text-align: left;">
-                    <span th:each="role,iter : ${member.userRoles}">
-                        <h6 th:text="${role.roleName}"></h6>
-                    </span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+<div class="container">
+    <h1 class="text-primary">ADMIN - USER MANAGER</h1>
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <!--// on : 현재 위치 //-->
+                <li class="nav-item">
+                    <a href="javascript:void(0);" class="nav-link active">사용자관리</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:tabChange('2');" class="nav-link">권한관리</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:tabChange('3');" class="nav-link">리소스관리</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">이름</th>
+                        <th scope="col">이메일</th>
+                        <th scope="col">나이</th>
+                        <th scope="col">권한</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="member, num:${members}">
+                    <tr th:onclick="'javascript:move('+${member.id}+');'" style="cursor:pointer;">
+                        <td scope="row" th:text="${member.username}"></td>
+                        <td scope="row" th:text="${member.email}"></td>
+                        <td scope="row" th:text="${member.age}"></td>
+                        <td scope="row">
+                            <span th:each="role,iter : ${member.userRoles}">
+                                <h6 th:text="${role.roleName}"></h6>
+                            </span>
+                        </td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-
 </body>
 </html>

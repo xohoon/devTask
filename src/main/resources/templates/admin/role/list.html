@@ -1,37 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head th:replace="fragments/header::header">
-    <title>devTask</title>
 </head>
+<title>ADMIN ROLE</title>
 <body>
+<script>
+    function move(value) {
+        location.href="/hide/admin/role/"+value;
+    }
+</script>
 <script th:src="@{/js/admin/common.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
-<div id="maininner"><!-- maininner (s)-->
-    <div class="cc-tab-con">
-        <a href="javascript:tabChange('1');" class="cc-tab-item">사용자관리</a>        <!--// on : 현재 위치 //-->
-        <a href="javascript:void(0);" class="cc-tab-item  on">권한관리</a>
-        <a href="javascript:tabChange('3');" class="cc-tab-item">리소스관리</a>
-    </div>
-    <div class="tbl_wrp">
-        <table class="table">
-            <thead>
-            <tr class="table-info">
-                <th scope="col">권한명</th>
-                <th scope="col">권한설명</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="link_btn hover" th:each="role : ${roles}">
-
-                <td style="text-align: left;">
-                    <a th:href="@{'/hide/admin/role/' + ${role.id}}"><span th:text="${role.roleName}">회원</span></a>
-                </td>
-                <td style="text-align: left;" th:text="${role.roleDesc}"></td>
-            </tr>
-            </tbody>
-        </table>
-        <div style="text-align:right;">
-            <p><a class="btn btn-dark btn-lg" style="margin:10;" th:href="@{/hide/admin/role/register}">권한 등록</a></p>
+<div class="container">
+    <h1 class="text-primary">ADMIN - ROLE MANAGER</h1>
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <!--// on : 현재 위치 //-->
+                <li class="nav-item">
+                    <a href="javascript:tabChange('1');" class="nav-link">사용자관리</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:void(0);" class="nav-link active">권한관리</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:tabChange('3');" class="nav-link">리소스관리</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">권한 명</th>
+                    <th scope="col">권한 설명</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="role : ${roles}">
+                    <tr th:onclick="'javascript:move('+${role.id}+');'" style="cursor:pointer;">
+                        <td scope="row" th:text="${role.roleDesc}"></td>
+                        <td scope="row" th:text="${role.roleName}"></td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+            <a class="btn btn-dark btn-lg" th:href="@{/hide/admin/role/register}">권한 등록</a>
         </div>
     </div>
 </div>

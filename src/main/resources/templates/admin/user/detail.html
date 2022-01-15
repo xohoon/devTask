@@ -1,65 +1,83 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head th:replace="fragments/header::header">
-    <title>devTask</title>
 </head>
+<title>ADMIN USER</title>
 <body>
 <script th:src="@{/js/admin/common.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
-<div id="maininner"><!-- maininner (s)-->
-    <div class="cc-tab-con">
-        <a href="javascript:void(0);" class="cc-tab-item on">사용자관리</a>        <!--// on : 현재 위치 //-->
-        <a href="javascript:tabChange('2');" class="cc-tab-item">권한관리</a>
-        <a href="javascript:tabChange('3');" class="cc-tab-item">리소스관리</a>
-    </div>
-    <div class="tbl_wrp">
-        <form class="form-horizontal" th:action="@{/hide/admin/user}" method="post" th:object="${member}">
-            <input th:type="hidden" name="id" th:value="*{id}"/>
-            <div class="form-group">
-                <label for="username" class="col-sm-2 control-label">아이디</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control input-large" name="username" id="username"
-                           placeholder="username" th:value="*{username}" required>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="password" class="col-sm-2 control-label">비밀번호</label>
-                <div class="col-sm-10">
-                    <input type="password" class="form-control input-large" name="password" id="password"
-                           placeholder="Password" data-minlength="6" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="email" class="col-sm-2 control-label">이메일</label>
-                <div class="col-sm-10">
-                    <input type="email" class="form-control input-large" name="email" id="email" placeholder="이메일"
-                           th:value="*{email}" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="age" class="col-sm-2 control-label">나이</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control input-large" name="age" id="age" placeholder="나이"
-                           th:value="*{age}" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="roles" class="col-sm-2 control-label">권한</label>
-                <div class="col-sm-10" th:each="role: ${roleList}">
-                    <input th:type="checkbox" name="roles" id="roles"
-                           th:text="${role.roleName}"
-                           th:value="${role.roleName}"
-                           th:checked="${member.roles.contains(role.roleName)} ? 'true' : 'false'"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-1 col-sm-10">
-                    <button type="Submit" class="btn btn-dark btn-lg">등록</button>
-                    <a class="btn btn-dark btn-lg" style="margin:10;" th:href="@{/hide/admin/user}">목록 </a>
-                </div>
-            </div>
-        </form>
+<div class="container">
+    <h1 class="text-primary">ADMIN - USER MANAGER</h1>
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <!--// on : 현재 위치 //-->
+                <li class="nav-item">
+                    <a href="javascript:void(0);" class="nav-link active">사용자관리</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:tabChange('2');" class="nav-link">권한관리</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:tabChange('3');" class="nav-link">리소스관리</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <form class="form-horizontal" th:action="@{/hide/admin/user}" method="post" th:object="${member}">
+                <input th:type="hidden" name="id" th:value="*{id}"/>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" colspan="2">회원정보</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">아이디</th>
+                            <td>
+                                <input type="text" class="form-control input-large" name="username" id="username"
+                                       placeholder="username" th:value="*{username}" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">비밀번호</th>
+                            <td>
+                                <input type="password" class="form-control input-large" name="password" id="password"
+                                       placeholder="Password" data-minlength="6" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">이메일</th>
+                            <td>
+                                <input type="email" class="form-control input-large" name="email" id="email" placeholder="이메일"
+                                       th:value="*{email}" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">나이</th>
+                            <td>
+                                <input type="text" class="form-control input-large" name="age" id="age" placeholder="나이"
+                                       th:value="*{age}" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">권한</th>
+                            <td>
+                                <div class="col-sm-10" th:each="role: ${roleList}" style="text-align: left;">
+                                    <input th:type="checkbox" name="roles" id="roles"
+                                           th:text="${role.roleName}"
+                                           th:value="${role.roleName}"
+                                           th:checked="${member.roles.contains(role.roleName)} ? 'true' : 'false'"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="Submit" class="btn btn-dark btn-lg">등록</button>
+                <a class="btn btn-dark btn-lg" th:href="@{/hide/admin/user}">목록 </a>
+            </form>
+        </div>
     </div>
 </div>
 </body>

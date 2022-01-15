@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head th:replace="fragments/header::header">
-    <title>debTask</title>
 </head>
+<title>ADMIN HOME</title>
 <body>
 <script th:src="@{/js/admin/common.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
-<div id="maininner"><!-- maininner (s)-->
-    <div class="cc-tab-con">
-        <a href="javascript:tabChange('1');" class="cc-tab-item">사용자관리</a>        <!--// on : 현재 위치 //-->
-        <a href="javascript:tabChange('2');" class="cc-tab-item">권한관리</a>
-        <a href="javascript:tabChange('3');" class="cc-tab-item">리소스관리</a>
-    </div>
-    <div class="tbl_wrp">
-        <div style="padding-top:50px;" class="col">
-            <div class="container text-center">
-                <div class="security"></div>
-                <h1 class="text-primary">Spring Security Administration</h1>
-            </div>
+<div class="container">
+    <h1 class="text-primary">ADMIN MAIN</h1>
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <!--// on : 현재 위치 //-->
+                <li class="nav-item">
+                    <a href="javascript:tabChange('1');" class="nav-link">사용자관리</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:tabChange('2');" class="nav-link">권한관리</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:tabChange('3');" class="nav-link">리소스관리</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">ADMIN MAIN PAGE</h5>
         </div>
     </div>
-
 </div>
-
 </body>
 </html>
