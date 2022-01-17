@@ -18,6 +18,7 @@ import java.util.List;
 public class CompanyService {
 
     private final CompanyRepository companyRepository;
+    private final EntityManager em;
 
     @Transactional
     public void register(Company company, Member member) {

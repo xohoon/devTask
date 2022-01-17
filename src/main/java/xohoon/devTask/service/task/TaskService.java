@@ -31,4 +31,7 @@ public class TaskService {
         return taskRepository.findById(id).orElse(new Task());
     }
 
+    public List<Task> getTasksByCompanyId(Long id) {
+        return taskRepository.findAllByCompany_id(id);
+    }
 }

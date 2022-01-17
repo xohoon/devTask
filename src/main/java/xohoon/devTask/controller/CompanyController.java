@@ -113,7 +113,7 @@ public class CompanyController {
         if(company == null) {
             tasks = null;
         }else {
-            tasks = company.getTasks();
+            tasks = taskService.getTasksByCompanyId(company.getId());
         }
 
         model.addAttribute("tasks", tasks);

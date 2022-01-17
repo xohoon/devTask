@@ -31,8 +31,4 @@ public class Company extends BaseEntity{
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member = new Member();
-
-    // company 1 : N task
-    @OneToMany(mappedBy = "company")
-    private List<Task> tasks = new ArrayList<>();
 }
