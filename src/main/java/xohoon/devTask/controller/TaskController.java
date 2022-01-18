@@ -43,7 +43,9 @@ public class TaskController {
     @GetMapping(value = "detail/{id}") // 상세보기
     public String taskDetail(@PathVariable(value = "id") String id, Model model, Principal principal) {
         Task task = taskService.getTaskById(Long.valueOf(id));
-
+        // 양방향 매핑을 단방향으로 변경.. 예정 코드
+        List<TaskDetail> taskDetails = taskDetailService.getTaskDetailByTaskId((Long.valueOf(id)));
+//        model.addAttribute("taskDetails", taskDetails);
         if (principal != null) {
             List<String> supportUser = new ArrayList<>();
             Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -58,6 +60,7 @@ public class TaskController {
             }
             model.addAttribute("supportUser", supportUser);
         }
+
         model.addAttribute("task", task);
 
         return "task/detail";

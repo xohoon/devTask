@@ -25,4 +25,8 @@ public class TaskDetailService {
     public TaskDetail getTaskDetailById(Long id) {
         return taskDetailRepository.findById(id).orElse(new TaskDetail());
     }
+
+    public List<TaskDetail> getTaskDetailByTaskId(Long id) {
+        return taskDetailRepository.findAllByTask_id(id);
+    }
 }

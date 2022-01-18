@@ -9,4 +9,5 @@ import java.util.Collection;
 import java.util.List;
 
 public interface TaskDetailRepository extends JpaRepository<TaskDetail, Long> {
+    List<TaskDetail> findAllByTask_id(Long id);
 }
