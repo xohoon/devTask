@@ -26,10 +26,10 @@ public class ToySupport {
     // toySupport N : 1 toyDetail
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_detail_id")
-    private ToyDetail toyDetail = new ToyDetail();
+    private ToyDetail toyDetail;
 
     // toySupport N : 1 member
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private Member member = new Member();
+    private Member member;
 }
