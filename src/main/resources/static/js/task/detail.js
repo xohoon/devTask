@@ -29,3 +29,23 @@ function taskSupport(value, id) {
         return false;
     }
 }
+
+function viewMap(value) {
+    if(value == "homepage") {
+        var url = $("#url").val();
+        window.open('https://www.'+url);
+    }else if(value == "map") {
+        var address = $("#address").val();
+        var company = $("#company").val();
+        console.log("TEST1" + address);
+        var geocoder = new kakao.maps.services.Geocoder();
+        geocoder.addressSearch(address, function(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                var address_x = result[0].x;
+                var address_y = result[0].y;
+                window.open('https://map.kakao.com/link/map/'+company+','+address_y+','+address_x);
+            }
+        });
+    }
+}

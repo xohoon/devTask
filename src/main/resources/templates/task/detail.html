@@ -4,13 +4,18 @@
     <title>debTask</title>
 </head>
 <body>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d78bec2fc2c20f29a60a2998d989650b&libraries=services"></script>
 <script th:src="@{/js/task/detail.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
     <div class="card">
         <div class="card-header">
             <h5 th:text="${task.company.company}"></h5>
-            <a th:href="${'http://www.'+task.company.site_url}" target='_blank'>기업사이트</a>
+            <button type="button" onclick="javascript:viewMap('homepage')" class="btn btn-secondary btn-sm">홈페이지</button>
+            <button type="button" onclick="javascript:viewMap('map')" class="btn btn-secondary btn-sm">기업위치</button>
+            <input type="hidden" th:value="${task.company.site_url}" id="url">
+            <input type="hidden" th:value="${task.company.address}" id="address">
+            <input type="hidden" th:value="${task.company.company}" id="company">
         </div>
         <div class="card-body">
             <h3 th:text="${task.task_title}"></h3>
