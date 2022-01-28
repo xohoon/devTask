@@ -15,7 +15,7 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col">기업명</th>
             <th scope="col">제목</th>
             <th scope="col">과제분야</th>
             <th scope="col">채용인원</th>
@@ -26,7 +26,7 @@
         <tbody>
         <th:block th:each="task, num:${tasks}">
             <tr th:onclick="'javascript:move('+${task.id}+');'" style="cursor:pointer;">
-                <th scope="row"><span th:text="${num.count}"></span></th>
+                <th scope="row"><span th:text="${task.company.company}"></span></th>
                 <td><span th:text="${task.task_title}"></span></td>
                 <td>
                     <th:block th:each="taskDetail, num:${task.taskDetails}">

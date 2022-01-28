@@ -5,6 +5,8 @@
 <title>TASK REGISTER</title>
 <body>
 <script th:src="@{/js/common/tab.js}"></script>
+<script th:src="@{/js/common/api.js}"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
     <h1 class="text-primary">COMPANY REGISTER</h1>
@@ -69,7 +71,11 @@
                     <tr>
                         <th scope="row">주소</th>
                         <td>
-                            <input type="text" class="form-control" name="address" id="address" th:value="*{address}" placeholder="주소">
+                            <input type="text" th:value="*{address_postcode}" name="address_postcode" id="address_postcode" placeholder="우편번호" class="form-control" style="width: 49%; float:left; margin-bottom: 5px; margin-right: 5px;">
+                            <input type="button" onclick="address_api()" value="우편번호 찾기" class="btn btn-success" style="float: left;">
+                            <input type="text" th:value="*{address}" name="address" id="address" placeholder="주소" class="form-control" style="margin-bottom: 5px;">
+                            <input type="text" th:value="*{address_detailAddress}" name="address_detailAddress" id="address_detailAddress" placeholder="상세주소" class="form-control" style="width: 49.5%; float: left; margin-right: 5px;">
+                            <input type="text" th:value="*{address_extraAddress}" name="address_extraAddress" id="address_extraAddress" placeholder="참고항목" class="form-control" style="width: 49.7%; float: left;">
                         </td>
                     </tr>
                     </tbody>

@@ -59,6 +59,7 @@ public class CompanyController {
     @PostMapping(value = "register") // 저장 및 업데이트
     public String register(CompanyDto companyDto) throws Exception {
         ModelMapper mapper = new ModelMapper();
+        System.out.println("companyDto.toString() = " + companyDto.toString());
         Company company = mapper.map(companyDto, Company.class);
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         companyService.register(company, member);

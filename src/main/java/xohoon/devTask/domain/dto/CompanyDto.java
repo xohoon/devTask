@@ -20,4 +20,7 @@ public class CompanyDto {
     private int personnel;
     private String salary;
     private String address;
+    private String address_postcode;
+    private String address_detailAddress;
+    private String address_extraAddress;
 }

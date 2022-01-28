@@ -25,7 +25,7 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col" colspan="2">기업정보</th>
+                        <th scope="col" colspan="2"><h3>기업정보</h3></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -68,7 +68,10 @@
                     <tr>
                         <th scope="row">주소</th>
                         <td>
-                            <input type="text" th:value="${company.address}" class="form-control" readonly>
+                            <input type="text" th:value="${company.address_postcode}" placeholder="우편번호" class="form-control" style="width: 49%; float:left; margin-bottom: 5px; margin-right: 5px;" readonly>
+                            <input type="text" th:value="${company.address}" placeholder="주소" class="form-control" style="margin-bottom: 5px;" readonly>
+                            <input type="text" th:value="${company.address_detailAddress}" placeholder="상세주소" class="form-control" style="width: 49.5%; float: left; margin-right: 5px;" readonly>
+                            <input type="text" th:value="${company.address_extraAddress}" placeholder="참고항목" class="form-control" style="width: 49.7%; float: left;" readonly>
                         </td>
                     </tr>
                     </tbody>

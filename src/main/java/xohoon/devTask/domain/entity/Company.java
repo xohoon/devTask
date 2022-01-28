@@ -26,6 +26,9 @@ public class Company extends BaseEntity{
     private int personnel;
     private String salary;
     private String address;
+    private String address_postcode;
+    private String address_detailAddress;
+    private String address_extraAddress;
 
     // company 1 : 1 member
     @OneToOne(fetch = FetchType.LAZY)

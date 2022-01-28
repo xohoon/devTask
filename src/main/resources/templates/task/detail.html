@@ -7,89 +7,63 @@
 <script th:src="@{/js/task/detail.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
-    <div class="bg">
-        <div class="container sign_container">
-            <div class="card sign_card">
-                <div class="card-body">
-                    <h3>과제</h3><br />
-                    <span>제목</span>
-                    <span th:text="${task.task_title}"></span>
-                    <th:block th:each="taskDetail, num:${task.taskDetails}">
-                        <table class="table table-bordered">
-                            <thead style="border-top: white;border-left: white;border-right: white;">
-                                <tr scope="col">
-                                    <th colspan="2">
-                                        <span th:text="'TASK # '+${taskDetail.task_subject}" style="font-size: 25px;"></span>
-                                        <span th:text="'(지원인원 : '+${taskDetail.taskSupports.size()}+')'" style="color: gray;"></span>
-                                    </th>
-                                    <th>
-                                        <button type="button"  class="btn btn-secondary" style="float:right;"
-                                                sec:authorize="hasAuthority('ROLE_DEV')"
-                                                th:id="${taskDetail.id}" th:value="supported"
-                                                onclick="javascript:taskSupport(this.value, this.id);"
-                                                th:if="*{supportUser.get(num.index) != 'notSupport'}">지원완료
-                                        </button>
-                                        <button type="button"  class="btn btn-success" style="float:right;"
-                                                sec:authorize="hasAuthority('ROLE_DEV')"
-                                                th:id="${taskDetail.id}" th:value="${taskDetail.task_subject}"
-                                                onclick="javascript:taskSupport(this.value, this.id);"
-                                                th:if="*{supportUser.get(num.index) == 'notSupport'}">지원하기
-                                        </button>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <thead class="table-light" style="text-align: center;">
-                                <tr>
-                                    <th scope="col">과제분야</th>
-                                    <th scope="col">모집인원</th>
-                                    <th scope="col">과제 진행 기간</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td style="width: 69%;">
-                                        <div class="card">
-                                            <div class="card-body" th:text="${taskDetail.task_part}">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td style="width: 15%;">
-                                        <div class="card">
-                                            <div class="card-body" th:text="${taskDetail.task_part_personnel}">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td style="width: 15%;">
-                                        <div class="card">
-                                            <div class="card-body" th:text="${taskDetail.tasking_day}">
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <thead class="table-light" style="text-align: center;">
-                                <tr>
-                                    <th scope="col" colspan="3">주요스킬</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td colspan="3">
-                                        <div class="card">
-                                            <div class="card-body" th:text="${taskDetail.task_need_skill}">
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </th:block>
-                    <span>마감일</span>
-                    <span th:text="${task.task_dead_day}"></span>
-                    <br />
-                    <a th:href="@{'/task/list'}">목록</a>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-header">
+            <h5 th:text="${task.company.company}"></h5>
+            <a th:href="${'http://www.'+task.company.site_url}" target='_blank'>기업사이트</a>
+        </div>
+        <div class="card-body">
+            <h3 th:text="${task.task_title}"></h3>
+            <th:block th:each="taskDetail, num:${task.taskDetails}">
+                <table class="table">
+                    <thead style="border-top: white;border-left: white;border-right: white;">
+                        <tr scope="col">
+                            <th colspan="2">
+                                <span th:text="'TASK # '+${taskDetail.task_subject}" style="font-size: 25px;"></span>
+                                <span th:text="'(지원인원 : '+${taskDetail.taskSupports.size()}+')'" style="color: gray;"></span>
+                            </th>
+                            <th>
+                                <button type="button"  class="btn btn-secondary" style="float:right;"
+                                        sec:authorize="hasAuthority('ROLE_DEV')"
+                                        th:id="${taskDetail.id}" th:value="supported"
+                                        onclick="javascript:taskSupport(this.value, this.id);"
+                                        th:if="*{supportUser.get(num.index) != 'notSupport'}">지원완료
+                                </button>
+                                <button type="button"  class="btn btn-success" style="float:right;"
+                                        sec:authorize="hasAuthority('ROLE_DEV')"
+                                        th:id="${taskDetail.id}" th:value="${taskDetail.task_subject}"
+                                        onclick="javascript:taskSupport(this.value, this.id);"
+                                        th:if="*{supportUser.get(num.index) == 'notSupport'}">지원하기
+                                </button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row" style="width: 15%;">과제분야</th>
+                            <td th:text="${taskDetail.task_part}" colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">모집인원</th>
+                            <td th:text="${taskDetail.task_part_personnel}" colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">과제 소요 기간</th>
+                            <td th:text="${taskDetail.tasking_day}" colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">과제 마감 기간</th>
+                            <td th:text="${task.task_dead_day}" colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">주요스킬</th>
+                            <td th:text="${taskDetail.task_need_skill}" colspan="2"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </th:block>
+            <br />
+            <a th:href="@{'/task/list'}">목록</a>
         </div>
     </div>
 </div>
