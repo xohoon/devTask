@@ -7,89 +7,57 @@
 <script th:src="@{/js/toy/detail.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
-    <div class="bg">
-        <div class="container sign_container">
-            <div class="card sign_card">
-                <div class="card-body">
-                    <h3>과제</h3><br />
-                    <span>제목</span>
-                    <span th:text="${toy.toy_title}"></span>
-                    <th:block th:each="toyDetail, num:${toy.toyDetails}">
-                        <table class="table table-bordered">
-                            <thead style="border-top: white;border-left: white;border-right: white;">
-                            <tr scope="col">
-                                <th colspan="2">
-                                    <span th:text="'TASK # '+${toyDetail.toy_subject}" style="font-size: 25px;"></span>
-                                    <span th:text="'(지원인원 : '+${toyDetail.toySupports.size()}+')'" style="color: gray;"></span>
-                                </th>
-                                <th>
-                                    <button type="button"  class="btn btn-secondary" style="float:right;"
-                                            sec:authorize="hasAuthority('ROLE_DEV')"
-                                            th:id="${toyDetail.id}" th:value="supported"
-                                            onclick="javascript:toySupport(this.value, this.id);"
-                                            th:if="*{supportUser.get(num.index) != 'notSupport'}">지원완료
-                                    </button>
-                                    <button type="button"  class="btn btn-success" style="float:right;"
-                                            sec:authorize="hasAuthority('ROLE_DEV')"
-                                            th:id="${toyDetail.id}" th:value="${toyDetail.toy_subject}"
-                                            onclick="javascript:toySupport(this.value, this.id);"
-                                            th:if="*{supportUser.get(num.index) == 'notSupport'}">지원하기
-                                    </button>
-                                </th>
-                            </tr>
-                            </thead>
-                            <thead class="table-light" style="text-align: center;">
-                            <tr>
-                                <th scope="col">과제분야</th>
-                                <th scope="col">모집인원</th>
-                                <th scope="col">과제 진행 기간</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td style="width: 69%;">
-                                    <div class="card">
-                                        <div class="card-body" th:text="${toyDetail.toy_part}">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td style="width: 15%;">
-                                    <div class="card">
-                                        <div class="card-body" th:text="${toyDetail.toy_part_personnel}">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td style="width: 15%;">
-                                    <div class="card">
-                                        <div class="card-body" th:text="${toyDetail.toying_day}">
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                            <thead class="table-light" style="text-align: center;">
-                            <tr>
-                                <th scope="col" colspan="3">주요스킬</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td colspan="3">
-                                    <div class="card">
-                                        <div class="card-body" th:text="${toyDetail.toy_need_skill}">
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </th:block>
-                    <span>마감일</span>
-                    <span th:text="${toy.toy_dead_day}"></span>
-                    <br />
-                    <a th:href="@{'/toy/list'}">목록</a>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2 th:text="${toy.toy_title}"></h2>
+            <th:block th:each="toyDetail, num:${toy.toyDetails}">
+                <table class="table">
+                    <thead style="border-top: white;border-left: white;border-right: white;">
+                    <tr scope="col">
+                        <th colspan="2">
+                            <span th:text="'TASK # '+${toyDetail.toy_subject}" style="font-size: 25px;"></span>
+                            <span th:text="'(지원인원 : '+${toyDetail.toySupports.size()}+')'" style="color: gray;"></span>
+                        </th>
+                        <th>
+                            <button type="button"  class="btn btn-secondary" style="float:right;"
+                                    sec:authorize="hasAuthority('ROLE_DEV')"
+                                    th:id="${toyDetail.id}" th:value="supported"
+                                    onclick="javascript:toySupport(this.value, this.id);"
+                                    th:if="*{supportUser.get(num.index) != 'notSupport'}">지원완료
+                            </button>
+                            <button type="button"  class="btn btn-success" style="float:right;"
+                                    sec:authorize="hasAuthority('ROLE_DEV')"
+                                    th:id="${toyDetail.id}" th:value="${toyDetail.toy_subject}"
+                                    onclick="javascript:toySupport(this.value, this.id);"
+                                    th:if="*{supportUser.get(num.index) == 'notSupport'}">지원하기
+                            </button>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row" style="width: 15%;">과제분야</th>
+                            <td th:text="${toyDetail.toy_part}" colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="width: 15%;">모집인원</th>
+                            <td th:text="${toyDetail.toy_part_personnel}" colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="width: 15%;">과제 진행 기간</th>
+                            <td th:text="${toyDetail.toying_day}" colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="width: 15%;">주요스킬</th>
+                            <td th:text="${toyDetail.toy_need_skill}" colspan="2"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </th:block>
+            <span>마감일</span>
+            <span th:text="${toy.toy_dead_day}"></span>
+            <br />
+            <a th:href="@{'/toy/list'}">목록</a>
         </div>
     </div>
 </div>
