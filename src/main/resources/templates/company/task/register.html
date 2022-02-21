@@ -9,7 +9,7 @@
 <script th:src="@{/js/common/tab.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
-    <div class="card">
+    <div class="card text-center">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <!--// on : 현재 위치 //-->
@@ -27,7 +27,9 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" colspan="2">과제 등록</th>
+                            <th scope="col" colspan="2">
+                                <h3>과제 등록</h3>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -112,7 +114,7 @@
     html += '<input type="hidden" name="task_btn_id" id="task_btn_id" value="'+btn_id+'">';
     html += '<input type="hidden" name="task_subject" id="task_subject" value="'+task_subject+'">';
     html += '<thead style="border-top: white;border-left: white;border-right: white;">';
-    html += '<tr>';
+    html += '<tr style="text-align: left;">';
     html += '<th scope="col" colSpan="2">TASK # '+task_subject+'</th>';
     html += '<th>';
     html += '<input onClick='+"javascript:removeTaskTable("+changeId+");"+' type="button" class="btn btn-danger btn-sm" style="float:right;" value="삭제" />';
