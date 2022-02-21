@@ -7,7 +7,6 @@
 <script th:src="@{/js/common/tab.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
-    <h1 class="text-primary">TASK MANAGER - INFO</h1>
     <div class="card text-center">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
@@ -24,7 +23,9 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col" colspan="2" th:text="${task.task_title}"></th>
+                    <th scope="col" colspan="2">
+                        <h5 th:text="${task.task_title}"></h5>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,7 +38,7 @@
             <th:block th:each="taskDetail, num:${task.taskDetails}">
                 <table class="table table-bordered">
                     <thead style="border-top: white;border-left: white;border-right: white;">
-                    <tr scope="col" colspan="3">
+                    <tr scope="col" colspan="3" style="text-align: left;">
                         <th><span th:text="'TASK # '+${taskDetail.task_subject}"></span></th>
                     </tr>
                     </thead>
@@ -71,25 +72,27 @@
                     </tr>
                     </tbody>
                     <thead class="table-light" style="text-align: center;">
-                    <tr>
-                        <th scope="col" colspan="3">주요스킬</th>
-                    </tr>
+                        <tr>
+                            <th scope="col" colspan="3">주요스킬</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td colspan="3">
-                            <div class="card">
-                                <div class="card-body" th:text="${taskDetail.task_need_skill}">
+                        <tr>
+                            <td colspan="3">
+                                <div class="card">
+                                    <div class="card-body">
+<!--                                        <textarea class="form-control" th:text="${taskDetail.task_need_skill}" style="height: 150px;"></textarea>-->
+                                        <div style="white-space:pre;text-align: left;" th:text="${taskDetail.task_need_skill}"></div>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </th:block>
-            <a class="btn btn-dark" th:href="@{'/co/task/modify/'+${task.id}}">수정</a>
+            <a class="btn btn-warning" th:href="@{'/co/task/warning/'+${task.id}}">수정</a>
             <form  th:action="@{'/co/task/delete/'+${task.id}}" method="post" style="float:left;">
-                <input type="submit" value="삭제" class="btn btn-dark">
+                <input type="submit" value="삭제" class="btn btn-outline-danger">
             </form>
             <a class="btn btn-dark" th:href="@{'/co/task/main'}">목록</a>
         </div>
