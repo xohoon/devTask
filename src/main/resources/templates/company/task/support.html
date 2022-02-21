@@ -8,7 +8,7 @@
 <script th:src="@{/js/common/tab.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
-    <div class="card">
+    <div class="card text-center">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <!--// on : 현재 위치 //-->
@@ -23,31 +23,29 @@
         <div class="card-body">
             <table class="table">
                 <thead>
-                <tr>
-                    <th scope="col" colspan="2" th:text="${task.task_title}"></th>
-                </tr>
+                    <tr>
+                        <th scope="col" colspan="2">
+                            <h5 th:text="${task.task_title}"></h5>
+                        </th>
+                    </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">마감일</th>
-                    <td th:text="${task.task_dead_day}"></td>
-                </tr>
-                </tbody>
             </table>
             <th:block th:each="taskDetail, num:${task.taskDetails}">
-                <span th:text="'TASK # '+${taskDetail.task_subject}" style="font-size: 25px;"></span>
-                <span th:text="'(지원인원 : '+${taskDetail.taskSupports.size()}+')'" style="color: gray;"></span>
+                <div style="text-align: left;margin-top: 25px;">
+                    <b th:text="'TASK # '+${taskDetail.task_subject}"></b>
+                    <span th:text="'(지원인원 : '+${taskDetail.taskSupports.size()}+')'" style="color: gray;"></span>
+                </div>
                 <table class="table">
                     <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">지원자이름</th>
-                        <th scope="col">지원자 프로필 보기</th>
-                        <th scope="col">과제 요청</th>
-                    </tr>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">지원자이름</th>
+                            <th scope="col">지원자 프로필 보기</th>
+                            <th scope="col">과제 요청</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <th:block th:each="taskSupport, count:*{taskDetail.taskSupports}">
+                    <th:block th:if="${not #lists.isEmpty(taskSupport)}" th:each="taskSupport, count:*{taskDetail.taskSupports}">
                         <tr>
                             <th scope="row"><span th:text="*{count.count}"></span></th>
                             <td><span th:text="*{taskSupport.member.username}"></span></td>
@@ -59,6 +57,13 @@
                                         onclick="javascript:taskConfirm(this.value, this.id);"
                                         type="button" class="btn btn-warning">진행 요청</button>
                                 <button th:if="${taskSupport.support_status == 1}" type="button" class="btn btn-secondary">진행중</button>
+                            </td>
+                        </tr>
+                    </th:block>
+                    <th:block th:unless="${not #lists.isEmpty(taskSupport)}">
+                        <tr>
+                            <td colspan="4">
+                                조회된 결과값이 없습니다.
                             </td>
                         </tr>
                     </th:block>
