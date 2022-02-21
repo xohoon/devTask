@@ -45,9 +45,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <th:block th:if="${not #lists.isEmpty(taskSupport)}" th:each="taskSupport, count:*{taskDetail.taskSupports}">
+                    <th:block th:if="${not #lists.isEmpty(taskDetail.taskSupports)}" th:each="taskSupport, num:*{taskDetail.taskSupports}">
                         <tr>
-                            <th scope="row"><span th:text="*{count.count}"></span></th>
+                            <th scope="row"><span th:text="*{num.count}"></span></th>
                             <td><span th:text="*{taskSupport.member.username}"></span></td>
                             <td><a th:href="@{'/devDetail/'+${taskSupport.member.id}}" class="btn btn-success">프로필</a></td>
                             <td>
@@ -60,7 +60,7 @@
                             </td>
                         </tr>
                     </th:block>
-                    <th:block th:unless="${not #lists.isEmpty(taskSupport)}">
+                    <th:block th:unless="${not #lists.isEmpty(taskDetail.taskSupports)}">
                         <tr>
                             <td colspan="4">
                                 조회된 결과값이 없습니다.
