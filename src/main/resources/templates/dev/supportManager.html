@@ -7,7 +7,7 @@
 <script th:src="@{/js/common/tab.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
-    <div class="card">
+    <div class="card text-center">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <!--// on : 현재 위치 //-->
@@ -26,25 +26,34 @@
             <h5 class="card-title">기업 지원</h5>
             <table class="table">
                 <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">기업이름</th>
-                    <th scope="col">지원분야</th>
-                    <th scope="col">지원상태</th>
-                </tr>
+                    <tr>
+                        <th scope="col" style="width: 5%;">#</th>
+                        <th scope="col" style="width: 15%;">기업이름</th>
+                        <th scope="col" style="width: 35%;">제목</th>
+                        <th scope="col" style="width: 20%;">지원분야</th>
+                        <th scope="col" style="width: 15%;">지원상태</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <th:block th:each="taskSupport, num:*{taskSupports}">
-                <tr>
-                    <th scope="row"><span th:text="*{num.count}"></span></th>
-                    <td><span th:text="*{taskSupport.taskDetail.task.company.company}"></span></td>
-                    <td><span th:text="*{taskSupport.taskDetail.task_subject}"></span></td>
-                    <td>
-                        <span th:if="*{taskSupport.support_status == 1}" th:text="진행중"></span>
-                        <span th:if="*{taskSupport.support_status == 0}" th:text="확인중"></span>
-                    </td>
-                </tr>
-                </th:block>
+                    <th:block th:if="${not #lists.isEmpty(taskSupports)}" th:each="taskSupport, num:*{taskSupports}">
+                    <tr>
+                        <th scope="row"><span th:text="*{num.count}"></span></th>
+                        <td><span th:text="*{taskSupport.taskDetail.task.company.company}"></span></td>
+                        <td><span th:text="*{taskSupport.taskDetail.task.task_title}"></span></td>
+                        <td><span th:text="*{taskSupport.taskDetail.task_subject}"></span></td>
+                        <td>
+                            <span th:if="*{taskSupport.support_status == 1}" th:text="진행중"></span>
+                            <span th:if="*{taskSupport.support_status == 0}" th:text="확인중"></span>
+                        </td>
+                    </tr>
+                    </th:block>
+                    <th:block th:unless="${not #lists.isEmpty(taskSupports)}">
+                        <tr>
+                            <td colspan="5">
+                                조회된 결과값이 없습니다.
+                            </td>
+                        </tr>
+                    </th:block>
                 </tbody>
             </table>
         </div>
@@ -53,25 +62,32 @@
             <h5 class="card-title">토이프로젝트 지원</h5>
             <table class="table">
                 <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">프로젝트 제목</th>
-                    <th scope="col">지원분야</th>
-                    <th scope="col">지원상태</th>
-                </tr>
+                    <tr>
+                        <th scope="col" style="width: 5%;">#</th>
+                        <th scope="col" style="width: 60%;">프로젝트 제목</th>
+                        <th scope="col" style="width: 20%;">지원분야</th>
+                        <th scope="col" style="width: 15%;">지원상태</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <th:block th:each="toySupport, num:*{toySupports}">
-                <tr>
-                    <th scope="row"><span th:text="*{num.count}"></span></th>
-                    <td><span th:text="*{toySupport.toyDetail.toy.toy_title}"></span></td>
-                    <td><span th:text="*{toySupport.toyDetail.toy_subject}"></span></td>
-                    <td>
-                        <span th:if="*{toySupport.support_status == 1}" th:text="진행중"></span>
-                        <span th:if="*{toySupport.support_status == 0}" th:text="확인중"></span>
-                    </td>
-                </tr>
-                </th:block>
+                    <th:block th:if="${not #lists.isEmpty(toySupports)}" th:each="toySupport, num:*{toySupports}">
+                    <tr>
+                        <th scope="row"><span th:text="*{num.count}"></span></th>
+                        <td><span th:text="*{toySupport.toyDetail.toy.toy_title}"></span></td>
+                        <td><span th:text="*{toySupport.toyDetail.toy_subject}"></span></td>
+                        <td>
+                            <span th:if="*{toySupport.support_status == 1}" th:text="진행중"></span>
+                            <span th:if="*{toySupport.support_status == 0}" th:text="확인중"></span>
+                        </td>
+                    </tr>
+                    </th:block>
+                    <th:block th:unless="${not #lists.isEmpty(toySupports)}">
+                        <tr>
+                            <td colspan="4">
+                                조회된 결과값이 없습니다.
+                            </td>
+                        </tr>
+                    </th:block>
                 </tbody>
             </table>
         </div>

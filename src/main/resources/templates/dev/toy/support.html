@@ -8,7 +8,7 @@
 <div th:replace="fragments/nav::nav"></div>
 <script th:src="@{/js/dev/support.js}"></script>
 <div class="container">
-    <div class="card">
+    <div class="card text-center">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <!--// on : 현재 위치 //-->
@@ -24,32 +24,49 @@
             </ul>
         </div>
         <div class="card-body">
-            <h5 th:text="${toy.toy_title}"></h5>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col" colspan="2">
+                        <h5 th:text="${toy.toy_title}"></h5>
+                    </th>
+                </tr>
+                </thead>
+            </table>
             <th:block th:each="toyDetail, num:${toy.toyDetails}">
-                <span th:text="'TASK # '+${toyDetail.toy_subject}" style="font-size: 25px;"></span>
-                <span th:text="'(지원인원 : '+${toyDetail.toySupports.size()}+')'" style="color: gray;"></span>
+                <div style="text-align: left;margin-top: 25px;">
+                    <b th:text="'TASK # '+${toyDetail.toy_subject}"></b>
+                    <span th:text="'(지원인원 : '+${toyDetail.toySupports.size()}+')'" style="color: gray;"></span>
+                </div>
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">지원자이름</th>
-                        <th scope="col">지원자 프로필 보기</th>
-                        <th scope="col">과제 요청</th>
+                        <th scope="col" style="width: 5%;">#</th>
+                        <th scope="col" style="width: 35%;">지원자이름</th>
+                        <th scope="col" style="width: 35%;">지원자 프로필 보기</th>
+                        <th scope="col" style="width: 25%;">과제 요청</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <th:block th:each="taskSupport, count:*{toyDetail.toySupports}">
+                    <th:block th:if="${not #lists.isEmpty(toyDetail.toySupports)}" th:each="toySupport, num:*{toyDetail.toySupports}">
                         <tr>
-                            <th scope="row"><span th:text="*{count.count}"></span></th>
-                            <td><span th:text="*{taskSupport.member.username}"></span></td>
-                            <td><a th:href="@{'/devDetail/'+${taskSupport.member.id}}" class="btn btn-success">프로필</a></td>
+                            <th scope="row"><span th:text="*{num.count}"></span></th>
+                            <td><span th:text="*{toySupport.member.username}"></span></td>
+                            <td><a th:href="@{'/devDetail/'+${toySupport.member.id}}" class="btn btn-success">프로필</a></td>
                             <td>
-                                <input type="hidden" id="member_id" th:value="${taskSupport.member.id}">
-                                <input type="hidden" id="td_id" th:value="${taskSupport.toyDetail.id}">
-                                <button th:if="${taskSupport.support_status == 0}" th:value="${taskSupport.getMember.username}" th:id="${taskSupport.id}"
+                                <input type="hidden" id="member_id" th:value="${toySupport.member.id}">
+                                <input type="hidden" id="td_id" th:value="${toySupport.toyDetail.id}">
+                                <button th:if="${toySupport.support_status == 0}" th:value="${toySupport.getMember.username}" th:id="${toySupport.id}"
                                         onclick="javascript:toyConfirm(this.value, this.id);"
                                         type="button" class="btn btn-warning">진행 요청</button>
-                                <button th:if="${taskSupport.support_status == 1}" type="button" class="btn btn-secondary">진행중</button>
+                                <button th:if="${toySupport.support_status == 1}" type="button" class="btn btn-secondary">진행중</button>
+                            </td>
+                        </tr>
+                    </th:block>
+                    <th:block th:unless="${not #lists.isEmpty(toyDetail.toySupports)}">
+                        <tr>
+                            <td colspan="4">
+                                조회된 결과값이 없습니다.
                             </td>
                         </tr>
                     </th:block>

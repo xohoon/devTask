@@ -7,7 +7,7 @@
 <script th:src="@{/js/common/tab.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
-    <div class="card">
+    <div class="card text-center">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <!--// on : 현재 위치 //-->
@@ -26,24 +26,30 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col" colspan="2" th:text="${toy.toy_title}"></th>
+                    <th scope="col" colspan="2">
+                        <h5 th:text="${toy.toy_title}"></h5>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                     <th scope="row">마감일</th>
-                    <td th:text="${toy.toy_dead_day}"></td>
+                    <td>
+                        <div style="text-align: left;" th:text="${toy.toy_dead_day}"></div>
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row">상세 내용</th>
-                    <td th:text="${toy.toy_content}"></td>
+                    <td>
+                        <div style="white-space:pre;text-align: left;" th:text="${toy.toy_content}"></div>
+                    </td>
                 </tr>
                 </tbody>
             </table>
             <th:block th:each="toyDetail, num:${toy.toyDetails}">
                 <table class="table table-bordered">
                     <thead style="border-top: white;border-left: white;border-right: white;">
-                    <tr scope="col" colspan="3">
+                    <tr scope="col" colspan="3" style="text-align: left;">
                         <th><span th:text="'TASK #'+${num.count}+' '+${toyDetail.toy_subject}"></span></th>
                     </tr>
                     </thead>
@@ -85,7 +91,8 @@
                     <tr>
                         <td colspan="3">
                             <div class="card">
-                                <div class="card-body" th:text="${toyDetail.toy_need_skill}">
+                                <div class="card-body">
+                                    <div style="white-space:pre;text-align: left;" th:text="${toyDetail.toy_need_skill}"></div>
                                 </div>
                             </div>
                         </td>
@@ -93,9 +100,9 @@
                     </tbody>
                 </table>
             </th:block>
-            <a class="btn btn-dark" th:href="@{'/dev/toy/modify/'+${toy.id}}">수정</a>
+            <a class="btn btn-warning" th:href="@{'/dev/toy/modify/'+${toy.id}}">수정</a>
             <form  th:action="@{'/dev/toy/delete/'+${toy.id}}" method="post" style="float:left;">
-                <input type="submit" value="삭제" class="btn btn-dark">
+                <input type="submit" value="삭제" class="btn btn-outline-danger">
             </form>
             <a class="btn btn-dark" th:href="@{'/dev/toy/main'}">목록</a>
         </div>

@@ -115,13 +115,13 @@
     html += '<input type="hidden" name="task_subject" id="task_subject" value="'+task_subject+'">';
     html += '<thead style="border-top: white;border-left: white;border-right: white;">';
     html += '<tr style="text-align: left;">';
-    html += '<th scope="col" colSpan="2">TASK # '+task_subject+'</th>';
+    html += '<th scope="col" colspan="2">TASK # '+task_subject+'</th>';
     html += '<th>';
     html += '<input onClick='+"javascript:removeTaskTable("+changeId+");"+' type="button" class="btn btn-danger btn-sm" style="float:right;" value="삭제" />';
     html += '</th>';
     html += '</tr>';
     html += '</thead>';
-    html += '<thead class="table-light" style="text-align: center;">';
+    html += '<thead class="table-light">';
     html += '<tr>';
     html += '<th scope="col">과제분야</th>';
     html += '<th scope="col">모집인원</th>';
@@ -141,7 +141,7 @@
     html += '</td>';
     html += '</tr>';
     html += '</tbody>';
-    html += '<thead class="table-light" style="text-align: center;">';
+    html += '<thead class="table-light">';
     html += '<tr>';
     html += '<th scope="col" colSpan="3">주요스킬</th>';
     html += '</tr>';
