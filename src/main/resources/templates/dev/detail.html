@@ -25,48 +25,51 @@
         <div class="card-body">
             <table class="table">
                 <thead>
-                <tr>
-                    <th scope="col" colspan="2">포트폴리</th>
-                </tr>
+                    <tr>
+                        <th scope="col" colspan="2"><h3>포트폴리오</h3></th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">제목</th>
-                    <td>
-                        <input type="text" class="form-control" th:value="${dev.title}"  readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">사용스킬</th>
-                    <td>
-                        <input type="text" th:value="${dev.useSkill}" class="form-control" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">사이트1</th>
-                    <td>
-                        <input type="text" th:value="${dev.url_1}" class="form-control" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">사이트2</th>
-                    <td>
-                        <input type="text" th:value="${dev.url_2}" class="form-control" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">사이트3</th>
-                    <td>
-                        <input type="text" th:value="${dev.url_3}" class="form-control" readonly>
-                    </td>
-                </tr>
+                    <tr>
+                        <th scope="row" style="width: 20%;">제목</th>
+                        <td>
+                            <div style="white-space:pre;text-align: left;" th:text="${dev.title}"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">포트폴리오 URL</th>
+                        <td>
+                            <a th:href="${dev.url_1}" target="_blank" style="float: left;">포트폴리오</a>
+                            <span th:text="'('+${dev.url_1}+')'" style="float: left;"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">CODE URL</th>
+                        <td>
+                            <a th:href="${dev.url_2}" target="_blank" style="float: left;">CODE</a>
+                            <span th:text="'('+${dev.url_2}+')'" style="float: left;"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">BLOG URL</th>
+                        <td>
+                            <a th:href="${dev.url_3}" target="_blank" style="float: left;">BLOG</a>
+                            <span th:text="'('+${dev.url_3}+')'" style="float: left;"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">사용스킬</th>
+                        <td>
+                            <div style="white-space:pre;text-align: left;" th:text="${dev.useSkill}"></div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
-            <a class="btn btn-dark" th:href="@{'/dev/modify/'+${dev.id}}">수정</a>
+            <a class="btn btn-warning" th:href="@{'/dev/modify/'+${dev.id}}">수정</a>
             <form  th:action="@{'/dev/delete/'+${dev.id}}" method="post" style="float:left;">
-                <input type="submit" value="삭제" class="btn btn-dark">
+                <input type="submit" value="삭제" class="btn btn-outline-danger">
             </form>
-            <a class="btn btn-dark" th:href="@{'/dev/main'}">메인페이지</a>
+<!--            <a class="btn btn-dark" th:href="@{'/dev/main'}">메인페이지</a>-->
         </div>
     </div>
 </div>

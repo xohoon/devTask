@@ -58,13 +58,15 @@ public class DevController {
 
     @PostMapping(value = "register") // 등록
     public String register(DevDto devDto) {
-        System.out.println("devDto = " + devDto.toString());
         ModelMapper mapper = new ModelMapper();
         Dev dev = mapper.map(devDto, Dev.class);
+        System.out.println("devDTO = " + devDto);
+        System.out.println("dev = " + dev);
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println("member.getId() = " + member.getId());
         devService.register(dev, member);
 
-        return "redirect:/dev/main";
+        return "redirect:/dev/detail";
     }
 
     @GetMapping(value = "detail") // 상세 페이지

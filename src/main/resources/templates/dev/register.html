@@ -24,48 +24,49 @@
         </div>
         <div class="card-body">
             <form name="fm" th:action="@{/dev/register}" method="POST" th:object="${dev}">
+                <input th:type="hidden" name="id" th:value="*{id}" />
                 <table class="table">
                     <thead>
-                    <tr>
-                        <th scope="col" colspan="2">포트폴리</th>
-                    </tr>
+                        <tr>
+                            <th scope="col" colspan="2"><h3>포트폴리오</h3></th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">제목</th>
-                        <td>
-                            <input type="text" class="form-control" name="title" th:value="*{title}" placeholder="포트폴리오 제목">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">사용스킬</th>
-                        <td>
-                            <textarea class="form-control" name="useSkill" th:text="*{useSkill}" placeholder="사용가능 기술" style="height: 150px;"></textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">사이트1</th>
-                        <td>
-                            <input type="text" class="form-control" name="url_1" id="url_1" th:value="*{url_1}" placeholder="포폴 주소">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">사이트2</th>
-                        <td>
-                            <input type="text" class="form-control" name="url_2" id="url_2" th:value="*{url_2}" placeholder="포폴 주소">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">사이트3</th>
-                        <td>
-                            <input type="text" class="form-control" name="url_3" id="url_3" th:value="*{url_3}" placeholder="포폴 주소">
-                        </td>
-                    </tr>
+                        <tr>
+                            <th scope="row" style="width: 20%;">제목</th>
+                            <td>
+                                <input type="text" class="form-control" name="title" th:value="*{title}" placeholder="포트폴리오 제목">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">포트폴리오 URL</th>
+                            <td>
+                                <input type="text" class="form-control" name="url_1" id="url_1" th:value="*{url_1}" placeholder="포폴 주소">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">CODE URL</th>
+                            <td>
+                                <input type="text" class="form-control" name="url_2" id="url_2" th:value="*{url_2}" placeholder="포폴 주소">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">BLOG URL</th>
+                            <td>
+                                <input type="text" class="form-control" name="url_3" id="url_3" th:value="*{url_3}" placeholder="포폴 주소">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">사용스킬</th>
+                            <td>
+                                <textarea class="form-control" name="useSkill" th:text="*{useSkill}" placeholder="사용가능 기술" style="height: 300px;"></textarea>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
-                <input type="submit" value="등록하기" class="btn btn-success">
+                <input type="submit" value="등록" class="btn btn-success">
+                <a class="btn btn-dark" th:href="@{'/dev/detail'}">취소</a>
             </form>
-            <a class="btn btn-dark" th:href="@{'/dev/main'}">메인페이지</a>
         </div>
     </div>
 </div>
