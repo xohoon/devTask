@@ -80,3 +80,23 @@ function portfolioCheck() {
     });
     return portfolio;
 }
+
+function portfolioCheck() {
+    var portfolio = "not";
+    $.ajax({
+        type : 'GET',
+        url : '/task/portfolio',
+        dataType : 'JSON',
+        async: false,
+        beforeSend : function(xhr){
+            xhr.setRequestHeader(header, token);
+        },
+        success : function(result, data) {
+            portfolio = result.result;
+        },
+        error : function(result) {
+            location.reload();
+        }
+    });
+    return portfolio;
+}
