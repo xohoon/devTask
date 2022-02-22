@@ -6,9 +6,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import xohoon.devTask.domain.entity.Dev;
 import xohoon.devTask.domain.entity.Member;
 import xohoon.devTask.domain.entity.task.Task;
 import xohoon.devTask.domain.entity.task.TaskDetail;
+import xohoon.devTask.service.DevService;
 import xohoon.devTask.service.task.TaskDetailService;
 import xohoon.devTask.service.task.TaskService;
 import xohoon.devTask.service.task.TaskSupportService;
@@ -23,6 +25,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TaskController {
 
+    private final DevService devService;
     private final TaskService taskService;
     private final TaskDetailService taskDetailService;
     private final TaskSupportService taskSupportService;
@@ -73,6 +76,21 @@ public class TaskController {
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         TaskDetail taskDetail = taskDetailService.getTaskDetailById(Long.valueOf(id));
         taskSupportService.setTaskSupport(member, taskDetail);
+
+        return jsonObject;
+    }
+
+    @GetMapping(value = "portfolio")
+    @ResponseBody
+    public Object portfolioCheck() {
+        JSONObject jsonObject = new JSONObject();
+        Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Dev dev = devService.getDevByMemberId(member.getId());
+        if (dev == null) {
+            jsonObject.put("result", "fail");
+        }else {
+            jsonObject.put("result", "success");
+        }
 
         return jsonObject;
     }

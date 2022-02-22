@@ -21,6 +21,7 @@ import xohoon.devTask.service.toy.ToyDetailService;
 import xohoon.devTask.service.toy.ToyService;
 import xohoon.devTask.service.toy.ToySupportService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -121,7 +122,13 @@ public class DevController {
     @GetMapping(value = "toy/main")
     public String toyList(Model model) {
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<Toy> toys = toyService.getToyByMemberId(member.getId());
+        Dev dev = devService.getDevByMemberId(member.getId());
+        List<Toy> toys = new ArrayList<>();
+        if (dev == null) {
+            toys = null;
+        }else {
+            toys = toyService.getToyByMemberId(member.getId());
+        }
         model.addAttribute("toys", toys);
 
         return "dev/toy/main";

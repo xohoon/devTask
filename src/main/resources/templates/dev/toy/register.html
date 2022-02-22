@@ -10,7 +10,7 @@
 <div th:replace="fragments/nav::nav"></div>
 
 <div class="container">
-    <div class="card">
+    <div class="card text-center">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <!--// on : 현재 위치 //-->
@@ -31,7 +31,9 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" colspan="2">과제 등록</th>
+                            <th scope="col" colspan="2">
+                                <h3>과제 등록</h3>
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -90,8 +92,10 @@
                     </div>
                 </div>
                 <div id="tablePoint"></div>
-                <input type="button" onclick="javascript:saveToy();" value="발행하기" class="btn btn-success">
-                <a class="btn btn-dark" th:href="@{'/dev/toy/main'}">목록</a>
+                <div style="margin-top: 10px;">
+                    <input type="button" onclick="javascript:saveToy();" value="발행하기" class="btn btn-success">
+                    <a class="btn btn-dark" th:href="@{'/dev/toy/main'}">목록</a>
+                </div>
             </div>
         </div>
     </div>
@@ -156,7 +160,7 @@
     html += '<tbody>';
     html += '<tr>';
     html += '<td colSpan="3">';
-    html += '<textarea class="form-control" name="toy_need_skill" style="height: 150px;">'+toy_need_skill+'</textarea>';
+    html += '<textarea class="form-control" name="toy_need_skill" style="height: 300px;">'+toy_need_skill+'</textarea>';
     html += '</td>';
     html += '</tr>';
     html += '</tbody>';
