@@ -60,11 +60,22 @@ public class DevController {
     @PostMapping(value = "register") // 등록
     public String register(DevDto devDto) {
         ModelMapper mapper = new ModelMapper();
+        String http = "https://";
+        String url;
+        if(devDto.getUrl_1().length() > 0 && !devDto.getUrl_1().contains(http)) {
+            url = devDto.getUrl_1();
+            devDto.setUrl_1(http.concat(url));
+        }
+        if(devDto.getUrl_2().length() > 0 && !devDto.getUrl_2().contains(http)) {
+            url = devDto.getUrl_2();
+            devDto.setUrl_2(http.concat(url));
+        }
+        if(devDto.getUrl_3().length() > 0 && !devDto.getUrl_3().contains(http)) {
+            url = devDto.getUrl_3();
+            devDto.setUrl_3(http.concat(url));
+        }
         Dev dev = mapper.map(devDto, Dev.class);
-        System.out.println("devDTO = " + devDto);
-        System.out.println("dev = " + dev);
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println("member.getId() = " + member.getId());
         devService.register(dev, member);
 
         return "redirect:/dev/detail";

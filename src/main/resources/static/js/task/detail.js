@@ -44,7 +44,7 @@ function taskSupport(value, id) {
 function viewMap(value) {
     if(value == "homepage") {
         var url = $("#url").val();
-        window.open('https://www.'+url);
+        window.open(url);
     }else if(value == "map") {
         var address = $("#address").val();
         var company = $("#company").val();

@@ -59,6 +59,12 @@ public class CompanyController {
     @PostMapping(value = "register") // 저장 및 업데이트
     public String register(CompanyDto companyDto) throws Exception {
         ModelMapper mapper = new ModelMapper();
+        String http = "https://";
+        String url;
+        if(companyDto.getSite_url().length() > 0 && !companyDto.getSite_url().contains(http)) {
+            url = companyDto.getSite_url();
+            companyDto.setSite_url(http.concat(url));
+        }
         Company company = mapper.map(companyDto, Company.class);
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         companyService.register(company, member);
