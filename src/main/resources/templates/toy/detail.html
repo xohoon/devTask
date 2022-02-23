@@ -7,15 +7,17 @@
 <script th:src="@{/js/toy/detail.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
-    <div class="card">
+    <div class="card text-center">
+        <div class="card-header">
+            <h3 th:text="${toy.toy_title}"></h3>
+        </div>
         <div class="card-body">
-            <h2 th:text="${toy.toy_title}"></h2>
             <th:block th:each="toyDetail, num:${toy.toyDetails}">
                 <table class="table">
                     <thead style="border-top: white;border-left: white;border-right: white;">
                     <tr scope="col">
-                        <th colspan="2">
-                            <span th:text="'TASK # '+${toyDetail.toy_subject}" style="font-size: 25px;"></span>
+                        <th colspan="2" style="text-align: left;">
+                            <span th:text="'TASK # '+${toyDetail.toy_subject}" style="font-size: 20px;"></span>
                             <span th:text="'(지원인원 : '+${toyDetail.toySupports.size()}+')'" style="color: gray;"></span>
                         </th>
                         <th>
@@ -37,27 +39,30 @@
                     <tbody>
                         <tr>
                             <th scope="row" style="width: 15%;">과제분야</th>
-                            <td th:text="${toyDetail.toy_part}" colspan="2"></td>
+                            <td th:text="${toyDetail.toy_part}" colspan="2" style="text-align: left;"></td>
                         </tr>
                         <tr>
-                            <th scope="row" style="width: 15%;">모집인원</th>
-                            <td th:text="${toyDetail.toy_part_personnel}" colspan="2"></td>
+                            <th scope="row">모집인원</th>
+                            <td th:text="${toyDetail.toy_part_personnel}" colspan="2" style="text-align: left;"></td>
                         </tr>
                         <tr>
-                            <th scope="row" style="width: 15%;">과제 진행 기간</th>
-                            <td th:text="${toyDetail.toying_day}" colspan="2"></td>
+                            <th scope="row">과제 진행 기간</th>
+                            <td th:text="${toyDetail.toying_day}" colspan="2" style="text-align: left;"></td>
                         </tr>
                         <tr>
-                            <th scope="row" style="width: 15%;">주요스킬</th>
-                            <td th:text="${toyDetail.toy_need_skill}" colspan="2"></td>
+                            <th scope="row">주요스킬</th>
+                            <td colspan="2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div style="white-space:pre;text-align: left;" th:text="${toyDetail.toy_need_skill}"></div>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </th:block>
-            <span>마감일</span>
-            <span th:text="${toy.toy_dead_day}"></span>
-            <br />
-            <a th:href="@{'/toy/list'}">목록</a>
+            <a class="btn btn-dark" th:href="@{'/toy/list'}">목록</a>
         </div>
     </div>
 </div>
