@@ -1,5 +1,5 @@
 # devTask
-* 환경<br>
+* O S & TOOL<br>
 mac(m1), IntelliJ, workbench
 * SKILL<br>
 Spring Boot, Spring Security, JPA, Thymeleaf<br>
@@ -16,4 +16,6 @@ GitHub, MySQL, BootStrap5
 3. 기업 권한 회원<br>
 기업 정보, 과제 기반 구인 공고 및 관리
 4. 구직자 권한 회원<br>
-포트폴리오 등록, 토이 프로젝트 등록 및 관리, 지원 현황 관리
+포트폴리오 등록, 토이 프로젝트 등록 및 관리, 지원 현황 관리<br>
+* Action<br>
+  [![](https://img.youtube.com/vi/43thU_OAXVA/0.jpg)](https://youtu.be/43thU_OAXVA) 
