@@ -18,4 +18,5 @@ GitHub, MySQL, BootStrap5
 4. 구직자 권한 회원<br>
 포트폴리오 등록, 토이 프로젝트 등록 및 관리, 지원 현황 관리<br>
 * Action<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/43thU_OAXVA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   [![](https://img.youtube.com/vi/43thU_OAXVA/0.jpg)](https://youtu.be/43thU_OAXVA) 
