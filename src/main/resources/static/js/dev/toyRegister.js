@@ -135,7 +135,7 @@ function addTable(title, id) {
     html += '<input type="hidden" name="toy_subject" id="toy_subject" value="'+title+'">';
     html += '<input type="hidden" name="toy_btn_id" id="toy_btn_id" value="'+id+'">';
     html += '<thead style="border-top: white;border-left: white;border-right: white;">';
-    html += '<tr>';
+    html += '<tr style="text-align: left;">';
     html += '<th scope="col" colSpan="2">TASK #'+title+'</th>';
     html += '<th>';
     html += '<input onClick='+"javascript:removeToyTable("+changeId+");"+' type="button" class="btn btn-danger btn-sm" style="float:right;" value="삭제" />';

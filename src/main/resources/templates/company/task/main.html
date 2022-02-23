@@ -26,7 +26,10 @@
         </div>
         <div class="card-body">
             <th:block th:if="${tasks != null}">
-            <a class="btn btn-success" th:href="@{/co/task/register}" style="float:left;">과제발행</a>
+            <div>
+                <h3>공고 관리</h3>
+                <a class="btn btn-success" th:href="@{/co/task/register}" style="float:right;">과제발행</a>
+            </div>
             <table class="table table-hover">
                 <thead>
                     <tr>

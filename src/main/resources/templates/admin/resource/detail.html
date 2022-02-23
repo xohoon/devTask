@@ -62,9 +62,9 @@
                         </tr>
                     </tbody>
                 </table>
-                <button type="Submit" class="btn btn-success">등록</button>
+                <a class="btn btn-outline-danger" th:href="@{'/hide/admin/resource/delete/' + *{id}}" style="float: left;">삭제</a>
+                <button type="Submit" class="btn btn-success">저장</button>
                 <a class="btn btn-dark" th:href="@{/hide/admin/resource}">목록 </a>
-                <a class="btn btn-danger" th:href="@{'/hide/admin/resource/delete/' + *{id}}">삭제</a>
             </form>
         </div>
     </div>
