@@ -26,7 +26,7 @@
                     <thead style="border-top: white;border-left: white;border-right: white;">
                         <tr scope="col">
                             <th colspan="2" style="text-align: left;">
-                                <span th:text="'TASK # '+${taskDetail.task_subject}"></span>
+                                <span th:text="'TASK # '+${taskDetail.task_subject}" style="font-size: 20px;"></span>
                                 <span th:text="'(지원인원 : '+${taskDetail.taskSupports.size()}+')'" style="color: gray;"></span>
                             </th>
                             <th>
@@ -55,16 +55,16 @@
                             <td th:text="${taskDetail.task_part_personnel}" colspan="2" style="text-align: left;"></td>
                         </tr>
                         <tr>
-                            <th scope="row">과제 소요 기간</th>
+                            <th scope="row">과제 소요 시간</th>
                             <td th:text="${taskDetail.tasking_day}" colspan="2" style="text-align: left;"></td>
                         </tr>
                         <tr>
-                            <th scope="row">과제 마감 기간</th>
+                            <th scope="row">과제 마감일</th>
                             <td th:text="${task.task_dead_day}" colspan="2" style="text-align: left;"></td>
                         </tr>
                         <tr>
                             <th scope="row">주요스킬</th>
-                            <td>
+                            <td colspan="2">
                                 <div class="card">
                                     <div class="card-body">
                                         <div style="white-space:pre;text-align: left;" th:text="${taskDetail.task_need_skill}"></div>

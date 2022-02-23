@@ -29,7 +29,10 @@
         </div>
         <div class="card-body">
             <th:block th:if="${toys != null}">
-            <a class="btn btn-success" th:href="@{/dev/toy/register}" style="float:left;">프로젝트 생성</a>
+            <div>
+                <h3>토이프로젝트 관리</h3>
+                <a class="btn btn-success" th:href="@{/dev/toy/register}" style="float:right;margin-bottom: 10px;">프로젝트 생성</a>
+            </div>
             <table class="table table-hover">
                 <thead>
                 <tr>
