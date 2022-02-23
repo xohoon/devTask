@@ -11,47 +11,55 @@
 </script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
-    <h2>등록된 과제</h2>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">기업명</th>
-            <th scope="col">제목</th>
-            <th scope="col">과제분야</th>
-            <th scope="col">채용인원</th>
-            <th scope="col">과제기간</th>
-            <th scope="col">마감기간</th>
-        </tr>
-        </thead>
-        <tbody>
-        <th:block th:each="task, num:${tasks}">
-            <tr th:onclick="'javascript:move('+${task.id}+');'" style="cursor:pointer;">
-                <th scope="row"><span th:text="${task.company.company}"></span></th>
-                <td><span th:text="${task.task_title}"></span></td>
-                <td>
-                    <th:block th:each="taskDetail, num:${task.taskDetails}">
-                        <span th:text="${taskDetail.task_subject}"></span><br />
-                    </th:block>
-                </td>
-                <td>
-                    <th:block th:each="taskDetail, num:${task.taskDetails}">
-                        <span th:text="${taskDetail.task_part_personnel}"></span><br />
-                    </th:block>
-                </td>
-                <td>
-                    <th:block th:each="taskDetail, num:${task.taskDetails}">
-                        <span th:text="${taskDetail.tasking_day}"></span><br />
-                    </th:block>
-                </td>
-                <td>
-                    <span th:text="${task.task_dead_day}"></span><br />
-                    <span th:if="${task.task_status == 1}">마감됨</span>
-                    <span th:if="${task.task_status == 0}">진행중</span>
-                </td>
-            </tr>
-        </th:block>
-        </tbody>
-    </table>
+    <div class="card text-center">
+        <div class="card-header">
+            <h5>모집 과제</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">기업명</th>
+                    <th scope="col">제목</th>
+                    <th scope="col">과제분야</th>
+                    <th scope="col">채용인원</th>
+                    <th scope="col">과제기간</th>
+                    <th scope="col">마감기간</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="task, num:${tasks}">
+                    <tr th:onclick="'javascript:move('+${task.id}+');'" style="cursor:pointer;">
+                        <th scope="row"><span th:text="${num.count}"></span></th>
+                        <th scope="row"><span th:text="${task.company.company}"></span></th>
+                        <td><span th:text="${task.task_title}"></span></td>
+                        <td>
+                            <th:block th:each="taskDetail, num:${task.taskDetails}">
+                                <span th:text="${taskDetail.task_subject}"></span><br />
+                            </th:block>
+                        </td>
+                        <td>
+                            <th:block th:each="taskDetail, num:${task.taskDetails}">
+                                <span th:text="${taskDetail.task_part_personnel}"></span><br />
+                            </th:block>
+                        </td>
+                        <td>
+                            <th:block th:each="taskDetail, num:${task.taskDetails}">
+                                <span th:text="${taskDetail.tasking_day}"></span><br />
+                            </th:block>
+                        </td>
+                        <td>
+                            <span th:text="${task.task_dead_day}"></span><br />
+                            <span th:if="${task.task_status == 0}">마감됨</span>
+                            <span th:if="${task.task_status == 1}">진행중</span>
+                        </td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 </body>
 </html>

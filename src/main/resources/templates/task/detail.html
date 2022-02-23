@@ -8,23 +8,25 @@
 <script th:src="@{/js/task/detail.js}"></script>
 <div th:replace="fragments/nav::nav"></div>
 <div class="container">
-    <div class="card">
+    <div class="card text-center">
         <div class="card-header">
-            <h5 th:text="${task.company.company}"></h5>
-            <button type="button" onclick="javascript:viewMap('homepage')" class="btn btn-secondary btn-sm">홈페이지</button>
-            <button type="button" onclick="javascript:viewMap('map')" class="btn btn-secondary btn-sm">기업위치</button>
+            <h3 th:text="${task.task_title}"></h3>
+            <div style="text-align: left;">
+                <h5 th:text="${task.company.company}"></h5>
+                <button type="button" onclick="javascript:viewMap('homepage')" class="btn btn-secondary btn-sm">홈페이지</button>
+                <button type="button" onclick="javascript:viewMap('map')" class="btn btn-secondary btn-sm">기업위치</button>
+            </div>
             <input type="hidden" th:value="${task.company.site_url}" id="url">
             <input type="hidden" th:value="${task.company.address}" id="address">
             <input type="hidden" th:value="${task.company.company}" id="company">
         </div>
         <div class="card-body">
-            <h3 th:text="${task.task_title}"></h3>
             <th:block th:each="taskDetail, num:${task.taskDetails}">
                 <table class="table">
                     <thead style="border-top: white;border-left: white;border-right: white;">
                         <tr scope="col">
-                            <th colspan="2">
-                                <span th:text="'TASK # '+${taskDetail.task_subject}" style="font-size: 25px;"></span>
+                            <th colspan="2" style="text-align: left;">
+                                <span th:text="'TASK # '+${taskDetail.task_subject}"></span>
                                 <span th:text="'(지원인원 : '+${taskDetail.taskSupports.size()}+')'" style="color: gray;"></span>
                             </th>
                             <th>
@@ -46,29 +48,34 @@
                     <tbody>
                         <tr>
                             <th scope="row" style="width: 15%;">과제분야</th>
-                            <td th:text="${taskDetail.task_part}" colspan="2"></td>
+                            <td th:text="${taskDetail.task_part}" colspan="2" style="text-align: left;"></td>
                         </tr>
                         <tr>
                             <th scope="row">모집인원</th>
-                            <td th:text="${taskDetail.task_part_personnel}" colspan="2"></td>
+                            <td th:text="${taskDetail.task_part_personnel}" colspan="2" style="text-align: left;"></td>
                         </tr>
                         <tr>
                             <th scope="row">과제 소요 기간</th>
-                            <td th:text="${taskDetail.tasking_day}" colspan="2"></td>
+                            <td th:text="${taskDetail.tasking_day}" colspan="2" style="text-align: left;"></td>
                         </tr>
                         <tr>
                             <th scope="row">과제 마감 기간</th>
-                            <td th:text="${task.task_dead_day}" colspan="2"></td>
+                            <td th:text="${task.task_dead_day}" colspan="2" style="text-align: left;"></td>
                         </tr>
                         <tr>
                             <th scope="row">주요스킬</th>
-                            <td th:text="${taskDetail.task_need_skill}" colspan="2"></td>
+                            <td>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div style="white-space:pre;text-align: left;" th:text="${taskDetail.task_need_skill}"></div>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </th:block>
-            <br />
-            <a th:href="@{'/task/list'}">목록</a>
+            <a class="btn btn-dark" th:href="@{'/task/list'}">목록</a>
         </div>
     </div>
 </div>
