@@ -1,4 +1,5 @@
 # devTask
+과제 기반의 구인 구직 및 토이 프로젝트 팀원 구인 플랫폼
 * O S & TOOL<br>
 mac(m1), IntelliJ, workbench
 * SKILL<br>
